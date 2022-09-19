@@ -1,0 +1,29 @@
+<body class="bodyq">
+    <div class="multi-button">
+    <button class="btn1">Edificio</button>
+    <button class="btn2" [routerLink]="['/departamentos']">Departamentos</button>    
+    <button class="btn3" [routerLink]="['/departamentos/verTodos']">Ver todos</button>
+    </div>
+</body>
+
+<div class="step-forms step-forms-edificio">
+    <form action="" id="msform" [formGroup]="edificioForm" (ngSubmit)="guardarEdificio()">
+        <fieldset>
+                    <h2 class="fs-title">Registro de Edicios</h2>
+                    <h3 class="fs-subtitle"></h3>
+                    
+                        <input type= 'text' formControlName="nombre_edificio" class='inputbox' placeholder="Nombre" />
+                        <input type= 'text' formControlName="descripcion" class='inputbox' placeholder="Descripción"/>
+                        <div class="btns-group">
+                            <input class="botons" type="submit" value="Cancelar" > 
+                            <input class="botons" type="submit" value="Registrar" [disabled]="edificioForm.invalid"> 
+                            <!-- <a class="botons btn" type="submit">Registrar</a> -->
+                        </div>
+                    
+        </fieldset>
+            
+    </form>
+</div>
+
+
+

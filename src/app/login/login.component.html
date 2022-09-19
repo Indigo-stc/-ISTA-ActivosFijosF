@@ -1,0 +1,65 @@
+<!-- <header>
+    <div>
+      <img class="responsive, ajusts" src="assets/img/ista.png" />
+    </div>
+    <div class="responsive, background">
+      <p class="text">Bienvenido</p>
+    </div>
+  </header> -->
+  
+  <div class="col-md-12">
+    <div class="row">
+      <div class="container, col-md-4">
+        <div class="modific">
+          <img class="img-position" src="assets/img/infraestructura.png">
+          <div class="text-arribita">Plataforma Administrativa ISTA</div>
+        </div>
+  
+        <form class="container row col-md-4" ngNativeValidate (ngSubmit)="onSubmit()">
+          <!-- <div class="container row col-md-4"> -->
+            <div class="modific2">
+              <label class="label-config" for="">Nombre de usuario:</label>
+              <br>
+              <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"
+                rel="stylesheet" />
+              <div id="search-wrapper">
+                <input type="text" id="search" name="correo" [(ngModel)]="form.correo" (input)="autoCompleteEmail($event)">
+                <i class="fa fa-user"></i>
+              </div>
+            </div>
+            <br>
+  
+            <br>
+            <div class="modific2">
+              <label class="label-config" for="">Contraseña:</label>
+              <br>
+              <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css"
+                rel="stylesheet" />
+              <div id="search-wrapper">
+                <input type="password" id="search" name="password" [(ngModel)]="form.contrasenia">
+                <i class="fa fa-lock"></i>
+              </div>
+              <a href="/recuperar" class="link, direccion">¿Olvidó su contraseña?</a>
+            </div>
+            <br>
+  
+  
+  
+            <div class="modific2">
+              <div class="btn-group" role="group">
+                <button type="submit" class="botton btn-lg" style="margin-top: 8ex;">INICIAR SESIÓN</button>
+                <a href="/registrar" class="link, direccionRegis">REGISTRARSE</a>
+              </div>
+            </div>
+          <!-- </div> -->
+  
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <footer class="footer">
+    <div class="responsive">
+      Copyright &copy; 2022 - ISTA
+    </div>
+  </footer> -->

@@ -1,0 +1,32 @@
+<body class="bodyq">
+  <div class="multi-button">
+    <button class="btn2" [routerLink]="['/RegEdificioComponent']">Edificios</button>
+    <button class="btn1">Departamentos</button>
+    <button class="btn3" [routerLink]="['/departamentos/verTodos']">Ver todos</button>
+  </div>
+</body>
+
+<div class="step-forms step-forms-departamentos">
+  <form action="" id="msform" [formGroup]="departamentoForm" (ngSubmit)="guardarDepartamentos()">
+    <div class="group-inputs"></div>
+    <fieldset>
+      <h2 class="fs-title">Registro de Departamentos</h2>
+      <h3 class="fs-subtitle"></h3>
+      <p class="estado">
+        Edificios:
+        <select name="edificio" id="edificio" formControlName="edificio" class="combobox" required>
+          <option [ngValue]="item" *ngFor="let item of edificios"> {{ item.nombre_edificio }}</option>
+        </select>
+      </p>
+
+      <input class='inputbox' type="text" formControlName="nombre_departamento" id="nombre" placeholder="Nombre"/>
+      <input class='inputbox' type= "text" formControlName="descripcion" id="descripcion" placeholder="Descripción"/>
+      <div class="btns-group">
+        <input class="btn" type="submit" value="Cancelar"> 
+        <input class="btn" type="submit" value="Registrar" [disabled]="departamentoForm.invalid"> 
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+            

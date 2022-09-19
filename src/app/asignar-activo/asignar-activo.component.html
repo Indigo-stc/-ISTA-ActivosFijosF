@@ -1,0 +1,57 @@
+<div class="container">
+<div class="step-forms step-forms-active">
+    <form action="" id="msform">
+        <div class="group-inputs"></div>
+        <fieldset>
+            <h2 class="fs-title">Datos del Activos</h2>
+            <h3 class="fs-subtitle"></h3>
+            <input type="text" class="inputbox" name="Codigo" id="CodigoActivo" placeholder="Codigo del Activo:"
+                required />
+            <input type="text" class="inputbox" name="Nombre" id="NombreActivo" placeholder="Nombre del Activo:"
+                required />
+            <input type="text" class="inputbox" name="procedenica" id="procedenica" placeholder="Procedencia:"
+                required />
+            <input type="text" class="inputbox" name="esp" id="especificacion" placeholder="Especificaciones:"
+                required />
+            <input type="text" class="inputbox" name="est" id="estado" placeholder="Estado:" required />
+            <input type="text" class="inputbox" name="dispo" id="disponible" placeholder="Disponibilidad:" required />
+            <p class="estado">
+                Edificio
+                <select class="combobox" required>
+                    <option>Seleccione</option>
+                    <option>EdificoP</option>
+                    <option>EdificioL</option>
+                    <option>Talleres</option>
+                </select>
+            </p>
+            <p class="estado">
+                Departamento:
+                <select class="combobox" required>
+                    <option>Seleccione</option>
+                    <option>Laboratorio1</option>
+                    <option>Laboratorio2</option>
+                    <option>aula-302</option>
+                </select>
+            </p>
+        </fieldset>
+    </form>
+
+</div>
+<!-- parte de responsables -->
+<div class="step-forms2 step-forms-active" >
+    <form action="" id="msform">
+        <fieldset>
+            <h2 class="fs-title">Datos del Custodio</h2>
+            <input type="text" class="inputbox" name="ced" placeholder="Cedula" required />
+            <input type="text" class="inputbox" name="nom" placeholder="Nombres" required />
+            <input type="text" class="inputbox" name="correo" placeholder="Correo Electronico" required />
+            <input type="text" class="inputbox" name="telf" placeholder="Telefono" required />
+            <!-- <input type="datetime-local" class="inputbox" /> -->
+            <div class="btns-group">
+                <a class="btn" [routerLink]="['/Gestion_activos']">Cancelar</a>
+                <a class="btn">Guardar</a>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</div>

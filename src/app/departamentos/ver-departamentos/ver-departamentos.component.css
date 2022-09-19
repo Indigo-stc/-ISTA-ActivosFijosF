@@ -1,0 +1,311 @@
+/************************ diseño para botones de navegacion ***********************/
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+.bodyq {
+  min-height: 10vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  
+}
+
+.multi-button :nth-child(1){
+  border-radius: 20px 0 0 20px;
+}
+
+.multi-button :nth-child(2){
+    border-radius: 0 20px 20px 0;
+  }
+  
+.multi-button :nth-child(3){
+  border-radius: 0 20px 20px 0;
+}
+
+.btn1:hover{
+  cursor: pointer;
+  filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
+}
+.btn2:hover{
+  cursor: pointer;
+  filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
+}
+
+.btn3:hover{
+    cursor: pointer;
+    filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
+  }
+
+  .btn3:hover{
+    cursor: pointer;
+    filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
+  }
+
+  .btn1 {
+    width: 130px;
+  height: 35px;
+  padding: 1px 20px;
+  border: 2px solid #ced4da;
+  font-family: montserrat, arial, verdana;
+  font-weight: 100;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  border-radius: 0ex 2ex 2ex 0ex;
+  background-color:#272e56;
+   color: white;
+   right: 10px;
+}
+.btn2 {
+    width: 130px;
+    height: 35px;
+    padding: 1px 20px;
+    border: 2px solid #ced4da;
+    font-family: montserrat, arial, verdana;
+    font-weight: 200;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    border-radius: 0 20px 20px 0;
+    background-color:#dcdcdc;
+    color:#272e56;
+}
+
+.btn3 {
+    width: 160px;
+   height: 35px;
+   padding: 1px 20px;
+   border: 2px solid #ced4da;
+   font-family: montserrat, arial, verdana;
+   font-weight: 100;
+   font-weight: bold;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   position: relative;
+   display: inline-block;
+   border-radius: 0 20px 20px 0;
+   background-color:#dcdcdc;
+   color:#272e56;
+   
+ }
+
+
+/************************ diseño para  Botones del form ***********************/
+.btns-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.btn {
+    padding: 0.75rem;
+    display: block;
+    text-decoration: none;
+    background-color: #272e56;
+    color: #f3f3f3;
+    text-align: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 3px #272e56;
+}
+
+.btn-añadir {
+    padding: 0.75rem;
+    gap: 1.5rem;
+    display: block;
+    text-decoration: none;
+    background-color: #272e56;
+    color: #f3f3f3;
+    text-align: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/************************ diseño para  inputs del form ***********************/
+
+p {
+    display: block;
+    text-align: left;
+}
+
+.inputbox {
+    background-color: hsla(949, 43%, 51%, 0.3);
+    color: #030303;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1.5px solid #ccc;
+    margin-bottom: 1rem;
+    border-radius: 0.3rem;
+    font-family: montserrat, arial, verdana;
+    color: #615a5a;
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline: none;
+}
+
+.estado {
+    background-color: hsla(949, 43%, 51%, 0.3);
+    width: 100%;
+    padding: 1rem;
+    border: 1.5px solid #ccc;
+    margin-bottom: 2rem;
+    border-radius: 0.3rem;
+    font-family: montserrat, arial, verdana;
+    color: #615a5a;
+    font-size: 1rem;
+    font-weight: 100;
+    outline: none;
+}
+
+.combobox {
+    background-color: white;
+    width: 50%;
+    padding: 0.23rem;
+    border: none;
+    margin-bottom: 2rem;
+    border-radius: 0.3rem;
+    font-family: montserrat, arial, verdana;
+    color: #615a5a;
+    font-size: 1rem;
+    font-weight: 100;
+    outline: none;
+    float: right;
+}
+
+/************************ diseño para los forms and fieldshet ***********************/
+
+.form {
+    /* width: clamp(320px, 100%, 55%); */
+    margin: 0 auto;
+    border: none;
+    border-radius: 10px !important;
+    overflow: hidden;
+    padding: 1.5rem;
+    background-color: #fff;
+    padding: 20px 30px;
+}
+
+
+.step-forms {
+    display: none;
+    transform-origin: top;
+    animation: animate 0s;
+}
+
+.step-forms-active {
+    display: block;
+}
+
+.group-inputs {
+    margin: 1rem 0;
+}
+
+@keyframes animate {
+    from {
+        transform: scale(1, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
+
+#msform {
+    width: 900px;
+    margin: auto;
+    text-align: center;
+    position: relative;
+}
+
+/************************************ color de fondo de los forms **************************************/
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 3px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 10%;
+    position: relative;
+}
+
+#msform fieldset:not(:first-of-type) {
+    display: none;
+}
+
+#msform input,
+#msform textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat, arial, verdana;
+    color: #2c3e50;
+    font-size: 13px;
+}
+
+#msform .action-button {
+    width: 100px;
+    background: #272e56;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+
+.fs-title {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.fs-subtitle {
+    font-weight: normal;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 200;
+}
+
+a {
+    text-decoration: none;
+}
+
+li,
+a {
+    font-size: 14px;
+}
+
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.table-wraper{
+    height: 350px;
+    overflow-y: scroll ;
+    }

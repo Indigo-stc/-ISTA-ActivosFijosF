@@ -1,0 +1,580 @@
+/************************ diseño para botones de navegacion ***********************/
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+.bodyq {
+  min-height: 10vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  
+}
+.multi-button :nth-child(1){
+  border-radius: 20px 0 0 20px;
+}
+.multi-button :nth-child(3){
+  border-radius: 0 20px 20px 0;
+}
+.btn1:hover{
+  cursor: pointer;
+  filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
+}
+.btn2:hover{
+  cursor: pointer;
+  filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
+}
+.btn1 {
+  width: 130px;
+  height: 35px;
+  padding: 1px 20px;
+  border: 2px solid #ced4da;
+  font-family: montserrat, arial, verdana;
+  font-weight: 100;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  border-radius: 0ex 2ex 2ex 0ex;
+  background-color:#272e56;
+   color: white;
+}
+.btn2 {
+  width: 130px;
+  height: 35px;
+  padding: 1px 20px;
+  border: 2px solid #ced4da;
+  font-family: montserrat, arial, verdana;
+  font-weight: 100;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  border-radius: 0 20px 20px 0;
+  background-color:#dcdcdc;
+  color:#272e56;
+}
+
+
+/************************ diseño para  Botones del form ***********************/
+.btns-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.btn {
+  padding: 0.75rem;
+  display: block;
+  text-decoration: none;
+  background-color: #272e56;
+  color: #f3f3f3;
+  text-align: center;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btnM {
+ 
+  display: block;
+  text-decoration: none;
+  background-color: #272e56;
+  color: #f3f3f3;
+  text-align: center;
+  border-radius: 20rem;
+  cursor: pointer;
+  transition: 0.3s;
+  height: 25px;
+  font-size: 12px;
+ margin-bottom: 5px;
+
+}
+.btn:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #272e56;
+}
+.btnM:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #272e56;
+}
+
+/************************ diseño para  inputs del form ***********************/
+
+p {
+  display: block;
+  text-align: left;
+}
+.inputbox {
+  background-color: hsla(949, 43%, 51%, 0.3);
+  color: #030303;
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1.5px solid #ccc;
+  margin-bottom: 1rem;
+  border-radius: 0.3rem;
+  font-family: montserrat, arial, verdana;
+  color: #615a5a;
+  font-size: 1.1rem;
+  font-weight: 500;
+  outline: none;
+}
+
+.estado {
+  background-color: hsla(949, 43%, 51%, 0.3);
+  width: 100%;
+  padding: 1rem;
+  border: 1.5px solid #ccc;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  font-family: montserrat, arial, verdana;
+  color: #615a5a;
+  font-size: 1rem;
+  font-weight: 100;
+  outline: none;
+}
+.combobox {
+  background-color: white;
+  width: 50%;
+  padding: 0.23rem;
+  border: none;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  font-family: montserrat, arial, verdana;
+  color: #615a5a;
+  font-size: 1rem;
+  font-weight: 100;
+  outline: none;
+  float: right;
+}
+
+/************************ diseño para los forms and fieldshet ***********************/
+
+.form {
+  /* width: clamp(320px, 100%, 55%); */
+  margin: 0 auto;
+  border: none;
+  border-radius: 10px !important;
+  overflow: hidden;
+  padding: 1.5rem;
+  background-color: #fff;
+  padding: 20px 30px;
+}
+.step-forms {
+  display: none;
+  transform-origin: top;
+  animation: animate 0s;
+}
+.step-forms-active {
+  display: block;
+}
+.group-inputs {
+  margin: 1rem 0;
+}
+@keyframes animate {
+  from {
+    transform: scale(1, 0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+#msform {
+  width: 800px;
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
+}
+/************************************ color de fondo de los forms **************************************/
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  position: relative;
+}
+
+#msform fieldset:not(:first-of-type) {
+  display: none;
+}
+
+#msform input,
+#msform textarea {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: montserrat, arial, verdana;
+  color: #2c3e50;
+  font-size: 13px;
+}
+
+#msform .action-button {
+  width: 100px;
+  background: #272e56;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+
+.fs-title {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 200;
+}
+
+a {
+  text-decoration: none;
+}
+
+li,
+a {
+  font-size: 14px;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/*********************************** diseño para cargar la imagen ***********************/
+
+.container-input {
+  padding: 30px 0;
+  border-radius: 10px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+/*********************************** diseño para input de la imagen ***********************/
+.inputfile-7 + label {
+  color: black;
+}
+
+.inputfile-7 + label {
+  border: 1px solid #272e56;
+  font-size: 1rem;
+  background-color:white;
+  padding: 0;
+  border-radius: 10px;
+
+}
+
+.inputfile-7:focus + label,
+.inputfile-7.has-focus + label,
+.inputfile-7 + label:hover {
+  border-color: #272e56;
+}
+
+.inputfile-7 + label span,
+.inputfile-7 + label strong {
+  padding: 0.2rem 1rem;
+}
+
+.inputfile-7 + label span {
+  width: 250px;
+  min-height: 1em;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.inputfile-7 + label strong {
+  height: 30%;
+  color: #fff;
+  background-color: hsla(949, 43%, 51%, 0.3);
+  display: inline-block;
+}
+
+.inputfile-7:focus + label strong,
+.inputfile-7.has-focus + label strong,
+.inputfile-7 + label:hover strong {
+  background-color:hsla(949, 43%, 51%, 0.3);
+}
+
+@media screen and (max-width: 50em) {
+.inputfile-7 + label strong {
+  display: block;
+}
+}
+/***************************************** Progress Bar ********************************************/
+
+.progressbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  counter-reset: step;
+  margin: 2rem 0 3rem;
+  width: clamp(320px, 100%, 55%);
+  margin-left: 23%;
+  }
+  
+.progressbar::before,
+.progress {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  background-color: #dcdcdc;
+  z-index: 1;
+}
+.progress {
+  background-color: #272e56;
+  width: 0%;
+  transition: 0.3s;
+}
+.progress-step {
+  width: 2.1875rem;
+  height: 2.1875rem;
+  background-color: #dcdcdc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.progress-step::before {
+  counter-increment: step;
+  content: counter(step);
+}
+.progress-step::after {
+  content: attr(data-title);
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  font-size: 0.85rem;
+  color: #666;
+}
+.progress-step-active {
+  background-color:#272e56;
+  color: white;
+}
+
+.progress-step-check {
+  position: relative;
+  background-color: #272e56 !important;
+  transition: all 0.8s;
+}
+.progress-step-check::before {
+  position: absolute;
+  content: "\2713";
+  width: 100%;
+  height: 100%;
+  top: 8px;
+  left: 13px;
+  font-size: 12px;
+}
+.group-inputs {
+  position: relative;
+}
+.group-inputs label {
+  font-size: 13px;
+  position: absolute;
+  height: 19px;
+  padding: 4px 7px;
+  top: -14px;
+  left: 10px;
+  color: #a2a2a2;
+  background-color: white;
+}
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #272e56;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.checkmark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: 10% auto;
+  box-shadow: inset 0px 0px 0px #272e56;
+  animation: fill 0.4s ease-in-out 0.4s forwards,
+    scale 0.3s ease-in-out 0.9s both;
+}
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #272e56;
+  }
+}
+/***************************** Contenedor de codigo QR ***********************************/
+
+.contenedorQR {
+	max-width: 70%;
+	width: 300px;
+	margin: 50px auto;
+}
+
+.btnQR {
+  padding: 0.5rem;
+  display: block;
+  text-decoration: none;
+  background-color: #272e56;
+  color: #f3f3f3;
+  text-align: center;
+  font-family: montserrat, arial, verdana;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: auto;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.btnQR:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #272e56;
+}
+
+.contenedorQR {
+	display: flex;
+	justify-content: center;
+	padding: 10px 0;
+  background-color: hsla(949, 43%, 51%, 0.3);
+}
+.iconoQr{
+  float: right !important;
+  top: 0;
+  font-size: x-small;
+  text-decoration: none;
+  color: rgba(52, 73, 94, 1.00);
+  text-align: center;
+  padding: 2px;
+}
+/*******************************************menu floting***************************************/
+
+#ham-menu {
+  display: none;
+}
+label[for="ham-menu"] {
+  display: block;
+  position: fixed;
+  top: 450px;
+  left: 5px;
+  z-index: 999;
+  width: 60px;
+  height: 60px;
+  border-radius: 15px;
+}
+.ham-menu {
+  width: 40vw;
+  height: 50%;
+  position: fixed;
+  top: 300px;
+  left: 10px;
+  visibility: hidden;
+  transform: translate(-110%);
+  z-index: 998;
+  transition: 1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+#ham-menu:checked + label {
+  background-color: transparent;
+}
+#ham-menu:checked ~ div.ham-menu {
+  transform: translate(0px);
+  visibility: visible;
+}
+.table-wraper{
+  font-size: 12px;
+}
+
+ .searchBox{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+.input-search{
+  height: 40px;
+
+  font-size: 18px;
+  letter-spacing: 2px;
+  border-radius: 50px;
+  transition: all .5s ease-in-out;
+  background-color: #fff;
+  color:#272e56;
+}
+
+.searchButton {
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #272e56;
+}
+
+.searchButton:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #272e56;
+}

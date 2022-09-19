@@ -1,0 +1,45 @@
+<!-- botones de Navegacion-->
+
+<body class="bodyq">
+    <div class="multi-button">
+        <button class="btn2" [routerLink]="['/Recepcion_Activos']">Recepcion</button>
+        <button class="btn1">Ver Todos</button>
+    </div>
+</body>
+
+<!-- Tabla -->
+<div class="step-forms step-forms-active">
+    <form action="" id="msform">
+        <fieldset>
+            <div class="form-registrar-procedencia">
+                <h4>Lista de Recepciones</h4>
+
+                <div class="table-wraper">
+                    <table class="table">
+                        <thead class="text-light" style="background-color:#272e56">
+                            <tr class="cabecera-tabla">
+                                <th class="th-lg"><a>#</a></th>
+                                <th class="th-lg"><a>Cod. Recepcion</a></th>
+                                <th class="th-lg"><a>Procedencia</a></th>
+                                <th class="th-lg"><a>Receptor</a></th>
+                                <th class="th-lg"><a>Fecha Ingreso</a></th>
+                                <th class="th-lg"><a>Estado</a></th>
+                   
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let itemA of encabezado">
+                            <tr>
+                                <th>{{ itemA.id_encabezado_ing }}</th>
+                                <td>{{ itemA.num_recep }}</td>
+                                <td>{{ itemA.procedencia.nombre_procedencia}}</td>
+                                <td>{{ itemA.usuario.nombre}} {{ itemA.usuario.apellido}}</td>
+                                <td>{{ itemA.fecha_ingreso}}</td>
+                                <td>{{ itemA.estado }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

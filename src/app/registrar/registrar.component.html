@@ -1,0 +1,90 @@
+
+<script src="http://googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<header>
+    <div class="responsive, background">
+    <div>
+        <img class="ajusts" src="assets/img/ista.png"/>
+    </div>
+    </div>
+</header>
+<div class = "bootstrap-wrapper">
+<div class="container text-center">
+    <div class = "row">
+        <div >
+            <div >
+                <form lass="form-horizontal" ngNativeValidate (ngSubmit)="create()">
+                    <fieldset class="fields">
+                        <legend class="header">REGISTRARSE</legend>
+                        <img src="/assets/img/icon.png" class="img-perfil container">
+                        
+                        <div class="container form-group">
+                            
+                            <div class="col-md-8 ">
+                                <input type="text" maxlength="10" placeholder="CEDULA" class="form-control, text" required [(ngModel)]="usuario.cedula" name="cedula" (input)="escribirInput($event)">
+                               
+                            </div>
+                        </div>
+                        
+                        <div class="container form-group">
+                            
+                            <div class="col-md-8">
+                                <input type="text"  id="nombresss" placeholder="NOMBRES" class="form-control, text" required [(ngModel)]="usuario.nombre" name="nombres" disabled>
+                            </div>
+                        </div>
+                        
+                        <div class=" container form-group">
+                            
+                            <div class="col-md-8">
+                                <input type="text" placeholder="APELLIDOS" class="form-control, text" required [(ngModel)]="usuario.apellido" name="apellidos" disabled>
+                            </div>
+                        </div>
+
+                        <div class="container form-group">
+                            
+                            <div class="col-md-8">
+                                <input type="email" id="correoe" placeholder="CORREO" class="form-control, text" required [(ngModel)]="usuario.correo" name="correo" disabled (input)="autoEmail($event)">
+                                <div id="emailHelp" class="textlabel">Nunca compartiremos su correo electrónico con nadie más.</div>
+                            </div>
+                        </div>
+
+                        <div class="container form-group">
+                            
+                            <div class="col-md-8 text-center">
+                                <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                                <input type="password" placeholder="CONTRASEÑA" class="form-control, text" required [(ngModel)]="usuario.contrasenia" name="contrasenia">
+                                <!--input type="button" class="fa fa-eyes" onclick="mostrar()"-->
+                                <div class="textlabel">Tu contraseña debe tener entre 8 y 20 caracteres, contener letras y números, y no debe contener espacios, caracteres especiales ni emoji</div>
+                            </div>
+                        </div>
+                        
+                        <br>
+
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary botton">REGISTRARSE</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<footer class="footer">
+    <div class="responsive">
+    Copyright &copy; 2022 - ISTA
+    </div>
+</footer>
+
+<script type="text/javascript">
+    function mostrar() {
+        var tipo = document.getElementById("password");
+        if(tipo.type =='password'){
+            tipo.type = 'text';
+        } else {
+            tipo.type = 'password';
+        }
+    }
+</script>

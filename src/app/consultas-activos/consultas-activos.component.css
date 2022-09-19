@@ -1,0 +1,73 @@
+.card {
+  border: 0ch;
+}
+
+.container-1 {
+  width: 300px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+
+.container-1 input#search {
+  width: 300px;
+  height: 40px;
+  background: #ffffff;
+  font-size: 10pt;
+  border: 1px solid #272e56;
+  padding-left: 15px;
+  border-radius: 5px;
+  margin-block-end: 25px;
+}
+
+.container-1 input#search:hover,
+.container-1 input#search:focus,
+.container-1 input#search:active {
+  outline: none;
+  background: #ffffff;
+}
+
+.container-2 {
+  text-align: center;
+  width: auto;
+  right: auto;
+}
+
+.btn-nueva-recep {
+  background-color: #272e56;
+  color: rgb(255, 255, 255);
+  border: 2px solid #000000; /* Green */
+  border-radius: 15px;
+  width: 300px;
+  height: 40px;
+}
+
+.boton-ver {
+  text-align: center;
+  background-color: #272e56;
+  size: 10px;
+  color: rgb(255, 255, 255);
+  border: 2px solid #000000; /* Green */
+  border-radius: 15px;
+  width: 80px;
+  height: 30px;
+}
+
+.table {
+  border: 1px solid #272e56;
+  padding: 4px;
+  margin-top: 25px;
+  text-align: center;
+  overflow-y: scroll;
+}
+
+.th {
+  position: sticky;
+  top: 0%;
+}
+
+.table-wraper {
+  border: 0ch;
+  max-height: 500px;
+  overflow-y: scroll;
+}

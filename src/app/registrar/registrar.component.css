@@ -1,0 +1,96 @@
+.fields{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 300px;
+    margin-right: 150px;
+    width: 80ex;
+    height: 55ex;
+    align-items: center;
+}
+.ajusts{
+    position: absolute;
+    width: 17%;
+    height: 11%;
+}
+.background{
+    background-color: rgb(39, 46, 86);
+    height: 9ex;
+    vertical-align: middle;
+    bottom:0;
+}
+
+.container{
+    display: table-row-group;
+    justify-content: center;
+    align-items: center;
+    width: 90vh;
+}
+.header {
+    color: rgb(39, 46, 86);
+    font-size: 25px;
+    padding: 10px;
+}
+
+.bigicon {
+    font-size: 35px;
+    color: rgb(39, 46, 86);
+}
+.img-perfil{
+    margin-bottom: 1ex;
+    margin-left: 43%;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text{
+    background-color: #f8f8f8;
+    color: lightslategray;
+    width: 40ex;
+    height: 3ex;
+    border-radius: 25px 25px 25px 25px;
+    border: 1px solid rgb(39, 46, 86);
+    font-size:small;
+    margin-bottom: 0.5ex;
+    margin-left: 20ex;
+}
+.textlabel{
+    color: rgb(174, 173, 173);
+    width: 59ex;
+    height: 3ex;
+    border-radius: 25px 25px 25px 25px;
+    font-size:x-small;
+    margin-bottom: 2ex;
+    margin-left: 33ex;
+    text-align: justify;
+    
+}
+.botton{
+    width: 150px;
+    height: 40px;
+    border: 1px solid rgb(39, 46, 86);
+    border-left: 0;
+    border-radius: 25px 25px 25px 25px;
+    background-color: rgb(39, 46, 86);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    size: 20ex;
+    color: white;
+    font-size: 90%;
+    margin-left: 38%;
+    margin-bottom: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    width: 99%;
+    background-color: rgb(39, 46, 86);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(196, 199, 219); 
+    font-size:small;
+    text-align: center;   
+}

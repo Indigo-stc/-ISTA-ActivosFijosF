@@ -1,0 +1,99 @@
+<div class = "card">
+    <div class = "card-body">
+        <div class = "row">
+            <div class = "col-md-12">
+                <h2 class = "py-3 text-center font-bold">
+                    Historial de Usuario
+                </h2>
+            </div>
+            <div class = "table-wraper">
+                <table class = "table">
+                    <thead class = "text-light" style="background-color: #272e56;">
+                        <tr>
+                            <th scope = "row">#</th>
+                            <th class="th-lg">Responsable</th>
+                            <th class="th-lg">Usuario</th>
+                            <th class="th-lg">Rol Asignado</th>
+                            <th class="th-lg">Fecha de Asignacion del Rol</th>
+                            <th class="th-lg">Fecha finalizada del Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let historial of historial">
+                            <td>{{historial.id}}</td>
+                            <td>{{historial.responsable}}</td>
+                            <td>{{historial.usuario}}</td>
+                            <td>{{historial.rol}}</td>
+                            <td>{{historial.FechaAsignacionRol}}</td>
+                            <td>{{historial.FechaFinalizadaRol}}</td>
+                        
+                            
+                        
+                        <!-- <tr>
+                            <th scope = "row">2</th>
+                            <td>Carmen</td>
+                            <td>Martha</td>
+                            <td>Constatante</td>
+                            <td>24/11/2022</td>
+                            <td>20/10/2022</td>
+                            <td>20/10/2022</td>
+                            <td>10/10/2022</td>
+                           
+                            
+                        </tr>
+                        <tr>
+                            <th scope = "row">3</th>
+                            <td>Carlos</td>
+                            <td>Andres</td>
+                            <td>Constatante</td>
+                            <td>10/10/2022</td>
+                            <td>10/10/2022</td>
+                            <td>10/10/2022</td>
+                            <td>10/10/2022</td>
+                           
+                            
+                        </tr>
+                        <tr>
+                            <th scope = "row">4</th>
+                            <td>Carlos</td>
+                            <td>Andres</td>
+                            <td>Solicitante</td>
+                            <td>10/10/2022</td>
+                            <td>10/10/2022</td>
+                            <td>10/10/2022</td>
+                            <td>10/10/2022</td>
+                          
+
+                            
+                        </tr>
+                        <tr>
+                            <th scope = "row">5</th>
+                            <td>Juan</td>
+                            <td>Jose</td>
+                            <td>Solicitante</td>
+                            <td>10/10/2022</td>
+                            <td>10/10/2022</td>
+                            <td>10/10/2022</td>
+                            <td>10/10/2022</td>
+                            
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                
+                <div class="modal fade text-center" id="crearrecepcion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center" id="staticBackdropLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+          

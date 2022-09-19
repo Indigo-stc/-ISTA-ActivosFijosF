@@ -1,0 +1,75 @@
+.container .btn-menu, .logo{
+  float: left;
+  /* line-height:50px; ponemos cambiar position */
+}
+  
+.container .btn-menu label{
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+#btn-menu{
+  display: none;
+}
+.container-menu{
+  position: absolute;
+  /* background: rgba(0,0,0,0.5); */
+  width: 100%;
+  top: 0;left: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+  
+#btn-menu:checked ~ .container-menu{
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.cont-menu{
+  width: 100%;
+  max-width: 200px;
+  background: #1c1c1c;
+  height: 100vh;
+  position: relative;
+  transition: all 500ms ease;
+  transform: translateX(-100%);
+  
+}
+  
+#btn-menu:checked ~ .container-menu .cont-menu{
+  transform: translateX(0%);
+}
+  
+.cont-menu nav{
+  transform: translateY(15%);
+}
+
+.cont-menu nav a{
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+  color: #c7c7c7;
+  border-left: 5px solid transparent;
+  
+}
+.cont-menu nav a:hover{
+  border-left: 5px solid #c7c7c7;
+  background: #1f1f1f;
+}
+.cont-menu label{
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  color: #c7c7c7;
+  cursor: pointer;
+  font-size: 18px;
+
+}
+a{
+  color: white;
+}
+.dropdown-item{
+  color:#272e56;
+}

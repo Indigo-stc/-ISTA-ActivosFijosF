@@ -1,0 +1,45 @@
+<div class="form-registrar-procedencia">
+  <h4>Lista de Activos Fijos</h4>
+
+  <div class="table-wraper">
+    <table class="table">
+      <thead class="text-light" style="background-color:#272e56">
+        <tr class="cabecera-tabla">
+          <th scope="row">#</th>
+          <th class="th-lg"><a>Codigo</a></th>
+          <th class="th-lg"><a>Nombre</a></th>
+          <th class="th-lg"><a>Procedencia</a></th>
+          <th class="th-lg"><a>Especificaciones</a></th>
+          <th class="th-lg"><a>Estado</a></th>
+          <th class="th-lg"><a>Disponibilidad</a></th>
+          <th class="th-lg"><a></a></th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>001</td>
+          <td>computador</td>
+          <td>SECAP</td>
+          <td>compuatdor 19p</td>
+          <td>bueno</td>
+          <td>disponible</td>
+          <td> <a class="button" [routerLink]="['/asignar_activo']">Asignar</a></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>002</td>
+          <td>silla</td>
+          <td>ISTA</td>
+          <td>silla con reposa brazos</td>
+          <td>bueno</td>
+          <td>disponible</td>
+          <td> <a class="button" [routerLink]="['/asignar_activo']">Asignar</a></td>
+        </tr>
+
+      </tbody>
+    </table>
+    <!-- <a class="button" [routerLink]="['/asignar_activo']">añadir</a> -->
+  </div>
+</div>
