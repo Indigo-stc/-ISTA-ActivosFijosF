@@ -11,7 +11,7 @@ export class BaseFenixService {
 
   constructor(private http: HttpClient) { }
 
-  private urlFenix:string = 'http://localhost:8080/api';
+  private urlFenix:string = 'http://localhost:8080/api/auth';
 
   public consultarUser(cedula: string): Observable<Verpersonaf> {
     return this.http.get<Verpersonaf>(this.urlFenix + `/personafenix/${cedula}`);

@@ -32,8 +32,8 @@
                 <a routerLink="Constatacion_Activos">Activos Fijos</a>
                 <a routerLink="/">Suministros</a>
                 <a routerLink="Recepcion_Activos">Gestión de Activos</a>
-                <a routerLink="procedencia">Procedencia</a>
-                <a routerLink="Consultas_Activos">Consultas</a>
+                <a routerLink="procedencia" >Procedencia</a>
+                <a routerLink="Consultas_Activos" *ngIf="showProcedencias">Consultas</a>
               </nav>
               <label for="btn-menu">✖️</label>
             </div>
@@ -51,7 +51,7 @@
         </li> 
 
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="procedencia" style="margin-left:30px ;">Procedencia</a>
+          <a class="nav-link" aria-current="page" routerLink="procedencia" style="margin-left:30px ;" *ngIf="showProcedencias">Procedencia</a>
 
         </li>
         
@@ -82,6 +82,15 @@
           <a class="nav-link" aria-current="page" routerLink="roles" style="margin-left:30px ;">Roles</a>
         </li>
 
+      </ul>
+
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+        </li>
+        <li class="nav-item">
+          <a href class="nav-link" (click)="logout()">LogOut</a>
+        </li>
       </ul>
     </div>
   </div>

@@ -39,6 +39,9 @@ import { RolesComponent } from './roles/roles.component';
 import { PermisosComponent } from './roles/permisos/permisos.component';
 import { HistorialComponent } from './roles/Historial/historial.component';
 
+//Impot del interceptor
+import { httpInterceptorProviders } from './helpers/http.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -76,6 +79,7 @@ import { HistorialComponent } from './roles/Historial/historial.component';
   ],
   providers: [
     CargarScriptsService,
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
