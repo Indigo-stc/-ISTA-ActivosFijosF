@@ -45,7 +45,7 @@ const app_routes: Routes = [
   { path: 'departamentos/verTodos', component: VerDepartamentosComponent },
   { path: 'RegEdificioComponent', component: RegEdificioComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'registro', component: FormComponent },
+  { path: 'registra', component: FormComponent },
   { path: 'roles', component: RolesComponent },
   { path: 'permisos', component: PermisosComponent },
   { path: 'historial', component: HistorialComponent },
