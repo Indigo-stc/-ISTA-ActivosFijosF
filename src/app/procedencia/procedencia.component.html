@@ -16,6 +16,7 @@
       <div class="btns-group">
         <input class="btn" type="submit" value="Cancelar">
         <input class="btn" type="submit" value="Registrar" [disabled]="procedenciaForm.invalid">
+        <input class="btn" type="button" value="Actualizar" [disabled]="procedenciaForm.invalid" (click)="actualizarProcedencia()">
 
       </div>
     </fieldset>

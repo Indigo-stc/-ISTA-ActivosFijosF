@@ -54,6 +54,8 @@ const app_routes: Routes = [
 
   { path: 'procedencia/edit/:idprocedencia', component: ProcedenciaComponent },
 
+  {path: 'permisos/edit/:id_usuario', component: PermisosComponent},
+
   {path: '**',pathMatch:'full',redirectTo:'login'}
 ];
 export const app_routing = RouterModule.forRoot(app_routes);

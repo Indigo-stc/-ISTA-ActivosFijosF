@@ -1,37 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const url_ponit = 'http://localhost:8080/api/procedencia';
+import { Procedencia } from '../models/procedencia';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcedenciaService {
 
-  //private url_ponit = "http://localhost:8080/procedencias/";
+  private url_ponit = "http://localhost:8080/api/procedencias";
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+   // private headers:HttpHeaders
   ) { };
 
   public getAllProcedencia(): Observable<any>{
-    return this.httpClient.get(url_ponit + '/listar');
+    return this.httpClient.get(this.url_ponit + "/listarProcedencia");
   }
 
   public saveProcedencia(procedencia:any): Observable<any> {
-    return this.httpClient.post(url_ponit + '/save', procedencia);
+    return this.httpClient.post(this.url_ponit + "/guardarProcedencia/", procedencia);
+  }
+
+  public updateProcedencia( procedencia: Procedencia, ): Observable<any>{
+    return this.httpClient.put(this.url_ponit + "/actualizarProcedencia/", procedencia, {responseType: "text" })
   }
 
   // Eliminar Procedencia
   public deleteProcedencia(id: number):Observable<any>{
-    return this.httpClient.delete(url_ponit + "/delete/"+id)
+    return this.httpClient.delete(this.url_ponit + "/eliminarProcedencia/"+id)
   }
 
 
   // buscar idProcedencia
   public getByidProcedencia(id: any):Observable<any>{
-    return this.httpClient.get(url_ponit + "buscar/"+id)
+    return this.httpClient.get(this.url_ponit + "/buscarProcedenciaPorId/"+id)
   }
 
 }

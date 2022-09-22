@@ -16,10 +16,9 @@ export class ProcedenciaComponent implements OnInit {
   // VARIABLES
   procedenciaForm!: FormGroup;
   id_procedenciaP: any;
-
-  // creacion de array
-
-  procedencia: any;
+  id_procedencia: any;
+  
+  Procedencia = new Procedencia
 
   constructor(
     public fb: FormBuilder,
@@ -29,8 +28,8 @@ export class ProcedenciaComponent implements OnInit {
   }
   ngOnInit(): any {
 
+
     // Crear un Formulario
-    // para guardar  pr
     this.procedenciaForm = this.fb.group({
       id_procedencia: [''],
       nombre_procedencia: ['', Validators.required],
@@ -38,14 +37,6 @@ export class ProcedenciaComponent implements OnInit {
 
     });
 
-    // Obtener las procedencias
-    this.procedenciaservice.getAllProcedencia().subscribe(
-      procedencia => {
-        this.procedencia = procedencia
-        console.log(procedencia);
-      },
-      error => (console.log(error))
-    )
 
     this.id_procedenciaP = this.route.snapshot.params['idprocedencia'];
     console.log(this.id_procedenciaP);
@@ -54,44 +45,35 @@ export class ProcedenciaComponent implements OnInit {
       this.cargarDatosEdit();
     }
 
-
   }
 
+  /* **************************************************** */
 
-
-  // Guardar el Activo
-
+  actualizarProcedencia(): void {
+    this.procedenciaservice.updateProcedencia(this.procedenciaForm.value).subscribe(resp => {
+      console.log(resp)
+      this.procedenciaForm.reset();
+    },
+      error => (console.error(error))
+    )
+    
+  }
+  
   guardarProcedencia(): void {
     this.procedenciaservice.saveProcedencia(this.procedenciaForm.value).subscribe(resp => {
       this.procedenciaForm.reset();
-      this.procedencia = this.procedencia.filter((procedencia: any) => resp.id !== this.procedencia.id)
-      this.procedencia.push(resp);
     },
       error => (console.error(error))
     )
   }
-
-  // Eliminar
-  // eliminarProcedencia(id_procedencia: number) {
-  //   this.procedenciaservice.deleteProcedencia(id_procedencia).subscribe(resp => {
-  //     if (resp === true) {
-  //       this.procedencia.pop(id_procedencia)
-  //       this.procedencia.push(resp);
-  //     }
-
-  //   },
-  //     error => (console.error(error))
-  //   )
-  // }
+  
 
   // Editar
-
   editarProcedencia(procedencia: any) {
     this.procedenciaForm.setValue({
       id_procedencia: procedencia.id_procedencia,
       nombre_procedencia: procedencia.nombre_procedencia,
       descripcion: procedencia.descripcion,
-
     })
   }
 
@@ -99,7 +81,6 @@ export class ProcedenciaComponent implements OnInit {
     this.procedenciaservice.getByidProcedencia(this.id_procedenciaP).subscribe((data:any)=> {
       this.procedenciaForm.setValue(data);
       console.log(data);
-
     });
   }
 
