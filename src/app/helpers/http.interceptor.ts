@@ -4,8 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { StorageService } from '../service/storage.service';
-import { EventBusService } from '../shared/event-bus';
-import { EventData } from '../shared/event';
+import { EventBusService } from '../shared/event-bus.service';
+import { EventData } from '../shared/event.class';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -25,6 +25,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           !req.url.includes('auth/signin') &&
           error.status === 401
         ) {
+          console.log('Esto es lo que estoy ingresando el el interceptor cuando el valor es true..')
           return this.handle401Error(req, next);
         }
 
@@ -34,6 +35,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+    console.log('Esto es lo que me devuelve el handle401 Error --> '+request)
     if (!this.isRefreshing) {
       this.isRefreshing = true;
 

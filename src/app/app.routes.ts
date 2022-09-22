@@ -45,7 +45,7 @@ const app_routes: Routes = [
   { path: 'departamentos/verTodos', component: VerDepartamentosComponent },
   { path: 'RegEdificioComponent', component: RegEdificioComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'registro', component: FormComponent },
+  { path: 'registra', component: FormComponent },
   { path: 'roles', component: RolesComponent },
   { path: 'permisos', component: PermisosComponent },
   { path: 'historial', component: HistorialComponent },
@@ -54,6 +54,8 @@ const app_routes: Routes = [
 
   { path: 'procedencia/edit/:idprocedencia', component: ProcedenciaComponent },
 
-  { path: '**', pathMatch: 'full', redirectTo: 'home' },
+  {path: 'permisos/edit/:id_usuario', component: PermisosComponent},
+
+  {path: '**',pathMatch:'full',redirectTo:'login'}
 ];
 export const app_routing = RouterModule.forRoot(app_routes);

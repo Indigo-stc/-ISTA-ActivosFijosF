@@ -23,17 +23,8 @@ export class VerProcedenciaComponent implements OnInit {
   ) {
   }
   ngOnInit(): any {
-
-    // Crear un Formulario
-    // para guardar  pr
-    this.procedenciaForm = this.fb.group({
-      id_procedencia: [''],
-      nombre_procedencia: ['', Validators.required],
-      descripcion: ['', Validators.required],
-
-    });
-
     this.cargarLista();
+
   }
 
   //cargar lista --Obtener las procedencias
@@ -65,9 +56,9 @@ export class VerProcedenciaComponent implements OnInit {
   // // Editar
 
   editarProcedencia(procedencia: any) {
-    this.procedenciaForm.setValue({
+    //this.procedenciaForm.setValue({
 
-    })
+    //})
 
   }
 

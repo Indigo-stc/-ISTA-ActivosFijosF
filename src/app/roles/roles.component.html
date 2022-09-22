@@ -14,26 +14,21 @@
                             <th class="th-lg">Cedula</th>
                             <th class="th-lg">Nombre</th>
                             <th class="th-lg">Apellido</th>
-                            <th class="th-lg">Rol</th>
-                            <th class="th-lg">Asignacion</th>
+                            <th class="th-lg">Roles</th>
                             <th class="th-lg">Historial</th>
 
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr *ngFor="let usuario of usuario">
-                            <td>{{usuario.id}}</td>
+                    <tbody  *ngFor="let usuario of lista">
+                        <tr>
+                            <td>{{usuario.id_usuario}}</td> 
                             <td>{{usuario.cedula}}</td>
-                            <td>{{usuario.nombre}}</td>
-                            <td>{{usuario.apellido}}</td>
-                            <td>{{usuario.rol}}</td>
-
-                            <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                    class="boton-ver" routerLink="/permisos"> Permisos </button>
-                            <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                    class="boton-ver" routerLink="/historial"> Historial </button>
-
-                            </td>
+                            <td>{{usuario.nombres}}</td>
+                            <td>{{usuario.apellidos}}</td>
+                            <!-- <td>{{usuario.roles}}</td> -->
+                            
+                            <td><button type="submit" class="boton-ver" [routerLink]="['/permisos/edit' , usuario.id_usuario]"> Ver </button></td>
+                            <td><button type="submit" class="boton-ver" routerLink="/historial"> Historial </button></td>
 
                         </tr>
                         <!-- <tr>

@@ -1,39 +1,91 @@
 
 import { Component, ViewChild } from "@angular/core";
 import { MatSidenav } from '@angular/material/sidenav';
-import {BreakpointObserver} from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { StorageService } from '../service/storage.service';
+import { CreateAccountService } from '../service/createaccount.service';
+import { EventBusService } from '../shared/event-bus.service';
 
 @Component({
   selector: 'app-header',
-  templateUrl:  './header.component.html',
+  templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 
 export class HeaderComponent {
 
-    @ViewChild(MatSidenav)
-    sidenav!: MatSidenav;
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showProcedencias = false;
+  showModeratorBoard = false;
+  username?: string;
 
-    constructor(
-        private observer: BreakpointObserver,
-        private changeDedectionRef: ChangeDetectorRef
-      ) { }
+  eventBusSub?: Subscription;
 
-      ngOnInit(): void {
-        this.changeDedectionRef.detectChanges();
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav;
+
+  constructor(
+    private storageService: StorageService,
+    private authService: CreateAccountService,
+    private eventBusService: EventBusService,
+
+    private observer: BreakpointObserver,
+    private changeDedectionRef: ChangeDetectorRef
+  ) { }
+
+  ngOnInit(): void {
+    this.changeDedectionRef.detectChanges();
+
+    //Metodo incorporado para el login..
+    this.isLoggedIn = this.storageService.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      console.log('Estamos logiados satisfacririamente')
+      const user = this.storageService.getUser();
+      this.roles = user.roles;
+
+      this.showProcedencias = this.roles.includes('ROLE_RESPONSABLE');
+      //this.showModeratorBoard = this.roles.includes('ROL_ADMIN');
+
+      this.username = user.correo;
+      console.log('La obtencio del email del storage--> ' + user.correo)
+      console.log('Este user esta Auth --> ' + this.username)
+    }
+
+    this.eventBusSub = this.eventBusService.on('logout', () => {
+      this.logout();
+    });
+  }
+
+  logout(): void {
+    this.authService.logout().subscribe({
+      next: res => {
+        console.log('Salimos del sistema con --> ' + res)
+        console.log(res);
+        this.storageService.clean();
+        window.location.reload();
+      },
+      error: err => {
+        console.log('Tenemos un error a la hora de un logOut')
+        console.log(err);
       }
-    
-    
-      ngAfterContentInit() {
-          this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
-            if (res.matches) {
-              this.sidenav.mode = 'over';
-              this.sidenav.close();
-            } else {
-              // this.sidenav.mode = 'side';
-                  // this.sidenav.open();
-            }
-          });
+    });
+  }
+
+
+  ngAfterContentInit() {
+    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+      if (res.matches) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        // this.sidenav.mode = 'side';
+        // this.sidenav.open();
       }
+    });
+  }
 }
