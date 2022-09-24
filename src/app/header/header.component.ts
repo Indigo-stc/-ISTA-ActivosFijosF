@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { StorageService } from '../service/storage.service';
 import { CreateAccountService } from '../service/createaccount.service';
 import { EventBusService } from '../shared/event-bus.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-header',
@@ -53,7 +54,7 @@ export class HeaderComponent {
 
       this.username = user.correo;
       console.log('La obtencio del email del storage--> ' + user.correo)
-      console.log('Este user esta Auth --> ' + this.username)
+      console.log('Este user esta Auth --> ' + this.username) 
     }
 
     this.eventBusSub = this.eventBusService.on('logout', () => {
@@ -62,6 +63,24 @@ export class HeaderComponent {
   }
 
   logout(): void {
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Signed in successfully'
+    })
+
     this.authService.logout().subscribe({
       next: res => {
         console.log('Salimos del sistema con --> ' + res)

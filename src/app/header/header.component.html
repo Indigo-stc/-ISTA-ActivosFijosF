@@ -28,12 +28,12 @@
           <div class="container-menu">
             <div class="cont-menu">
               <nav>
-                <a routerLink="/">INICIO</a>
+                <a routerLink="/home">INICIO</a>
                 <a routerLink="Constatacion_Activos">Activos Fijos</a>
                 <a routerLink="/">Suministros</a>
                 <a routerLink="Recepcion_Activos">Gestión de Activos</a>
-                <a routerLink="procedencia" >Procedencia</a>
-                <a routerLink="Consultas_Activos" *ngIf="showProcedencias">Consultas</a>
+                <a routerLink="procedencia" *ngIf="showProcedencias">Procedencia</a>
+                <a routerLink="Consultas_Activos" >Consultas</a>
               </nav>
               <label for="btn-menu">✖️</label>
             </div>
@@ -84,12 +84,18 @@
 
       </ul>
 
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn == false">
+        <li class="nav-item">
+          <a href class="nav-link" [routerLink]="'login'">LOGIN</a>
+        </li>
+      </ul>
+
       <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
         <li class="nav-item">
-          <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+          <a  class="nav-link" style="color: white;">{{ username }}</a>
         </li>
         <li class="nav-item">
-          <a href class="nav-link" (click)="logout()">LogOut</a>
+          <a href class="nav-link" [routerLink]="'login'" (click)="logout()">LogOut</a>
         </li>
       </ul>
     </div>

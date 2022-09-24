@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
             this.isLoggedIn = true;
             this.roles = this.storageService.getUser().roles;
         }
+        
     }
 
     onSubmit(): void {
@@ -46,7 +47,6 @@ export class LoginComponent implements OnInit {
                 this.isLoginFailed = false;
                 this.isLoggedIn = true;
                 this.roles = this.storageService.getUser().roles;
-
                 Swal.fire({
                     position: 'top',
                     icon: 'success',
@@ -54,7 +54,8 @@ export class LoginComponent implements OnInit {
                     showConfirmButton: false,
                     timer: 2000,
                 });
-                //this.reloadPage();
+                this.reloadPage();
+
                 this.router.navigate(['/home']);
             },
             error: (err) => {
@@ -98,6 +99,6 @@ export class LoginComponent implements OnInit {
     }
 
     reloadPage(): void {
-        window.location.reload();
+        location.reload();
     }
 }
