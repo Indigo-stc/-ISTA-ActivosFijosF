@@ -1,0 +1,12 @@
+
+.responsive {
+    /* max-width: 100%; */
+    /* height: auto; */
+    background: url('../../assets/img/infraestructura.png');
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+ 
+}

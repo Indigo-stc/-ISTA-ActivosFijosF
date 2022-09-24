@@ -51,7 +51,7 @@ export class CreateAccountService {
   }
 
   logout(): Observable<any> {
-    return this.http.post(urlEndPoint + 'signout', { }, httpOptions);
+    return this.http.post(urlEndPoint + '/signout', { }, httpOptions);
   }
   
 }

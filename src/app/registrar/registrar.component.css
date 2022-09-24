@@ -67,8 +67,8 @@
     
 }
 .botton{
-    width: 150px;
-    height: 40px;
+    width: 100%;
+  height: auto;
     border: 1px solid rgb(39, 46, 86);
     border-left: 0;
     border-radius: 25px 25px 25px 25px;

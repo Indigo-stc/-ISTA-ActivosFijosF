@@ -10,7 +10,7 @@ export class StorageService {
   constructor() { }
 
   clean(): void {
-    localStorage.clear();
+    window.localStorage.clear();
     window.sessionStorage.clear();
   }
 
