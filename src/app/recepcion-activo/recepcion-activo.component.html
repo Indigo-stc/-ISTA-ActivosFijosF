@@ -40,18 +40,19 @@
         </p>
         <p class="estado">
           Edificio:
-          <select   (change)="onSelect($event)" ngModel="edificios.id_edificio"  name="edificio-name" id="edificio" formControlName="" class="combobox" required>
+          <select  (change)="cargarDepartamentosSegunEdificio($event)" name="edificio" id="edificio" formControlName="" class="combobox" required>
             <option [ngValue]="undefined"> Seleccione un Edificio</option>
-            <option value= {{item2.id_edificio}}  *ngFor="let item2 of edificios"> {{ item2.nombre_edificio }}</option>
+            <option [value]="edificio.id_edificio" *ngFor="let edificio of edificios"> {{ edificio.nombre_edificio }}</option>
           </select>
         </p>
         <p class="estado">
           Departamento:
           <select name="departamento" id="departamento"  [(ngModel)]="recepcion.departamento" formControlName="departamento"  class="combobox" required>
             <option [ngValue]="undefined"> Seleccione un Departamento </option>
-            <option [ngValue]="departamento" *ngFor="let departamento of departamentos"> {{ departamento.nombre_departamento }}</option>
+            <option [ngValue]="departamento" *ngFor="let departamento of departamentos"> {{departamento.nombre_departamento}}</option>
           </select>
         </p>
+
         <input type="date" class="inputbox" name="fecha_ingreso" [(ngModel)]="recepcion.fecha_ingreso" formControlName="fecha_ingreso" placeholder="Ingrese la fecha - yyyy/mm/dd:"required />
         <div class="btns-group1">
           <input class="btn" type="button" value="Cancelar"> 

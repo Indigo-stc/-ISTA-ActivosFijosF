@@ -175,7 +175,6 @@ export class ActivosComponent implements OnInit {
     this.departamentoservice.getByidDepartamentos(id_edificio).subscribe(
       (resp) => {
         console.log(resp)
-        alert('Response' + resp)
         this.departamentos = resp;
         // alert('Valor resultado'+this.departamentos)
       },
@@ -281,7 +280,6 @@ export class ActivosComponent implements OnInit {
     console.log('Id del departameno-> ' + this.id_departamento)
   }
 
-
   guardarHistorialActivo(): void {
 
     let historial_ing = { 
@@ -312,10 +310,5 @@ export class ActivosComponent implements OnInit {
       }
     });
   }
-
-
-
-
-  
 
 }

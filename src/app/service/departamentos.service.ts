@@ -27,6 +27,6 @@ export class DepartamentosService {
   }
 
   public getByidDepartamentos(id: number):Observable<Departamento>{
-    return this.httpClient.get<Departamento>(this.API_SERVER + "/buscarDepartamento/"+id);
+    return this.httpClient.get<Departamento>(this.API_SERVER + "/buscarDepartamentoPorEdifcio/"+id);
   }
 }
