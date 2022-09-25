@@ -84,7 +84,7 @@
 
       <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
         <li class="nav-item">
-          <a class="nav-link" style="color: white;">{{ username }}</a>
+          <a class="nav-link" style="color: white;">{{ username }} - {{id_persona}}</a>
         </li>
         <li class="nav-item">
           <a href class="nav-link" [routerLink]="'login'" (click)="logout()">LogOut</a>

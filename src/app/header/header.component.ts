@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { StorageService } from '../service/storage.service';
 import { CreateAccountService } from '../service/createaccount.service';
 import { EventBusService } from '../shared/event-bus.service';
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 
 @Component({
   selector: 'app-header',
@@ -23,6 +23,8 @@ export class HeaderComponent {
   showProcedencias = false;
   showModeratorBoard = false;
   username?: string;
+
+  id_persona?: string;
 
   eventBusSub?: Subscription;
 
@@ -53,8 +55,8 @@ export class HeaderComponent {
       //this.showModeratorBoard = this.roles.includes('ROL_ADMIN');
 
       this.username = user.correo;
+      this.id_persona= user.id;
       console.log('La obtencio del email del storage--> ' + user.correo)
-      console.log('Este user esta Auth --> ' + this.username) 
     }
 
     this.eventBusSub = this.eventBusService.on('logout', () => {

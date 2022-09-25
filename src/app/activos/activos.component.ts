@@ -1,4 +1,4 @@
-import { Component, OnInit, Input  } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CargarScriptsService } from './../cargar-scripts.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { FormGroup, Validators } from '@angular/forms';
@@ -10,6 +10,10 @@ import { RecepcionActivoService } from '../service/recepcion-activo.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Activo } from '../models/activo';
+
+import { StorageService } from '../service/storage.service';
+
+
 declare var jQuery: any;
 declare var $: any;
 @Component({
@@ -46,8 +50,10 @@ export class ActivosComponent implements OnInit {
     public departamentoservice: DepartamentosService,
     private activateRoute: ActivatedRoute,
     private route: Router,
-    private recepcionservice: RecepcionActivoService,
-    private activoServe: ActivosService
+
+    private activoServe: ActivosService,
+    private storageService: StorageService,
+
   ) {
     _CargaScripts.Carga(['js-activos/activos']);
   }
@@ -57,7 +63,21 @@ export class ActivosComponent implements OnInit {
     resp.subscribe((data) => (this.detalleAct = data));
   }
 
+  //Verifcar si el user esta logiado..
+  isLoggedIn = false;
+  id_persona?: number; // valor del usuario que este log
   ngOnInit(): any {
+
+    this.isLoggedIn = this.storageService.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      console.log('Estamos logiados satisfacririamente')
+      const user = this.storageService.getUser();
+      this.id_persona = user.id;
+    }
+
+    // alert('Cogigo que llega: -> '+this.id_persona)
+
     this.activoCompletForm = this.reg.group({
       // id_detalle_ing:[''],
       id_activo: [''],
@@ -67,9 +87,9 @@ export class ActivosComponent implements OnInit {
       marca: [''],
       modelo: [''],
       imagen: [''],
-      descripcionA: [''],
+      descripcion: [''],
       costo: [''],
-      Estado_Fisico: [''],
+      estado_fisico: [''],
       disponibilidad: ['true'],
     });
     this.recepcionForm = this.fb.group({
@@ -113,12 +133,12 @@ export class ActivosComponent implements OnInit {
     this.activo = new Activo();
     this.id = this.activateRoute.snapshot.params['id'];
     this.activoServe.getByidActivo(this.id).subscribe(
-        (data) => {
-          console.log(data);
-          this.activo = data;
-        },
-        (error) => console.log(error)
-      );
+      (data) => {
+        console.log(data);
+        this.activo = data;
+      },
+      (error) => console.log(error)
+    );
   }
 
   onSubmit() {
@@ -154,7 +174,10 @@ export class ActivosComponent implements OnInit {
     console.log(id_edificio);
     this.departamentoservice.getByidDepartamentos(id_edificio).subscribe(
       (resp) => {
+        console.log(resp)
+        alert('Response' + resp)
         this.departamentos = resp;
+        // alert('Valor resultado'+this.departamentos)
       },
       (error) => console.error(error)
     );
@@ -175,58 +198,124 @@ export class ActivosComponent implements OnInit {
     Swal.fire('Activo Registrado Correctamente', 'Continue', 'success');
   }
 
-  ////////////guardar Activo
-  guardarActivo(): void {
-    this.activoServe.saveActivo(this.activo).subscribe(
-      (resp) => {
-        if (resp == true) {
-          console.log('Activo Guardado');
-        } else {
-          console.log('error de guardado de activo');
-        }
-      },
-      (error) => console.error(error)
-    );
-  }
 
-  guardarHistorialActivo(): void {
-    this.activoServe.saveDetalle(this.activo).subscribe(
-      (resp) => {
-        if (resp == true) {
-          console.log('Activo Guardado');
-        } else {
-          console.log('error de guardado de activo');
-        }
-      },
-      (error) => console.error(error)
-    );
-  }
+  salida: string = "";
 
-  // guardarActivo(): void {
-  //   this.activoServe.saveActivo(this.activoCompletForm.value).subscribe(resp => {
-  //     if (resp == true) {
-  //       this.activoCompletForm.reset();
-  //       this.activoServe.saveDetalle(this.activoCompletForm.value).subscribe(resp => {
-  //         console.log("detalle guardado")
-  //       })
-  //     } else {
-  //       console.log("error de guardado de activo")
-  //     }
-  //   },
-  //     error => (console.error(error))
-  //   )
-  // }
+  id_detalle: number;
 
-  salida: string="";
-
-
-  busquedaProveedor(cod_pro){
+  pasarCodigoActivo(cod_pro, id_detallea) {
     this.salida = cod_pro;
+    // alert(id_detallea)
     this.value = (document.getElementById("CodigoActivo") as HTMLInputElement).value;
     this.value = this.salida;
-  
+
+    this.id_detalle = id_detallea;
+    console.log(this.id_detalle)
+
   }
 
   @Input()
-  value: string="";
+  value: string = "";
+
+  estadoA: string = '';
+
+  dispocicionAc: boolean;
+
+
+  form: any = {
+    id_activo: null,
+    codigo_activo: null,
+    nombre: null,
+    serie: null,
+    marca: null,
+    modelo: null,
+    imagen: null,
+    descripcion: null,
+    costo: null,
+    estado_fisico: this.estadoA,
+    disponibilidad: null,
+  };
+
+  listaEstado: string[] = ["Bueno", "Malo", "dañado"];
+  listaDispocicion: string[] = ["Ocupado", "Disponible"];
+
+  estadoActivo(e) {
+    console.log(e.target.value)
+    this.estadoA = e.target.value;
+  }
+
+  dispocicionActivo(e) {
+    console.log(e.target.value)
+    let valorRes = e.target.value;
+    if (valorRes == 'Ocupado') {
+      this.dispocicionAc = false;
+    }
+    if (valorRes == 'Disponible') {
+      this.dispocicionAc = true;
+    }
+  }
+
+  //Resgitro del activo
+  id_activo1: number;
+  registroAc(): void {
+    const { nombre, serie, marca, modelo, imagen, descripcion, costo } = this.form;
+    this.activoServe.GuardarAc(this.value, nombre, serie, marca, modelo, imagen, descripcion, costo, this.estadoA, this.dispocicionAc).subscribe({
+      next: data => {
+        this.id_activo1 = data.id_activo;
+        console.log(data);
+        console.log('Codigo de ingreso-> ' + this.id_activo1);
+        console.log('Correcto el ingreso del activo')
+        this.guardarHistorialActivo();
+       
+      },
+      error: err => {
+        console.log('Error no se pudo guardar el activo')
+      }
+    });
+  }
+
+  // historial
+  id_departamento: number;
+  ids_Departamento(e) {
+    this.id_departamento = e.target.value;
+    console.log('Id del departameno-> ' + this.id_departamento)
+  }
+
+
+  guardarHistorialActivo(): void {
+
+    let historial_ing = { 
+      "estado_fisico":this.estadoA,
+      "fecha_ingreso": null,
+      "id_activo":{
+        "id_activo":this.id_activo1
+      },
+      "id_departamento":{
+        "id_departamento": this.id_departamento
+      },
+      "id_detalle_ing": {
+        "id_detalle_ing": this.id_detalle
+      },
+      "id_responsable": {
+        "id_usuario": this.id_persona
+      }
+
+    };
+    
+    this.activoServe.saveHistorialActivos(historial_ing).subscribe({
+      next: data => {
+        console.log(data);
+        console.log('Correcto el ingreso del del historial del detalle de activo')
+      },
+      error: err => {
+        console.log('Error no se pudo guardar del historial del detalle de activo')
+      }
+    });
+  }
+
+
+
+
+  
+
 }
