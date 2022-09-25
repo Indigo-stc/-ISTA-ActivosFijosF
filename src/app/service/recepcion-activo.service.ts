@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecepcionActivoService {
-  private API_SERVER= "http://localhost:8080/encabezado_ingresos/";
+  private API_SERVER= "http://localhost:8080/api/encabezadoIngresos";
 
-  private API_SERVER_2= "http://localhost:8080/usuarios/";
+  private API_SERVER_2= "http://localhost:8080/api/user";
 
-  private API_SERVER_DETALLE= "http://localhost:8080/detalle_ingresos/";
+  private API_SERVER_DETALLE= "http://localhost:8080/api/detalleIngresos";
+  
+  private httpHeaders = new HttpHeaders({'Content-Type':'application/json'})
 
   constructor(private httpClient: HttpClient) { }
 
@@ -23,40 +25,40 @@ export class RecepcionActivoService {
     return this.httpClient.get(this.API_SERVER_2 + "buscar/" + id);
   }
 
-  ///////////
   public getAllUsuarios(): Observable<any>{
-    return this.httpClient.get(this.API_SERVER_2);
+    return this.httpClient.get(this.API_SERVER_2+'/all');
   }
   
-  //////////////////////////
   public getAllEncabezado_ing(): Observable<any>{
-    return this.httpClient.get(this.API_SERVER);
+    return this.httpClient.get(this.API_SERVER + "/listarEncabezadoIngresos");
   }
 
   public saveEncabezado_ing(encabezado_ing:any): Observable<any>{
-    return this.httpClient.post(this.API_SERVER,encabezado_ing);
+    return this.httpClient.post(this.API_SERVER + "/guardarEncabezadoIngresos",encabezado_ing);
   }
 
   public delete(id: number):Observable<any>{
-    return this.httpClient.delete(this.API_SERVER + "delete/"+id);
+    return this.httpClient.delete(this.API_SERVER + "/eliminarEncabezadoIngresos/"+id);
   }
 
-//añadir activos a recepcion
 
-public getAllDetalle_ing(): Observable<any>{
-  return this.httpClient.get(this.API_SERVER_DETALLE);
-}
-public saveDetalle(detalle_ing:any): Observable<any>{
-  return this.httpClient.post(this.API_SERVER_DETALLE,detalle_ing);
-}
+  // Añadir activos a recepcion
 
-public eliminarDetalle_ing(id: number):Observable<any>{
-  return this.httpClient.delete(this.API_SERVER_DETALLE + "delete/"+id);
-}
+  public getAllDetalle_ing(): Observable<any>{
+    return this.httpClient.get(this.API_SERVER_DETALLE + "/listarDetalleIngresos");
+  }
+  public saveDetalle(detalle_ing:any): Observable<any>{
+    return this.httpClient.post(this.API_SERVER_DETALLE + "/guardarDetalleIngresos",detalle_ing);
+  }
+
+  public eliminarDetalle_ing(id: number):Observable<any>{
+    return this.httpClient.delete(this.API_SERVER_DETALLE + "/eliminarDetalleIngresos/"+id);
+  }
 
 
-//metodo para traer activos del encabezado a la tabla
-public getDatosEncabezado (id_encabezado_ing: number): Observable<any>{
-  return this.httpClient.get(this.API_SERVER_DETALLE +  "filtrar/" +  id_encabezado_ing);
-}
+  // Metodo para traer activos del encabezado a la tabla
+  public getDatosEncabezado (id_encabezado_ing: number): Observable<any>{
+    return this.httpClient.get(this.API_SERVER_DETALLE +  "/filtrarDetalleIngresos/" +  id_encabezado_ing);
+  }
+
 }

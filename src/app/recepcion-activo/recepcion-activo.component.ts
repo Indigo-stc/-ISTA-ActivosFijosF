@@ -8,7 +8,12 @@ import { FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Encabezado_ing } from '../models/Encabezado_ing';
 import { RecepcionActivoService } from '../service/recepcion-activo.service';
-
+import { Router } from '@angular/router';
+import { ActivosService } from 'src/app/service/activos.service';
+import { Activo } from 'src/app/models/activo';
+import { Edificio } from '../models/edificio';
+import { Departamento } from '../models/departamento';
+import { Procedencia } from '../models/procedencia';
 @Component({
   selector: 'app-recepcion-activo',
   templateUrl: './recepcion-activo.component.html',
@@ -23,16 +28,16 @@ export class RecepcionActivoComponent implements OnInit {
   recepcion: Encabezado_ing = new Encabezado_ing();
   recepciones: any;
 
+  edificios: Edificio[] = [];
+  departamentos: Departamento[] = []
+  procedencia: Procedencia[] = [];
 
-  edificios: any;
-  procedencia: any;
-  departamentos: any;
   usuario: any;
   detalle: any;
   encabezado: any;
   detalleEnc: any;
 
-
+  activo:Activo[]=[];
 
   constructor(
 
@@ -41,6 +46,8 @@ export class RecepcionActivoComponent implements OnInit {
     public procedenciaservice: ProcedenciaService,
     public departamentoservice: DepartamentosService,
     public recepcionservice: RecepcionActivoService,
+    private activoTabla:ActivosService,
+    private router:Router,
     private _CargaScripts: CargarScriptsService) {
     _CargaScripts.Carga(["js-constatacion-activos/activos"]);
   }
@@ -50,7 +57,7 @@ export class RecepcionActivoComponent implements OnInit {
       id_encabezado_ing: [''],
       num_recep: ['', Validators.required],
       fecha_ingreso: ['', Validators.required],
-      Documento: ['null', Validators.required],
+      Documento: ['vacio', Validators.required],
       estado: ['false', Validators.required],
       procedencia: ['', Validators.required],
       departamento: ['', Validators.required],
@@ -65,13 +72,21 @@ export class RecepcionActivoComponent implements OnInit {
       codigoA: [' ', Validators.required],
       descripcion: [' ', Validators.required],
       encabezado_ing: [' ', Validators.required],
+      estado_detalle: ['false', Validators.required],
     });
 
     // LLenar Edificios
     this.regedificioservice.getAllEdificios().subscribe(
       edificios => {
         this.edificios = edificios
-        console.log(edificios);
+      },
+      error => (console.log(error))
+    )
+
+     // Departamentos
+    this.departamentoservice.getAllDepartamentos().subscribe(
+      departamentos => {
+        this.departamentos = departamentos
       },
       error => (console.log(error))
     )
@@ -80,7 +95,6 @@ export class RecepcionActivoComponent implements OnInit {
     this.recepcionservice.getAllEncabezado_ing().subscribe(
       encabezado => {
         this.encabezado = encabezado
-        console.log(encabezado);
       },
       error => (console.log(error))
     )
@@ -94,14 +108,6 @@ export class RecepcionActivoComponent implements OnInit {
     )
 
 
-    // Departamentos
-    this.departamentoservice.getAllDepartamentos().subscribe(
-      departamentos => {
-        this.departamentos = departamentos
-      },
-      error => (console.log(error))
-    )
-
     // LLenar Procedencia
     this.procedenciaservice.getAllProcedencia().subscribe(
       procedencia => {
@@ -110,24 +116,12 @@ export class RecepcionActivoComponent implements OnInit {
       error => (console.log(error))
     )
 
-
-    // Obtener los Encabezados
-    this.recepcionservice.getAllEncabezado_ing().subscribe(
-      recepcion => {
-        this.recepcion = recepcion
-      },
-      error => (console.log(error))
-    )
-
     this.recepcionservice.getAllDetalle_ing().subscribe(
       detalle => {
         this.detalle = detalle
-        console.log(detalle);
       },
       error => (console.log(error))
     )
-
-
 
   }
 
@@ -145,16 +139,6 @@ export class RecepcionActivoComponent implements OnInit {
 
   //  ***************************************************************************************************************
 
-  guardarEncabezado_ing(): void {
-    this.recepcionservice.saveEncabezado_ing(this.recepcionForm.value).subscribe(resp => {
-      this.recepcionForm.reset();
-      this.recepciones.push(resp);
-    },
-
-      error => (console.error(error))
-    )
-  }
-
   guardarDetalle_ing(): void {
     this.recepcionservice.saveDetalle(this.recepcionFormDetalle.value).subscribe(resp => {
       this.recepcionFormDetalle.reset();
@@ -164,21 +148,44 @@ export class RecepcionActivoComponent implements OnInit {
     )
   }
 
+  guardarEncabezado_ing(): void {
+    this.recepcionservice.saveEncabezado_ing(this.recepcionForm.value).subscribe(resp => {
+      this.recepcionForm.reset();
+      // Obtener los Encabezados
+      this.recepcionservice.getAllEncabezado_ing().subscribe(
+        encabezado => {
+          this.encabezado = encabezado
+        },
+        error => (console.log(error))
+      )
+    },
+
+      error => (console.error(error))
+    )
+  }
 
 
   Finaliza(): void {
     this.recepcionFormDetalle.reset();
     this.recepcionForm.reset();
+
+    // Cargar tabla vacia
+    let id_encabezado_ing_vacia = 0;
+    this.recepcionservice.getDatosEncabezado(id_encabezado_ing_vacia).subscribe(
+      resp => {
+        this.detalleEnc = resp;
+      },
+      error => (console.error(error))
+    )
     Swal.fire('Recepcion Registrada Correctamente', 'Continue', 'success')
   }
 
   // Cargar Departamentes Anidado
   onSelect(event: any) {
     let id_edificio = event.target.value;
-    console.log(id_edificio)
-    this.departamentoservice.getAllDepartamentosByEdificio(id_edificio).subscribe(
+    this.departamentoservice.getByidDepartamentos(id_edificio).subscribe(
       resp => {
-        this.departamentos = resp;
+        this.departamentos = this.departamentos;
       },
       error => (console.error(error))
     )
@@ -189,7 +196,7 @@ export class RecepcionActivoComponent implements OnInit {
   eliminarDetalle(id_detalle_ing: number) {
     this.recepcionservice.eliminarDetalle_ing(id_detalle_ing).subscribe(resp => {
       if (resp === true) {
-        this.procedencia.pop(id_detalle_ing)
+        this.procedencia.pop()
         this.procedencia.push(resp);
       }
 
@@ -201,7 +208,6 @@ export class RecepcionActivoComponent implements OnInit {
   // Cargar tabla
   onSelectDetalle(event: any) {
     let id_encabezado_ing = event.target.value;
-    console.log(id_encabezado_ing)
     this.recepcionservice.getDatosEncabezado(id_encabezado_ing).subscribe(
       resp => {
         this.detalleEnc = resp;
@@ -209,5 +215,7 @@ export class RecepcionActivoComponent implements OnInit {
       error => (console.error(error))
     )
   }
+
+
 
 }

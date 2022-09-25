@@ -3,6 +3,7 @@ import { Procedencia } from '../models/procedencia';
 import { ProcedenciaService } from '../service/procedencia.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -12,13 +13,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProcedenciaComponent implements OnInit {
 
-  // Guardar Procedencia
-  // VARIABLES
   procedenciaForm!: FormGroup;
   id_procedenciaP: any;
-  id_procedencia: any;
-  
-  Procedencia = new Procedencia
+  procedencia: Procedencia = new Procedencia();
 
   constructor(
     public fb: FormBuilder,
@@ -28,53 +25,39 @@ export class ProcedenciaComponent implements OnInit {
   }
   ngOnInit(): any {
 
-
-    // Crear un Formulario
     this.procedenciaForm = this.fb.group({
       id_procedencia: [''],
       nombre_procedencia: ['', Validators.required],
       descripcion: ['', Validators.required],
-
     });
 
-
     this.id_procedenciaP = this.route.snapshot.params['idprocedencia'];
-    console.log(this.id_procedenciaP);
-
     if (this.id_procedenciaP) {
       this.cargarDatosEdit();
     }
 
   }
 
-  /* **************************************************** */
+  guardarProcedencia(): void {
+    this.procedenciaservice.saveProcedencia(this.procedenciaForm.value).subscribe(resp => {
+      if (resp = true) {
+        this.procedenciaForm.reset();    
+        Swal.fire('Procedencia Registrada Correctamente', 'Continue', 'success')
+      } else {
+        Swal.fire('Error', 'Erro de registro', 'warning')
+      }
+    },
+      error => (console.error(error))
+    )
+  }
+
 
   actualizarProcedencia(): void {
     this.procedenciaservice.updateProcedencia(this.procedenciaForm.value).subscribe(resp => {
-      console.log(resp)
       this.procedenciaForm.reset();
     },
       error => (console.error(error))
     )
-    
-  }
-  
-  guardarProcedencia(): void {
-    this.procedenciaservice.saveProcedencia(this.procedenciaForm.value).subscribe(resp => {
-      this.procedenciaForm.reset();
-    },
-      error => (console.error(error))
-    )
-  }
-  
-
-  // Editar
-  editarProcedencia(procedencia: any) {
-    this.procedenciaForm.setValue({
-      id_procedencia: procedencia.id_procedencia,
-      nombre_procedencia: procedencia.nombre_procedencia,
-      descripcion: procedencia.descripcion,
-    })
   }
 
   cargarDatosEdit() {
@@ -83,5 +66,6 @@ export class ProcedenciaComponent implements OnInit {
       console.log(data);
     });
   }
+
 
 }

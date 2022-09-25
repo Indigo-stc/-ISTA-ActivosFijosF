@@ -19,7 +19,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <div class="container">
-            <div class="btn-menu" style="padding-top: 8px"> 
+            <div class="btn-menu" style="padding-top: 8px">
               <label for="btn-menu">☰</label>
             </div>
           </div>
@@ -28,12 +28,9 @@
           <div class="container-menu">
             <div class="cont-menu">
               <nav>
-                <a routerLink="/home">INICIO</a>
-                <a routerLink="Constatacion_Activos">Activos Fijos</a>
-                <a routerLink="/">Suministros</a>
-                <a routerLink="Recepcion_Activos">Gestión de Activos</a>
-                <a routerLink="procedencia" *ngIf="showProcedencias">Procedencia</a>
-                <a routerLink="Consultas_Activos" >Consultas</a>
+                <a routerLink="/">INICIO</a>
+                <a routerLink="constatacion">Constatar</a>
+                <a routerLink="roles">Roles</a>
               </nav>
               <label for="btn-menu">✖️</label>
             </div>
@@ -48,20 +45,22 @@
                 d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
             </svg> -->
           </a>
-        </li> 
+        </li>
 
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="procedencia" style="margin-left:30px ;" *ngIf="showProcedencias">Procedencia</a>
+          <a class="nav-link" aria-current="page" routerLink="procedencia" style="margin-left:30px ;"
+            *ngIf="showProcedencias">Procedencia</a>
 
         </li>
-        
+
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" routerLink="RegEdificioComponent" style="margin-left:30px ;">Departamentos y Edificios</a>
+          <a class="nav-link" aria-current="page" routerLink="regedificio" style="margin-left:30px ;">Departamentos y
+            Edificios</a>
         </li>
 
-         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false" style="margin-left:30px ;">Gestión de Activos</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+            style="margin-left:30px ;">Gestión de Activos</a>
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" href="#" [routerLink]="'Recepcion_Activos'">Recepción Activo</a>
@@ -74,13 +73,6 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" routerLink="Consultas_Activos" style="margin-left:30px ;">Consultas Activos Fijos</a>
-        </li>
-
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" routerLink="roles" style="margin-left:30px ;">Roles</a>
-        </li>
 
       </ul>
 
@@ -92,7 +84,7 @@
 
       <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
         <li class="nav-item">
-          <a  class="nav-link" style="color: white;">{{ username }}</a>
+          <a class="nav-link" style="color: white;">{{ username }}</a>
         </li>
         <li class="nav-item">
           <a href class="nav-link" [routerLink]="'login'" (click)="logout()">LogOut</a>

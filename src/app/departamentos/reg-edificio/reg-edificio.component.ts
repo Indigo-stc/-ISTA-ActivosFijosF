@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegEdificioService } from 'src/app/service/reg-edificio.service';
+import { ActivatedRoute } from '@angular/router';
+import { Edificio } from 'src/app/models/edificio';
 
 @Component({
   selector: 'app-reg-edificio',
@@ -10,63 +12,54 @@ import { RegEdificioService } from 'src/app/service/reg-edificio.service';
 export class RegEdificioComponent implements OnInit {
 
   edificioForm!: FormGroup;
-  public edificio:any;
+  id_edificioE: any;
 
-  
+  edificio = new Edificio;
+
   constructor(
     public fb: FormBuilder,
-    public regedificioservice: RegEdificioService
+    public regedificioservice: RegEdificioService,
+    private route: ActivatedRoute,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): any {
 
     this.edificioForm = this.fb.group({
-      id_edificio : [''],
-      descripcion : ['', Validators.required],
-      nombre_edificio : ['', Validators.required],
+      id_edificio: [''],
+      nombre_edificio: ['', Validators.required],
+      descripcion: ['', Validators.required],
     });
 
-    this.regedificioservice.getAllEdificios().subscribe(
-      edificio => {
-        this.edificio = edificio
-        console.log(edificio);
-      },
-      error => (console.log(error))
-    )
+    this.id_edificioE= this.route.snapshot.params['idedificio'];
+    console.log(this.id_edificioE);
+
+    if (this.id_edificioE) {
+      this.cargarDatosEdit();
+    }
   }
 
   guardarEdificio(): void {
     this.regedificioservice.saveEdificios(this.edificioForm.value).subscribe(resp=>{
       this.edificioForm.reset();
-      console.log("CLICK"); 
-      this.edificio = this.edificio.filter( (edificio: any) => resp.id!==this.edificio.id)
-      this.edificio.push(resp);
     },
       error=>(console.error(error))
     )
   }
 
-  // Eliminar
-  eliminarEdificio(id_edificio:number){
-    this.regedificioservice.deleteEdificios(id_edificio).subscribe(resp=>{
-    console.log(resp);  
-    if (resp===true) {
-      this.edificio.pop(id_edificio)
-      this.edificio.push(resp);
-    }
+  cargarDatosEdit() {
+    this.regedificioservice.getByidEdificio(this.id_edificioE).subscribe((data: any)=> {
+      this.edificioForm.setValue(data);
+      console.log(data);
+    });
+  }
+
+  actualizarEdificio(): void {
+    this.regedificioservice.updateEdificios(this.edificioForm.value).subscribe(resp => {
+      console.log(resp)
+      this.edificioForm.reset();
+    },
+      error => (console.error(error))
+    )
     
-  },
-  error=>(console.error(error))
-  )
-}
-
-// Editar
-
-editarEdificio(edificio:any){
-  this.edificioForm.setValue({
-    id_edificio: edificio.id_edificio,
-    descripcion: edificio.descripcion,
-    nombre_edificio: edificio.nombre_edificio,
-  })
-}
+  }
 }

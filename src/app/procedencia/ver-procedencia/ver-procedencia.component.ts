@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProcedenciaService } from 'src/app/service/procedencia.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Procedencia } from 'src/app/models/procedencia';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ver-procedencia',
@@ -9,13 +11,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class VerProcedenciaComponent implements OnInit {
 
-  // Guardar Procedencia
-  // VARIABLES
   procedenciaForm!: FormGroup;
-
-  // creacion de array
-
-  procedencia: any;
+  procedencia: Procedencia[]=[];
 
   constructor(
     public fb: FormBuilder,
@@ -23,8 +20,16 @@ export class VerProcedenciaComponent implements OnInit {
   ) {
   }
   ngOnInit(): any {
-    this.cargarLista();
 
+    // Crear un Formulario
+    this.procedenciaForm = this.fb.group({
+      id_procedencia: [''],
+      nombre_procedencia: ['', Validators.required],
+      descripcion: ['', Validators.required],
+
+    });
+
+    this.cargarLista();
   }
 
   //cargar lista --Obtener las procedencias
@@ -43,9 +48,9 @@ export class VerProcedenciaComponent implements OnInit {
   eliminarProcedencia(id_procedencia: number) {
     this.procedenciaservice.deleteProcedencia(id_procedencia).subscribe(resp => {
       if (resp === true) {
-        // this.procedencia.pop(id_procedencia)
-        // this.procedencia.push(resp);
         this.cargarLista();
+      }else { 
+        
       }
 
     },
@@ -53,13 +58,9 @@ export class VerProcedenciaComponent implements OnInit {
     )
   }
 
-  // // Editar
-
+  // Editar
   editarProcedencia(procedencia: any) {
-    //this.procedenciaForm.setValue({
-
-    //})
-
+    this.procedenciaForm.setValue({
+    })
   }
-
 }

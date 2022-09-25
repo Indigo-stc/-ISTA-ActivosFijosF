@@ -17,212 +17,237 @@
   <div class="progress-step" data-title="Ubicacion"></div>
   <div class="progress-step" data-title="Etiqueta"></div>
 </div>
-<form action="#" class="form" id="forms" onsubmit="event.preventDefault()">
+
 <!-- Barra Progress -->
 
-  <!-- primer formulario -->
+<!-- primer formulario -->
+<!-- <form [formGroup]="activoCompletForm" (ngSubmit)="guardarActivo()"> -->
+
+
+
   <div class="step-forms step-forms-active">
-    <form action="" id="msform">
-      <div class="group-inputs"></div>
+    <form action="" id="msform" (ngSubmit)="onSubmit()">
       <fieldset>
         <h2 class="fs-title">Registro de Activos</h2>
         <h3 class="fs-subtitle"></h3>
-        <input type="text" class="inputbox" name="Codigo" id="CodigoActivo" placeholder="Codigo del Activo:" required />
-        <input type="text" class="inputbox" name="Nombre" id="NombreActivo" placeholder="Nombre del Activo:" required />
-        <input type="text" class="inputbox" name="Proce" id="Proced" placeholder="Procedencia:" required />
-      
+        <div class="form-group">
+          <input readonly value="{{value}}" [(ngModel)]="activo.codigo_activo" formControlName="codigo_activo" type="text" class="inputbox" name="Codigo" id="CodigoActivo"
+            placeholder="Codigo del Activo:" required />
+        </div>
+        <div class="form-group">
+          <input [(ngModel)]="activo.nombre" type="text" class="inputbox" name="Nombre" id="NombreActivo"
+            placeholder="Nombre del Activo:" required />
+        </div>
+        <!-- <div class="form-group">
+        <input  [(ngModel)]="activo.nombre_procedencia" type="text" class="inputbox" name="Proce" id="Proced" placeholder="Procedencia:" required />
+        </div> -->
         <div class="">
           <a class="btn btn-next">Siguiente</a>
         </div>
       </fieldset>
     </form>
   </div>
-
-  <!-- //segundo formulario -->
-  <div class="step-forms">
-    <form action="" id="msform">
-      <fieldset>
-        <h2 class="fs-title">Imagen del Activo</h2>
-        <div class="inputbox">
-          <div class="container-input">
-            <input type="file" name="file-7" id="file-7" class="inputfile inputfile-7"
-              data-multiple-caption="{count} archivos seleccionados" multiple />
-            <label for="file-7">
-              <span class="iborrainputfile"></span>
-              <strong>
-                <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17"
-                  viewBox="0 0 20 17">
-                  <path
-                    d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
-                  </path>
-                </svg>
-                Seleccionar archivo
-              </strong>
-            </label>
+  <form action="#" class="form" id="forms" onsubmit="event.preventDefault()">
+    <!-- //segundo formulario -->
+    <div class="step-forms">
+      <form action="" id="msform">
+        <fieldset>
+          <h2 class="fs-title">Imagen del Activo</h2>
+          <div class="inputbox">
+            <div class="container-input">
+              <input type="file" name="file-7" id="file-7" class="inputfile inputfile-7"
+                data-multiple-caption="{count} archivos seleccionados" multiple />
+              <label for="file-7">
+                <span class="iborrainputfile"></span>
+                <strong>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17"
+                    viewBox="0 0 20 17">
+                    <path
+                      d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
+                    </path>
+                  </svg>
+                  Seleccionar archivo
+                </strong>
+              </label>
+            </div>
           </div>
-        </div>
-        <div class="btns-group">
-          <a class="btn btn-prev">Atrás</a>
-          <a class="btn btn-next">Siguiente</a>
-        </div>
-      </fieldset>
-    </form>
-  </div>
+          <div class="btns-group">
+            <a class="btn btn-prev">Atrás</a>
+            <a class="btn btn-next">Siguiente</a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
 
-  <!-- tercer formulario -->
-  <div class="step-forms">
-    <form action="" id="msform">
-      <fieldset>
-        <h2 class="fs-title">Datos del Activo</h2>
-        <input type="text" class="inputbox" name="Marca" placeholder="Marca:" required />
-        <input type="text" class="inputbox" name="Modleo" placeholder="Modelo:" required />
-        <input type="text" class="inputbox" name="Serie" placeholder="Serie:" required />
-        <input type="text" class="inputbox" name="Coste" placeholder="Coste:" required />
-        <p class="estado">
-          Estado:
-          <select class="combobox" required>
-            <option>Seleccione</option>
-            <option>Bueno</option>
-            <option>Malo</option>
-            <option>Dañado</option>
-          </select>
-        </p>
-        <p class="estado">
-          Disposicion:
-          <select class="combobox" required>
-            <option>Seleccione</option>
-            <option>Ocupado</option>
-            <option>Disponible</option>
-          </select>
-        </p>
-        <input type="text" class="inputbox" name="especificaciones" placeholder="Especificaciones:" required />
-        <div class="btns-group">
-          <a class="btn btn-prev">Atrás</a>
-          <a class="btn btn-next">Siguiente</a>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-  <!-- cuarto formulario -->
-  <div class="step-forms">
-    <form action="" id="msform">
-      <fieldset>
-        <h2 class="fs-title">Ubicacion del Activo</h2>
-        <p class="estado">
-          Edificio:
-          <select class="combobox" required>
-            <option>Seleccione</option>
-            <option>EdificoP</option>
-            <option>EdificioL</option>
-            <option>Talleres</option>
-          </select>
-        </p>
-        <p class="estado">
-          Departamento:
-          <select class="combobox" required>
-            <option>Seleccione</option>
-            <option>laboratorio1</option>
-            <option>aula 202</option>
-          </select>
-        </p>
-        <div class="btns-group">
-          <a class="btn btn-prev">Atrás</a>
-          <a class="btn btn-next">Siguiente</a>
-        </div>
-      </fieldset>
-    </form>
-  </div>
+    <!-- tercer formulario -->
+    <div class="step-forms">
+      <form action="" id="msform">
+        <fieldset>
+          <h2 class="fs-title">Datos del Activo</h2>
+          <input [(ngModel)]="activo.marca" type="text" class="inputbox" name="Marca" placeholder="Marca:" required />
+          <input [(ngModel)]="activo.modelo" type="text" class="inputbox" name="Modleo" placeholder="Modelo:"
+            required />
+          <input [(ngModel)]="activo.serie" type="text" class="inputbox" name="Serie" placeholder="Serie:" required />
+          <input [(ngModel)]="activo.costo" type="text" class="inputbox" name="Coste" placeholder="Coste:" required />
+          <p class="estado">
+            Estado:
+            <select [(ngModel)]="activo.estado_Fisico" class="combobox" required>
+              <option>Seleccione</option>
+              <option>Bueno</option>
+              <option>Malo</option>
+              <option>Dañado</option>
+            </select>
+          </p>
+          <p class="estado">
+            Disposicion:
+            <select [(ngModel)]="activo.disponibilidad" class="combobox" required>
+              <option>Seleccione</option>
+              <option>Ocupado</option>
+              <option>Disponible</option>
+            </select>
+          </p>
+          <input [(ngModel)]="activo.descripcion" type="text" class="inputbox" name="especificaciones"
+            placeholder="Especificaciones:" required />
+          <div class="btns-group">
+            <a class="btn btn-prev">Atrás</a>
+            <a class="btn btn-next">Siguiente</a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <!-- cuarto formulario -->
+    <div class="step-forms">
+      <form action="" id="msform">
+        <fieldset>
+          <h2 class="fs-title">Ubicacion del Activo</h2>
+          <p class="estado">
+            Edificio:
+            <select (change)="onSelect($event)" ngModel="edificios.id_edificio" name="edificio" id="edificio"
+              formControlName="" class="combobox" required>
+              <option [ngValue]="undefined"> Seleccione un Edificio</option>
+              <option value={{item2.id_edificio}} *ngFor="let item2 of edificios"> {{ item2.nombre_edificio }}</option>
+            </select>
+          </p>
+          <p class="estado">
+            Departamento:
+            <select name="departamento" id="departamento" class="combobox" required>
+              <option [ngValue]="undefined"> Seleccione un Departamento </option>
+              <option [ngValue]="departamento" *ngFor="let departamento of departamentos"> {{
+                departamento.nombre_departamento }}</option>
+            </select>
+          </p>
+          <div class="btns-group">
+            <a class="btn btn-prev">Atrás</a>
+            <a class="btn btn-next">Siguiente</a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </form>
   <!-- Quinto formulario -->
   <div class="step-forms">
     <form action="" id="msform">
       <fieldset>
 
         <h2 class="fs-title">Generar codigo QR</h2>
-          <div class="contenedor">
-            <form action="" id="formulario" class="formulario">
-              <input type="text" class="inputbox" id="codQR" placeholder="Código del Activo:" />
-              <input type="text"class="inputbox" id="nomQR" placeholder="Nombre del Activo:"/>
-              <button class="btnQR">Generar código QR</button>
-            </form>
-      
-            <div id="contenedorQR" class="contenedorQR"></div>
-          </div>
+        <div class="contenedor">
+          <form action="" id="formulario" class="formulario">
+            <input type="text" class="inputbox" id="codQR" placeholder="Código del Activo:" />
+            <!-- <input type="text" class="inputbox" id="nomQR" placeholder="Nombre del Activo:" /> -->
+            <button class="btnQR">Generar código QR</button>
+          </form>
+
+          <div id="contenedorQR" class="contenedorQR"></div>
+        </div>
         <div class="btns-group">
-          <a class="btn btn-prev">Cancelar</a>
-          <a class="btn btn-next">Guardar</a>
+          <a class="btn" [routerLink]="['/Gestion_activos']">Cancelar</a>
+          <a class="btn" type="submit" [routerLink]="['/Gestion_activos']" (click)="guardarActivo()">Guardar</a>
+          <a class="btn" type="button" [routerLink]="['/Gestion_activos']" (click)="Finaliza()">Finalizar</a>
         </div>
       </fieldset>
     </form>
   </div>
-</form>
+
+<!-- </form> -->
+
+
+
+<!-- ///////// ventana flotante//// -->
 <!-- formulario  de Recepciones-->
-<input type="checkbox" id="ham-menu">
+<input type="checkbox" id="ham-menu" [routerLink]="['/Gestion_activos']">
 <label for="ham-menu">
   <div class="hide-des">
-    <img src="http://www.clker.com/cliparts/j/S/t/a/n/H/icon-next-blue-light-braun-md.png" alt="" width="50px" height="50px">
+    <img src="http://www.clker.com/cliparts/j/S/t/a/n/H/icon-next-blue-light-braun-md.png" alt="" width="50px"
+      height="50px">
   </div>
 </label>
-<div class="full-page-green"></div>
 <div class="ham-menu">
-    <form action="" id="msform">
-      
-      <fieldset>
-        <h2 class="fs-title">Detalle de Recepcion</h2>
-        <form action="" id="xd" [formGroup]="BuscarRecepForm" (ngSubmit)="BuscarRecepcionDet(detalleRecep.id_encabezado_ing)">
+  <form action="" id="msform">
+    <fieldset>
+      <h2 class="fs-title">Detalle de Recepcion</h2>
+      <form action="" class="msform2">
         <div class="searchBox">
-          <input type="text" class="input-search" name="buscador" id="buscador" placeholder="Ingrese el N° de Recepcion">
-  
-          <button type="button" class="searchButton" onclick="BuscarRecepcionDet(buscador)">
+          <input type="text" class="input-search" name="num_recep" id="num_recep"
+            placeholder="Ingrese el N° de Recepcion" [(ngModel)]="num_recep">
+          <button type="button" class="searchButton" (click)="findUserByNumRecep()">
             <i class="material-icons"> search</i>
           </button>
-          
-      </div>
-    </form>
-            <!-- ///para subir el acta -->
-            <!-- <h2 class="fs-title">Imagen del Activo</h2> -->
-              <!-- <div class="container-input">
-                <input type="file" name="file-7" id="file-7" class="inputfile inputfile-7"
-                  data-multiple-caption="{count} archivos seleccionados" multiple placeholder="Ingrese el acta" />
-                <label for="file-7">
-                  <span class="iborrainputfile"></span>
-                  <strong>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17"
-                      viewBox="0 0 20 17">
-                      <path
-                        d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
-                      </path>
-                    </svg>
-                    Seleccionar archivo
-                  </strong>
-                </label>
-              </div> -->
-            
-        <div class="table-wraper">
-          <table class="table">
-              <thead class="text-light" style="background-color:#272e56">
-                  <tr class="cabecera-tabla">
-                    <th class="th-lg"><a>N° Recepcion</a></th>
-                      <th class="th-lg"><a>Cod.Activo</a></th>
-                      <th class="th-lg"><a>Nom.Activo</a></th>
-                      <th class="th-lg"><a>Procedencia</a></th>
-                      <th class="th-lg"><a>Estado</a></th>
-                      <th class="th-lg"><a>...</a></th>
-                  </tr>
-              </thead>
-              <tbody *ngFor="let itemB of detalleRecep"> 
-                  <tr>
-                    <th>{{ itemB.encabezado_ing.num_recep}}</th>
-                    <th>{{ itemB.codigoA}}</th>
-                    <th>{{ itemB.descripcion}}</th>
-                    <th>{{ itemB.encabezado_ing.procedencia.nombre_procedencia}}</th>
-                    <th>{{ itemB.encabezado_ing.estado}}</th>
-                    <td><button class="btnM">Registrar</button></td>
-                  </tr>
-              </tbody>
-          </table>
+        </div>
+      </form>
+      <!-- ///para subir el acta -->
+      <form action="" class="msform2">
+        <fieldset>
+          <h2 class="fs-title">Subir Acta de la Recepcion</h2>
+          <!-- <div class="container-input"> -->
+          <input type="file" name="file-8" id="file-8" class="inputfile inputfile-7"
+            data-multiple-caption="{count} archivos seleccionados" multiple placeholder="Ingrese el acta" />
+          <label for="file-8">
+            <span class="iborrainputfile2"></span>
+            <strong>
+              <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17"
+                viewBox="0 0 20 17">
+                <path
+                  d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
+                </path>
+              </svg>
+              Seleccionar archivo
+            </strong>
+          </label>
+          <!-- </div> -->
+          <button class="btnActa">Subir Acta</button>
+        </fieldset>
+
+      </form>
+
+      <div class="table-wraper">
+        <table class="table">
+          <thead class="text-light" style="background-color:#272e56">
+            <tr class="cabecera-tabla">
+              <!-- <th class="th-lg"><a>id</a></th> -->
+              <th class="th-lg"><a>N° Recepcion</a></th>
+              <th class="th-lg"><a>Cod.Activo</a></th>
+              <th class="th-lg"><a>Nom.Activo</a></th>
+              <th class="th-lg"><a>Procedencia</a></th>
+              <!-- <th class="th-lg"><a>Estado</a></th> -->
+              <th class="th-lg"><a>...</a></th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let itemB of detalleAct">
+            <tr>
+              <!-- <th>{{ itemB.encabezado_ing.id_encabezado_ing}}</th> -->
+              <th>{{ itemB.encabezado_ing.num_recep}}</th>
+              <!-- <th>{{ itemB.id_detalle_ing}}</th> -->
+              <th>{{ itemB.codigoA}}</th>
+              <th>{{ itemB.descripcion}}</th>
+              <th>{{ itemB.encabezado_ing.procedencia.nombre_procedencia}}</th>
+              <!-- <th>{{ itemB.encabezado_ing.estado}}</th> -->
+              <td><button class="btnM" (click)="busquedaProveedor(itemB.codigoA)">Registrar</button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      </fieldset>
-    </form>
+    </fieldset>
+  </form>
 
 </div>

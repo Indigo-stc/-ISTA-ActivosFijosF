@@ -20,16 +20,13 @@ import { FormComponent } from './registrar/registrar.component';
 import { RolesComponent } from './roles/roles.component';
 import { PermisosComponent } from './roles/permisos/permisos.component';
 import { HistorialComponent } from './roles/Historial/historial.component';
+import { VerEdificiosComponent } from './departamentos/ver-edificios/ver-edificios.component';
 
 const app_routes: Routes = [
   { path: 'Gestion_activos', component: ActivosComponent },
   { path: 'Recepcion_Activos', component: RecepcionActivoComponent },
   { path: 'Consultas_Activos', component: ConsultasActivosComponent },
   { path: 'procedencia', component: ProcedenciaComponent },
-  // {
-  //   path: 'Gestion_activos/responsables',
-  //   component: ResgistroResponsablesComponent,
-  // },
   { path: 'departamentos', component: DepartamentosComponent },
   { path: 'asignar_activo', component: AsignarActivoComponent },
   { path: 'listarActivos', component: ListarActivosComponent },
@@ -43,7 +40,10 @@ const app_routes: Routes = [
     component: VerRegistrosActivosComponent,
   },
   { path: 'departamentos/verTodos', component: VerDepartamentosComponent },
-  { path: 'RegEdificioComponent', component: RegEdificioComponent },
+  { path: 'departamentos/editar/:iddepartamento', component: DepartamentosComponent },
+  { path: 'regedificio', component: RegEdificioComponent },
+  { path: 'veredificios/verTodos', component: VerEdificiosComponent},
+  { path: 'regedificio/editar/:idedificio', component: RegEdificioComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registra', component: FormComponent },
   { path: 'roles', component: RolesComponent },

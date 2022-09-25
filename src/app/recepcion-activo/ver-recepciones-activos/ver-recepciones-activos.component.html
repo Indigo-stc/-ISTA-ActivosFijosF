@@ -24,7 +24,6 @@
                                 <th class="th-lg"><a>Receptor</a></th>
                                 <th class="th-lg"><a>Fecha Ingreso</a></th>
                                 <th class="th-lg"><a>Estado</a></th>
-                   
                             </tr>
                         </thead>
                         <tbody *ngFor="let itemA of encabezado">
@@ -32,8 +31,8 @@
                                 <th>{{ itemA.id_encabezado_ing }}</th>
                                 <td>{{ itemA.num_recep }}</td>
                                 <td>{{ itemA.procedencia.nombre_procedencia}}</td>
-                                <td>{{ itemA.usuario.nombre}} {{ itemA.usuario.apellido}}</td>
-                                <td>{{ itemA.fecha_ingreso}}</td>
+                                <td>{{ itemA.usuario.nombres}} {{ itemA.usuario.apellidos}}</td>
+                                <td>{{ itemA.fecha_ingreso  | date: 'dd-MM-aaaa' }}</td>
                                 <td>{{ itemA.estado }}</td>
                             </tr>
                         </tbody>
