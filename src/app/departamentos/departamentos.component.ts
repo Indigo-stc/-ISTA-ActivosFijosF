@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DepartamentosService } from '../service/departamentos.service';
 import { RegEdificioService } from '../service/reg-edificio.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Departamento } from '../models/departamento';
+
 
 @Component({
   selector: 'app-departamentos',
@@ -12,14 +15,16 @@ export class DepartamentosComponent implements OnInit {
 
   departamentoForm!: FormGroup;
 
-  public departamentos:any;
-  edificios: any;
+  departamentos = new Departamento;
+  edificio: any;
+  id_departamentoD: any;
 
   
   constructor(
     public fb: FormBuilder,
     public departamentoservice: DepartamentosService,
-    public regedificioservice: RegEdificioService
+    public regedificioservice: RegEdificioService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -32,54 +37,43 @@ export class DepartamentosComponent implements OnInit {
     });
 
     this.regedificioservice.getAllEdificios().subscribe(
-      edificios => {
-        this.edificios = edificios
-        console.log(edificios);
+      edificio => {
+        this.edificio = edificio
+        console.log(edificio);
       },
       error => (console.log(error))
     )
 
-    this.departamentoservice.getAllDepartamentos().subscribe(
-      departamentos => {
-        this.departamentos = departamentos
-        console.log(departamentos);
-      },
-      error => (console.log(error))
-    )
+    this.id_departamentoD= this.route.snapshot.params['iddepartamento'];
+    console.log(this.id_departamentoD);
+
+    if (this.id_departamentoD) {
+      this.cargarDatosEdit();
+    }
   }
 
   guardarDepartamentos(): void {
     this.departamentoservice.saveDepartamentos(this.departamentoForm.value).subscribe(resp=>{
       this.departamentoForm.reset();
-      this.departamentos = this.departamentos.filter( (departamentos: any) => resp.id!==this.departamentos.id)
-      this.departamentos.push(resp);
     },
       error=>(console.error(error))
     )
   }
 
-  // Eliminar
-  eliminarDepartamento(id_departamento:number){
-    this.departamentoservice.deleteDepartamentos(id_departamento).subscribe(resp=>{
-    console.log(resp);  
-    if (resp===true) {
-      this.departamentos.pop(id_departamento)
-      this.departamentos.push(resp);
-    }
+  cargarDatosEdit() {
+    this.departamentoservice.getByidDepartamentos(this.id_departamentoD).subscribe((data: any)=> {
+      this.departamentoForm.setValue(data);
+      console.log(data);
+    });
+  }
+
+  actualizarDepartamento(): void {
+    this.departamentoservice.updateDepartamentos(this.departamentoForm.value).subscribe(resp => {
+      console.log(resp)
+      this.departamentoForm.reset();
+    },
+      error => (console.error(error))
+    )
     
-  },
-  error=>(console.error(error))
-  )
-}
-
-// Editar
-
-editarDepartamento(departamentos:any){
-  this.departamentoForm.setValue({
-    id_departamento: departamentos.id_departamento,
-    nombre_departamento: departamentos.nombre_departamento,
-    descripcion: departamentos.descripcion,
-    edificio: departamentos.edificio
-  })
-}
+  }
 }

@@ -11,9 +11,19 @@
 .multi-button :nth-child(1){
   border-radius: 20px 0 0 20px;
 }
+
+.multi-button :nth-child(2){
+    border-radius: 0 0px 0px 0;
+  }
+  
 .multi-button :nth-child(3){
+  border-radius: 0 0px 0px 0;
+}
+
+.multi-button :nth-child(4){
   border-radius: 0 20px 20px 0;
 }
+
 .btn1:hover{
   cursor: pointer;
   filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
@@ -22,41 +32,69 @@
   cursor: pointer;
   filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
 }
-.btn1 {
-  width: 170px;
-height: 35px;
-padding: 1px 20px;
-border: 2px solid #ced4da;
-font-family: montserrat, arial, verdana;
-font-weight: 100;
-cursor: pointer;
-transition: all 0.3s ease;
-position: relative;
-display: inline-block;
-border-radius: 0ex 2ex 2ex 0ex;
-background-color:#272e56;
- color: white;
 
+.btn3:hover{
+    cursor: pointer;
+    filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
+  }
+
+.btn4:hover{
+    cursor: pointer;
+    filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));  
 }
-.btn2 {
-  width: 130px;
+
+.btn1 {
+    width: 130px;
   height: 35px;
   padding: 1px 20px;
   border: 2px solid #ced4da;
   font-family: montserrat, arial, verdana;
-  font-weight: 200;
+  font-weight: 100;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-  border-radius: 0 20px 20px 0;
+  border-radius: 0ex 2ex 2ex 0ex;
   background-color:#dcdcdc;
-  color:#272e56;
+   color: #272e56;
+}
+.btn2 {
+    width: 190px;
+    height: 35px;
+    padding: 1px 20px;
+    border: 2px solid #ced4da;
+    font-family: montserrat, arial, verdana;
+    font-weight: 100;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    border-radius: 0 20px 20px 0;
+    background-color:#272e56;
+    color:white;
+
 }
 
 .btn3 {
-  width: 130px;
+    width: 250px;
+   height: 35px;
+   padding: 1px 20px;
+   border: 2px solid #ced4da;
+   font-family: montserrat, arial, verdana;
+   font-weight: 100;
+   font-weight: bold;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   position: relative;
+   display: inline-block;
+   border-radius: 0 20px 20px 0;
+   background-color:#dcdcdc;
+   color:#272e56;
+ }
+
+ .btn4 {
+  width: 190px;
  height: 35px;
  padding: 1px 20px;
  border: 2px solid #ced4da;
@@ -70,11 +108,7 @@ background-color:#272e56;
  border-radius: 0 20px 20px 0;
  background-color:#dcdcdc;
  color:#272e56;
- right: 17px;
-
- 
 }
-
 
 /************************ diseño para  Botones del form ***********************/
 .btns-group {

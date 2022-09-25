@@ -36,6 +36,12 @@
   background-color:#272e56;
    color: white;
 }
+.fs-title{
+  font-family: montserrat, arial, verdana;
+  font-size: 32px;
+  color: #272e56;
+
+}
 .btn2 {
   width: 130px;
   height: 35px;
@@ -86,6 +92,23 @@
  margin-bottom: 5px;
 
 }
+.btnActa{
+  display: block;
+  text-decoration: none;
+  background-color: #272e56;
+  color: #f3f3f3;
+  text-align: center;
+  border-radius: 20rem;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 150px;
+  height: 30px;
+  font-size: 18px;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  margin-left: 130px;
+
+}
 .btn:hover {
   box-shadow: 0 0 0 2px #fff, 0 0 0 3px #272e56;
 }
@@ -93,6 +116,9 @@
   box-shadow: 0 0 0 2px #fff, 0 0 0 3px #272e56;
 }
 
+.btnActa:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #272e56;
+}
 /************************ diseño para  inputs del form ***********************/
 
 p {
@@ -183,6 +209,14 @@ p {
   text-align: center;
   position: relative;
 }
+.msform2 {
+  width: 110%;
+   margin: 10px; 
+  text-align: center;
+  position: relative;
+  /* margin-left: -0.100%; */
+}
+
 /************************************ color de fondo de los forms **************************************/
 #msform fieldset {
   background: white;
@@ -190,6 +224,18 @@ p {
   border-radius: 3px;
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
   padding: 20px 30px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  position: relative;
+}
+.field2 {
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  /* padding: 10px 20px; */
+  height: 200px;
   box-sizing: border-box;
   width: 80%;
   margin: 0 10%;
@@ -261,6 +307,7 @@ fieldset {
   padding: 0;
   border: none;
 }
+
 
 /*********************************** diseño para cargar la imagen ***********************/
 
@@ -522,7 +569,7 @@ label[for="ham-menu"] {
   border-radius: 15px;
 }
 .ham-menu {
-  width: 40vw;
+  width: 50vw;
   height: 50%;
   position: fixed;
   top: 300px;
@@ -546,13 +593,15 @@ label[for="ham-menu"] {
 }
 .table-wraper{
   font-size: 12px;
+    height: 180px;
+    overflow-y: scroll ;
 }
 
  .searchBox{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  width: fit-content;
+  gap: 1rem;
+  width: 650px;
   height: fit-content;
   position: relative;
 }
@@ -570,8 +619,8 @@ label[for="ham-menu"] {
 .searchButton {
   color: white;
   width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  height:38px;
+  border-radius:50%;
   background: #272e56;
 }
 

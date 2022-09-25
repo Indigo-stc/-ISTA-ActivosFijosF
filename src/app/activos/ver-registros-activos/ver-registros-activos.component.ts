@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivosService } from 'src/app/service/activos.service';
 
 @Component({
   selector: 'app-ver-registros-activos',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ver-registros-activos.component.css']
 })
 export class VerRegistrosActivosComponent implements OnInit {
+  listarActivos:any;
 
-  constructor() { }
+  constructor(
+    public listarAllActivos:ActivosService,
+  ) { }
 
   ngOnInit(): void {
+    
+ //listar Activos
+        this.listarAllActivos.getAllActivos().subscribe(
+          listarActivos => {
+            this.listarActivos = listarActivos
+            console.log(listarActivos);
+          },
+          error => (console.log(error+"hhhhh"))
+        )
   }
 
 }
+
+

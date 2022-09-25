@@ -17,75 +17,36 @@
                   <table class="table">
                       <thead class="text-light" style="background-color:#272e56">
                           <tr class="cabecera-tabla">
-                              <th scope="row">#</th>
-                              <th class="th-lg"><a>Codigo</a></th>
-                              <th class="th-lg"><a>Nombre</a></th>
+        
+                            <th class="th-lg"><a>id</a></th>  
+                            <th class="th-lg"><a>Codigo</a></th>
+                              <!-- <th class="th-lg"><a>Nombre</a></th>
                               <th class="th-lg"><a>Custodio</a></th>
-                              <th class="th-lg"><a>Responsable</a></th>
-                              <th class="th-lg"><a>Procedencia</a></th>
+                              <th class="th-lg"><a>Responsable</a></th> -->
+                              <!-- <th class="th-lg"><a>Procedencia</a></th> -->
                               <th class="th-lg"><a>Marca</a></th>
                               <th class="th-lg"><a>Serie</a></th>
                               <th class="th-lg"><a>Modelo</a></th>
                               <th class="th-lg"><a>Coste</a></th>
                               <th class="th-lg"><a>Estado</a></th>
                               <th class="th-lg"><a>Disposicion</a></th>
-                              <th class="th-lg"><a>departamento</a></th>
+                              <!-- <th class="th-lg"><a>departamento</a></th> -->
                               <th class="th-lg"><a>Especificaciones</a></th>
-                              <th class="th-lg"><a>N° Recepción</a></th>
+                              <!-- <th class="th-lg"><a>N° Recepción</a></th> -->
 
                           </tr>
                       </thead>
-                      <tbody>
+                      <tbody *ngFor="let itemX of listarActivos ">
                           <tr>
-                              <th scope="row">1</th>
-                              <td>Ep-10 5464651001</td>
-                              <td>Silla</td>
-                              <td>Juan Semeinario</td>
-                              <td>Juan Semeinario</td>
-                              <td>SECAP</td>
-                              <td>NA</td>
-                              <td>NA</td>
-                              <td>NA</td>
-                              <td>10.5</td>
-                              <td>Bueno</td>
-                              <td>Disponible</td>
-                              <td>Aula 302</td>
-                              <td>silla de plastico</td>
-                              <td>Rep-1</td>
-                          </tr>
-                          <tr>
-                              <th scope="row">1</th>
-                              <td>Ep-10 7777</td>
-                              <td>Silla</td>
-                              <td>Juan Semeinario</td>
-                              <td>Juan Semeinario</td>
-                              <td>SECAP</td>
-                              <td>NA</td>
-                              <td>NA</td>
-                              <td>NA</td>
-                              <td>10.5</td>
-                              <td>Bueno</td>
-                              <td>Disponible</td>
-                              <td>Aula 302</td>
-                              <td>silla de plastico</td>
-                              <td>Rep-2</td>
-                          </tr>
-                          <tr>
-                              <th scope="row">1</th>
-                              <td>Ep-10 44444</td>
-                              <td>Silla</td>
-                              <td>Juan Semeinario</td>
-                              <td>Juan Semeinario</td>
-                              <td>SECAP</td>
-                              <td>NA</td>
-                              <td>NA</td>
-                              <td>NA</td>
-                              <td>10.5</td>
-                              <td>Bueno</td>
-                              <td>Disponible</td>
-                              <td>Aula 302</td>
-                              <td>silla de plastico</td>
-                              <td>Rep-3</td>
+                            <th> {{itemX.id_activo}}</th>
+                              <th>{{ itemX.codigo_activo}}</th>
+                              <th>{{ itemX.nombre}}</th>
+                              <th>{{ itemX.marca}}</th>
+                              <th>{{ itemX.modelo}}</th>
+                              <th>{{ itemX.costo}}</th>
+                              <th>{{ itemX.estado_Fisico}}</th>
+                              <th>{{ itemX.disponibilidad}}</th>
+                            <th>{{ itemX.descripcion}}</th>
                           </tr>
 
                       </tbody>

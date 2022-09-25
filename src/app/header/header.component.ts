@@ -62,6 +62,21 @@ export class HeaderComponent {
     });
   }
 
+  ngAfterContentInit() {
+    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+      if (res.matches) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        // this.sidenav.mode = 'side';
+        // this.sidenav.open();
+      }
+    });
+  }
+
+
+
+  //Parte de login y logout..
   logout(): void {
 
     const Toast = Swal.mixin({
@@ -91,19 +106,6 @@ export class HeaderComponent {
       error: err => {
         console.log('Tenemos un error a la hora de un logOut')
         console.log(err);
-      }
-    });
-  }
-
-
-  ngAfterContentInit() {
-    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
-      if (res.matches) {
-        this.sidenav.mode = 'over';
-        this.sidenav.close();
-      } else {
-        // this.sidenav.mode = 'side';
-        // this.sidenav.open();
       }
     });
   }

@@ -39,6 +39,8 @@ import { RolesComponent } from './roles/roles.component';
 import { PermisosComponent } from './roles/permisos/permisos.component';
 import { HistorialComponent } from './roles/Historial/historial.component';
 
+import { VerEdificiosComponent } from './departamentos/ver-edificios/ver-edificios.component';
+
 //Impot del interceptor
 import { httpInterceptorProviders } from './helpers/http.interceptor';
 
@@ -65,7 +67,8 @@ import { httpInterceptorProviders } from './helpers/http.interceptor';
     FormComponent,
     RolesComponent,
     PermisosComponent,
-    HistorialComponent
+    HistorialComponent,
+    VerEdificiosComponent
   ],
 
 

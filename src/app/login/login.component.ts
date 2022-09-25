@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
                     showConfirmButton: false,
                     timer: 2000,
                 });
-                this.reloadPage();
+                // this.reloadPage();
 
                 this.router.navigate(['/home']);
             },

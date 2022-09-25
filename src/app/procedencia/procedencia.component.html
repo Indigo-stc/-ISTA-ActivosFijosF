@@ -10,15 +10,15 @@
       <h2 class="fs-title">Registro de Procedencia</h2>
       <h3 class="fs-subtitle"></h3>
 
-      <input type='text' formControlName="nombre_procedencia" class='inputbox' placeholder="Nombre" />
-      <input type='text' formControlName="descripcion" class='inputbox' placeholder="Descripción" />
+      <input type='text' formControlName="nombre_procedencia" [(ngModel)]="procedencia.nombre_procedencia" class='inputbox' placeholder="Nombre" />
+      <input type='text' formControlName="descripcion" [(ngModel)]="procedencia.descripcion" class='inputbox' placeholder="Descripción" />
 
       <div class="btns-group">
-        <input class="btn" type="submit" value="Cancelar">
+        <input class="btn" type="button" value="Cancelar">
         <input class="btn" type="submit" value="Registrar" [disabled]="procedenciaForm.invalid">
         <input class="btn" type="button" value="Actualizar" [disabled]="procedenciaForm.invalid" (click)="actualizarProcedencia()">
-
       </div>
+      
     </fieldset>
 
   </form>

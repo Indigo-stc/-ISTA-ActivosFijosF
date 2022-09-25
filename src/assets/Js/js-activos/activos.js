@@ -28,6 +28,31 @@
       //   alert("This is not an Image File!");}
       });
 	});
+  //subir acta
+  var inputs = document.querySelectorAll( '.inputfile2' );
+	Array.prototype.forEach.call( inputs, function( input )
+	{
+		var label	 = input.nextElementSibling,
+			labelVal = label.innerHTML;
+
+		input.addEventListener( 'change', function( e )
+		{
+			var fileName = '';
+      // let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid image extensions in array
+      // if (validExtensions.includes(fileType)) {
+			if( this.files && this.files.length > 1 )
+				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+			else
+				fileName = e.target.value.split( '\\' ).pop();
+
+			if( fileName )
+				label.querySelector( 'span' ).innerHTML = fileName;
+			else
+				label.innerHTML = labelVal;
+      // } else {
+      //   alert("This is not an Image File!");}
+      });
+	});
 
 
 	
@@ -41,15 +66,13 @@
 {
     //pasar datos de un form a otrp
     function obtenerdatos(){
-      var codigoA=document.getElementById('CodigoActivo').value;
-      var nombreA=document.getElementById('NombreActivo').value;
+      var codigo_activo=document.getElementById('CodigoActivo').value;
+      // var nombreA=document.getElementById('NombreActivo').value;
 
-      document.getElementById('codQR').value = codigoA;
-      document.getElementById('nomQR').value = nombreA;
+      document.getElementById('codQR').value = codigo_activo;
+      // document.getElementById('nomQR').value = nombreA;
     }
     //fin
-
-
 
   //Inicio de codigo qr
   const contenedorQR = document.getElementById('contenedorQR');
@@ -58,7 +81,7 @@
   
   formulario.addEventListener('submit', (e) => {
     e.preventDefault();
-    QR.makeCode(formulario.nomQR.value + formulario.codQR.value);
+    QR.makeCode(formulario.codQR.value);
   });
 
   //guardar qr

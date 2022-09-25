@@ -28,19 +28,19 @@
         <p class="estado">
           Receptor:
           <select  name="usuario" id="usuario" [(ngModel)]="recepcion.usuario" formControlName="usuario" class="combobox" required>
-            <option [ngValue]="usuario" *ngFor="let usuario of usuario"> {{ usuario.nombre }}  {{ usuario.apellido }} </option>
+            <option [ngValue]="usuario" *ngFor="let usuario of usuario"> {{ usuario.nombres }}  {{ usuario.apellidos }} </option>
           </select>
         </p>
         <p class="estado">
           Procedencia:
-          <select name="edificio" id="edificio" [(ngModel)]="recepcion.procedencia" formControlName="procedencia" class="combobox" required>
-            <option [ngValue]="undefined"> Seleccione la Procedencia/option>
+          <select name="procedencia" id="procedencia" [(ngModel)]="recepcion.procedencia" formControlName="procedencia" class="combobox" required>
+            <option [ngValue]="undefined"> Seleccione la Procedencia</option>
             <option [ngValue]="procedencias" *ngFor="let procedencias of procedencia"> {{ procedencias.nombre_procedencia }}</option>
           </select>
         </p>
         <p class="estado">
           Edificio:
-          <select (change)="onSelect($event)" ngModel="edificios.id_edificio"  name="edificio" id="edificio" formControlName="" class="combobox" required>
+          <select   (change)="onSelect($event)" ngModel="edificios.id_edificio"  name="edificio-name" id="edificio" formControlName="" class="combobox" required>
             <option [ngValue]="undefined"> Seleccione un Edificio</option>
             <option value= {{item2.id_edificio}}  *ngFor="let item2 of edificios"> {{ item2.nombre_edificio }}</option>
           </select>
@@ -52,10 +52,11 @@
             <option [ngValue]="departamento" *ngFor="let departamento of departamentos"> {{ departamento.nombre_departamento }}</option>
           </select>
         </p>
-        <input type="date" class="inputbox" [(ngModel)]="recepcion.fecha_ingreso" formControlName="fecha_ingreso" placeholder="Ingrese la fecha - yyyy/mm/dd:"required />
-        <div class="btns-group">
+        <input type="date" class="inputbox" name="fecha_ingreso" [(ngModel)]="recepcion.fecha_ingreso" formControlName="fecha_ingreso" placeholder="Ingrese la fecha - yyyy/mm/dd:"required />
+        <div class="btns-group1">
           <input class="btn" type="button" value="Cancelar"> 
-          <input class="btn btn-next" type="submit" value="Siguiente">
+          <input class="btn " type="submit" value="Registrar">
+          <input class="btn btn-next" type="button" value="Siguiente">
 
         </div>
           <!-- <input class="btn btn-next" type="submit" value="Siguiente" [disabled]="recepcionForm.invalid"> -->
@@ -71,10 +72,10 @@
         <h2 class="fs-title">Detalle de la Recepcion</h2>
         <p class="estado">
         Recepciones:
-
-        <select (change)="onSelectDetalle($event)" [(ngModel)]="encabezado.id_encabezado_ing"  name="encabezado_id" id="encabezado_id" formControlName="encabezado_ing" class="combobox" required>
+        <!-- <select (change)="onSelectDetalle($event)" [(ngModel)]="encabezado.id_encabezado_ing"  name="encabezado_id" id="encabezado_id" formControlName="encabezado_ing" class="combobox" required> -->
+        <select [(ngModel)]="encabezado.id_encabezado_ing"  name="encabezado_id" id="encabezado_id" formControlName="encabezado_ing" class="combobox" required>
           <option [ngValue]="undefined"> Seleccione el Detalle </option>
-          <option value= {{item5.id_encabezado_ing}} *ngFor="let item5 of encabezado"> {{ item5.num_recep }}</option>
+          <!-- <option value= {{item5.id_encabezado_ing}} *ngFor="let item5 of encabezado"> {{ item5.num_recep }}</option> -->
           <option [ngValue]="item4" *ngFor="let item4 of encabezado"> {{ item4.num_recep }}</option>
         </select>
           <!-- <select name="departamento" id="departamento" formControlName="encabezado_ing"  class="combobox" required>
