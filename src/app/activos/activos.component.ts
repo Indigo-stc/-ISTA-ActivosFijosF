@@ -122,23 +122,23 @@ export class ActivosComponent implements OnInit {
     );
 
     /////////////////////////////////////////
-    this.activoServe.getAllEncabezado().subscribe(
-      (detalleAct) => {
-        this.detalleAct = detalleAct;
-        console.log(detalleAct);
-      },
-      (error) => console.log(error)
-    );
+    // this.activoServe.getAllEncabezado().subscribe(
+    //   (detalleAct) => {
+    //     this.detalleAct = detalleAct;
+    //     console.log(detalleAct);
+    //   },
+    //   (error) => console.log(error)
+    // );
     /////llevar a tabla
-    this.activo = new Activo();
-    this.id = this.activateRoute.snapshot.params['id'];
-    this.activoServe.getByidActivo(this.id).subscribe(
-      (data) => {
-        console.log(data);
-        this.activo = data;
-      },
-      (error) => console.log(error)
-    );
+    // this.activo = new Activo();
+    // this.id = this.activateRoute.snapshot.params['id'];
+    // this.activoServe.getByidActivo(this.id).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //     this.activo = data;
+    //   },
+    //   (error) => console.log(error)
+    // );
   }
 
   onSubmit() {
@@ -265,6 +265,7 @@ export class ActivosComponent implements OnInit {
         console.log('Codigo de ingreso-> ' + this.id_activo1);
         console.log('Correcto el ingreso del activo')
         this.guardarHistorialActivo();
+        this.actualizarDetalleEstado();
        
       },
       error: err => {
@@ -310,5 +311,24 @@ export class ActivosComponent implements OnInit {
       }
     });
   }
+
+  actualizarDetalleEstado(): void {
+
+    let detalle_ing = { 
+      "id_detalle_ing":this.id_detalle,
+      "estado_detalle": true,
+    };
+    
+    this.activoServe.updateDetalleEstadoDeIngreso(detalle_ing).subscribe({
+      next: data => {
+        console.log(data);
+        console.log('Se actualizo el detalle')
+      },
+      error: err => {
+        console.log('Error al actualizar el detalle')
+      }
+    });
+  }
+
 
 }
