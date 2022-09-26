@@ -5,5 +5,11 @@ export class UsuarioRol{
 	apellidos: string='';
 	correo: string='';
 	contrasenia: string='';
-	roles: string[]=[];
+	roles: Rol[]=[];
+
+}
+class Rol{
+
+	id_rol: any;
+	nombre : any;
 }
