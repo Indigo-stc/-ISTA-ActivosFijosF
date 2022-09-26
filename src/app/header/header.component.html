@@ -24,20 +24,23 @@
             </div>
           </div>
 
+
+          <!-- *ngIf="showDepartamentoEdificio" -->
+
           <input type="checkbox" id="btn-menu" />
           <div class="container-menu">
             <div class="cont-menu">
               <nav>
-                <a routerLink="/">INICIO</a>
-                <a routerLink="constatacion">Constatar</a>
-                <a routerLink="roles">Roles</a>
+                <a routerLink="home" *ngIf="rolAdmin == true || rolSolicitante==true || rolConstatante==true || rolResponsable==true">INICIO</a>
+                <a *ngIf="rolAdmin == true || rolConstatante==true">Constatar</a>
+                <a [routerLink]="'roles'" *ngIf="rolAdmin == true">Roles</a>
               </nav>
               <label for="btn-menu">✖️</label>
             </div>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="home" style="margin-left:30px ;">Inicio
+          <a class="nav-link" aria-current="page" routerLink="home" style="margin-left:30px ;" *ngIf="rolAdmin == true || rolSolicitante==true || rolConstatante==true">Inicio
 
             <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-house-door-fill" viewBox="0 0 16 16">
@@ -49,18 +52,18 @@
 
         <li class="nav-item">
           <a class="nav-link" aria-current="page" routerLink="procedencia" style="margin-left:30px ;"
-            *ngIf="showProcedencias">Procedencia</a>
+            *ngIf="rolAdmin == true || rolResponsable==true">Procedencia</a>
 
         </li>
 
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" routerLink="regedificio" style="margin-left:30px ;">Departamentos y
+          <a class="nav-link" aria-current="page" routerLink="regedificio" style="margin-left:30px ;" *ngIf="rolAdmin == true">Departamentos y
             Edificios</a>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-            style="margin-left:30px ;">Gestión de Activos</a>
+            style="margin-left:30px ;" *ngIf="rolAdmin == true || rolResponsable==true">Gestión de Activos</a>
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" href="#" [routerLink]="'Recepcion_Activos'">Recepción Activo</a>
