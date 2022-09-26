@@ -29,7 +29,7 @@ export class RecepcionActivoComponent implements OnInit {
   recepciones: any;
 
   edificios: Edificio[] = [];
-  departamentos: Departamento[] = []
+  departamentos: any //esto esetaba como array
   procedencia: Procedencia[] = [];
 
   usuario: any;
@@ -83,13 +83,6 @@ export class RecepcionActivoComponent implements OnInit {
       error => (console.log(error))
     )
 
-     // Departamentos
-    this.departamentoservice.getAllDepartamentos().subscribe(
-      departamentos => {
-        this.departamentos = departamentos
-      },
-      error => (console.log(error))
-    )
 
     // LLenar Encabezados
     this.recepcionservice.getAllEncabezado_ing().subscribe(
@@ -216,6 +209,20 @@ export class RecepcionActivoComponent implements OnInit {
     )
   }
 
+  //*************//
+   // Cargar Departamentes Anidado
+   cargarDepartamentosSegunEdificio(event) {
+    let id_edificio = event.target.value;
+    alert("Id edificio " + id_edificio)
+    this.departamentoservice.getByidDepartamentos(id_edificio).subscribe(
+      resp  => {
+        console.log(resp)
+        this.departamentos = resp;
+      },
+      error => (console.error(error))
+    )
+  }
 
 
 }
+

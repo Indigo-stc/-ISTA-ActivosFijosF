@@ -10,7 +10,7 @@ export class Activo {
     imagen: string = "";
     descripcionA: string = "";
     costo:number=0;
-    Estado_Fisico: string = "";
+    estado_fisico: string = "";
     disponibilidad: boolean = false;
 
 }

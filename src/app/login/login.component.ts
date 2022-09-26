@@ -56,7 +56,8 @@ export class LoginComponent implements OnInit {
                 });
                 // this.reloadPage();
 
-                this.router.navigate(['/home']);
+                // this.router.navigate(['/home']);
+                this.router.navigate(['/home']) .then(() => { window.location.reload(); });
             },
             error: (err) => {
                 console.log(err.error.message);

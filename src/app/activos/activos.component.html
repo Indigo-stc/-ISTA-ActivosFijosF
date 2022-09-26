@@ -31,11 +31,11 @@
         <h2 class="fs-title">Registro de Activos</h2>
         <h3 class="fs-subtitle"></h3>
         <div class="form-group">
-          <input readonly value="{{value}}" [(ngModel)]="activo.codigo_activo" formControlName="codigo_activo" type="text" class="inputbox" name="Codigo" id="CodigoActivo"
+          <input readonly value="{{value}}" [(ngModel)]="form.codigo_activo" formControlName="codigo_activo" type="text" class="inputbox" name="Codigo" id="CodigoActivo"
             placeholder="Codigo del Activo:" required />
         </div>
         <div class="form-group">
-          <input [(ngModel)]="activo.nombre" type="text" class="inputbox" name="Nombre" id="NombreActivo"
+          <input [(ngModel)]="form.nombre" type="text" class="inputbox" name="Nombre" id="NombreActivo"
             placeholder="Nombre del Activo:" required />
         </div>
         <!-- <div class="form-group">
@@ -44,6 +44,7 @@
         <div class="">
           <a class="btn btn-next">Siguiente</a>
         </div>
+
       </fieldset>
     </form>
   </div>
@@ -84,29 +85,26 @@
       <form action="" id="msform">
         <fieldset>
           <h2 class="fs-title">Datos del Activo</h2>
-          <input [(ngModel)]="activo.marca" type="text" class="inputbox" name="Marca" placeholder="Marca:" required />
-          <input [(ngModel)]="activo.modelo" type="text" class="inputbox" name="Modleo" placeholder="Modelo:"
+          <input [(ngModel)]="form.marca" type="text" class="inputbox" name="Marca" placeholder="Marca:" required />
+          <input [(ngModel)]="form.modelo" type="text" class="inputbox" name="Modleo" placeholder="Modelo:"
             required />
-          <input [(ngModel)]="activo.serie" type="text" class="inputbox" name="Serie" placeholder="Serie:" required />
-          <input [(ngModel)]="activo.costo" type="text" class="inputbox" name="Coste" placeholder="Coste:" required />
+          <input [(ngModel)]="form.serie" type="text" class="inputbox" name="Serie" placeholder="Serie:" required />
+          <input [(ngModel)]="form.costo" type="text" class="inputbox" name="Coste" placeholder="Coste:" required />
           <p class="estado">
             Estado:
-            <select [(ngModel)]="activo.estado_Fisico" class="combobox" required>
+            <select [(ngModel)]="form.estado_Fisico" class="combobox" required (change)="estadoActivo($event)">
               <option>Seleccione</option>
-              <option>Bueno</option>
-              <option>Malo</option>
-              <option>Dañado</option>
+              <option *ngFor="let valor of listaEstado">{{valor}}</option>
             </select>
           </p>
           <p class="estado">
             Disposicion:
-            <select [(ngModel)]="activo.disponibilidad" class="combobox" required>
+            <select [(ngModel)]="form.disponibilidad" class="combobox" required (change)="dispocicionActivo($event)">
               <option>Seleccione</option>
-              <option>Ocupado</option>
-              <option>Disponible</option>
+              <option *ngFor="let dispo of listaDispocicion">{{dispo}}</option>
             </select>
           </p>
-          <input [(ngModel)]="activo.descripcion" type="text" class="inputbox" name="especificaciones"
+          <input [(ngModel)]="form.descripcion" type="text" class="inputbox" name="especificaciones"
             placeholder="Especificaciones:" required />
           <div class="btns-group">
             <a class="btn btn-prev">Atrás</a>
@@ -130,10 +128,10 @@
           </p>
           <p class="estado">
             Departamento:
-            <select name="departamento" id="departamento" class="combobox" required>
+            <select  name="departamento" id="departamento" class="combobox" required (change)="ids_Departamento($event)">
               <option [ngValue]="undefined"> Seleccione un Departamento </option>
-              <option [ngValue]="departamento" *ngFor="let departamento of departamentos"> {{
-                departamento.nombre_departamento }}</option>
+              <option value= {{departamento.id_departamento}} [ngValue]="departamento" *ngFor="let departamento of departamentos" > {{
+                departamento.nombre_departamento }} </option>
             </select>
           </p>
           <div class="btns-group">
@@ -161,7 +159,7 @@
         </div>
         <div class="btns-group">
           <a class="btn" [routerLink]="['/Gestion_activos']">Cancelar</a>
-          <a class="btn" type="submit" [routerLink]="['/Gestion_activos']" (click)="guardarActivo()">Guardar</a>
+          <a class="btn" type="submit" [routerLink]="['/Gestion_activos']" (click)="registroAc()">Guardar</a>
           <a class="btn" type="button" [routerLink]="['/Gestion_activos']" (click)="Finaliza()">Finalizar</a>
         </div>
       </fieldset>
@@ -223,7 +221,7 @@
         <table class="table">
           <thead class="text-light" style="background-color:#272e56">
             <tr class="cabecera-tabla">
-              <!-- <th class="th-lg"><a>id</a></th> -->
+              <th class="th-lg"><a>id</a></th>
               <th class="th-lg"><a>N° Recepcion</a></th>
               <th class="th-lg"><a>Cod.Activo</a></th>
               <th class="th-lg"><a>Nom.Activo</a></th>
@@ -235,13 +233,14 @@
           <tbody *ngFor="let itemB of detalleAct">
             <tr>
               <!-- <th>{{ itemB.encabezado_ing.id_encabezado_ing}}</th> -->
+              <th>{{ itemB.id_detalle_ing}}</th>
               <th>{{ itemB.encabezado_ing.num_recep}}</th>
               <!-- <th>{{ itemB.id_detalle_ing}}</th> -->
               <th>{{ itemB.codigoA}}</th>
               <th>{{ itemB.descripcion}}</th>
               <th>{{ itemB.encabezado_ing.procedencia.nombre_procedencia}}</th>
               <!-- <th>{{ itemB.encabezado_ing.estado}}</th> -->
-              <td><button class="btnM" (click)="busquedaProveedor(itemB.codigoA)">Registrar</button></td>
+              <td><button class="btnM" (click)="pasarCodigoActivo(itemB.codigoA, itemB.id_detalle_ing)" [routerLink]="['/Gestion_activos']">Registrar</button></td>
             </tr>
           </tbody>
         </table>
@@ -249,5 +248,6 @@
 
     </fieldset>
   </form>
+
 
 </div>

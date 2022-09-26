@@ -21,6 +21,7 @@ import { RolesComponent } from './roles/roles.component';
 import { PermisosComponent } from './roles/permisos/permisos.component';
 import { HistorialComponent } from './roles/Historial/historial.component';
 import { VerEdificiosComponent } from './departamentos/ver-edificios/ver-edificios.component';
+import { VigilanteGuard } from './vigilante.guard';
 
 const app_routes: Routes = [
   { path: 'Gestion_activos', component: ActivosComponent },
@@ -46,7 +47,7 @@ const app_routes: Routes = [
   { path: 'regedificio/editar/:idedificio', component: RegEdificioComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registra', component: FormComponent },
-  { path: 'roles', component: RolesComponent },
+  { path: 'roles', component: RolesComponent, canActivate: [VigilanteGuard] },
   { path: 'permisos', component: PermisosComponent },
   { path: 'historial', component: HistorialComponent },
 

@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { StorageService } from '../service/storage.service';
 import { CreateAccountService } from '../service/createaccount.service';
 import { EventBusService } from '../shared/event-bus.service';
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 
 @Component({
   selector: 'app-header',
@@ -20,11 +20,20 @@ export class HeaderComponent {
 
   private roles: string[] = [];
   isLoggedIn = false;
-  showProcedencias = false;
-  showModeratorBoard = false;
+  
   username?: string;
 
+  id_persona?: string;
+
   eventBusSub?: Subscription;
+
+  //Acceso dependiendo de sus roles..
+
+  //Roles Acceso-------------------------
+  rolAdmin=false;
+  rolSolicitante=false;
+  rolConstatante=false;
+  rolResponsable=false;
 
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
@@ -49,12 +58,14 @@ export class HeaderComponent {
       const user = this.storageService.getUser();
       this.roles = user.roles;
 
-      this.showProcedencias = this.roles.includes('ROLE_RESPONSABLE');
-      //this.showModeratorBoard = this.roles.includes('ROL_ADMIN');
-
+      this.rolAdmin = this.roles.includes('ROLE_ADMIN');
+      this.rolSolicitante = this.roles.includes('ROLE_SOLICITANTE');
+      this.rolConstatante = this.roles.includes('ROLE_CONSTATANTE');
+      this.rolResponsable = this.roles.includes('ROLE_RESPONSABLE');
+      
       this.username = user.correo;
+      this.id_persona= user.id;
       console.log('La obtencio del email del storage--> ' + user.correo)
-      console.log('Este user esta Auth --> ' + this.username) 
     }
 
     this.eventBusSub = this.eventBusService.on('logout', () => {
