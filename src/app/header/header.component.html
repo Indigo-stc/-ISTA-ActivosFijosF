@@ -33,7 +33,7 @@
               <nav>
                 <a routerLink="home" *ngIf="rolAdmin == true || rolSolicitante==true || rolConstatante==true || rolResponsable==true">INICIO</a>
                 <a *ngIf="rolAdmin == true || rolConstatante==true">Constatar</a>
-                <a [routerLink]="'roles'" *ngIf="rolAdmin == true">Roles</a>
+                <a [routerLink]="'roles'" *ngIf="rolAdmin == true || rolResponsable==true">Roles</a>
               </nav>
               <label for="btn-menu">✖️</label>
             </div>

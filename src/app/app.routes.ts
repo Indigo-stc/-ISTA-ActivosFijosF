@@ -31,7 +31,7 @@ const app_routes: Routes = [
   { path: 'departamentos', component: DepartamentosComponent },
   { path: 'asignar_activo', component: AsignarActivoComponent },
   { path: 'listarActivos', component: ListarActivosComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [VigilanteGuard] },
   {
     path: 'Recepcion_Activos/verTodos',
     component: VerRecepcionesActivosComponent,
