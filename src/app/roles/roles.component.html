@@ -15,7 +15,7 @@
                             <th class="th-lg">Nombre</th>
                             <th class="th-lg">Apellido</th>
                             <th class="th-lg">Roles</th>
-                            <th class="th-lg">Historial</th>
+                            <!-- <th class="th-lg">Historial</th> -->
                         </tr>
                     </thead>
                     <tbody *ngFor="let usuario of lista">
@@ -26,9 +26,9 @@
                             <td>{{usuario.apellidos}}</td>
 
                             <td><button type="submit" class="btn btn-primary active" 
-                                    [routerLink]="['/permisos/edit' , usuario.id_usuario]"> <img title = "Ver" src="../Imagenes/roles.png"> </button></td>
-                            <td><button type="submit" class="btn btn-primary active" routerLink="/historial"> 
-                                <img title = "Historial" src="../Imagenes/historial.png"> </button></td>
+                                    [routerLink]="['/permisos/edit' , usuario.id_usuario]"> <img title = "Ver" src="../../assets/img/roles.png"> </button></td>
+                            <!-- <td><button type="submit" class="btn btn-primary active" routerLink="/historial"> 
+                                <img title = "Historial" src="../Imagenes/historial.png"> </button></td> -->
                         </tr>
                     </tbody>
                 </table>
