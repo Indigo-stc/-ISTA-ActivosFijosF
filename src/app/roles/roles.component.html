@@ -16,71 +16,23 @@
                             <th class="th-lg">Apellido</th>
                             <th class="th-lg">Roles</th>
                             <th class="th-lg">Historial</th>
-
                         </tr>
                     </thead>
-                    <tbody  *ngFor="let usuario of lista">
+                    <tbody *ngFor="let usuario of lista">
                         <tr>
-                            <td>{{usuario.id_usuario}}</td> 
+                            <td>{{usuario.id_usuario}}</td>
                             <td>{{usuario.cedula}}</td>
                             <td>{{usuario.nombres}}</td>
                             <td>{{usuario.apellidos}}</td>
-                            <!-- <td>{{usuario.roles}}</td> -->
-                            
-                            <td><button type="submit" class="boton-ver" [routerLink]="['/permisos/edit' , usuario.id_usuario]"> Ver </button></td>
-                            <td><button type="submit" class="boton-ver" routerLink="/historial"> Historial </button></td>
 
+                            <td><button type="submit" class="btn btn-primary active" 
+                                    [routerLink]="['/permisos/edit' , usuario.id_usuario]"> <img title = "Ver" src="../Imagenes/roles.png"> </button></td>
+                            <td><button type="submit" class="btn btn-primary active" routerLink="/historial"> 
+                                <img title = "Historial" src="../Imagenes/historial.png"> </button></td>
                         </tr>
-                        <!-- <tr>
-                            <th scope = "row">2</th>
-                            <td>0202020202</td>
-                            <td>Juan</td>
-                            <td>Ortega</td>
-                            <td>Solicitante</td>
-                            <td>Activo</td>
-                            <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="boton-ver" routerLink="/permisos">Permisos</button>
-                            <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="boton-ver" routerLink="/historial"> Historial </button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope = "row">3</th>
-                            <td>0303030303</td>
-                            <td>Juan</td>
-                            <td>Castro</td>
-                            <td>Solicitante</td>
-                            <td>No Activo</td>
-                            <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="boton-ver" routerLink="/permisos">Permisos</button>
-                                <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="boton-ver" routerLink="/historial"> Historial </button>
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <th scope = "row">4</th>
-                            <td>0404040404</td>
-                            <td>Carlos</td>
-                            <td>Ibarra</td>
-                            <td>Solicitante</td>
-                            <td>Activo</td>
-                            <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="boton-ver" routerLink="/permisos">Permisos</button>
-                            <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="boton-ver" routerLink="/historial"> Historial </button>
-                                
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope = "row">5</th>
-                            <td>0505050505</td>
-                            <td>Martin</td>
-                            <td>Calle</td>
-                            <td>Solicitante</td>
-                            <td>Activo</td>
-                            <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="boton-ver" routerLink="/permisos">Permisos</button>
-                            <td><button _ngcontent-btj-c77="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="boton-ver" routerLink="/historial"> Historial </button>
-                            </td>
-                        </tr> -->
                     </tbody>
                 </table>
+                
             </div>
             <div>
                 <div class="modal fade text-center" id="crearrecepcion" data-bs-backdrop="static"

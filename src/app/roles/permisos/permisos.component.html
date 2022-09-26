@@ -19,28 +19,27 @@
           <td>{{usuarios.nombres}} {{usuarios.apellidos}}</td>
           <td>
             <label class="toggle" for="myToggle">
-              <input class="toggle__input" name="" type="checkbox" id="myToggle" placeholder="xd">
+              <input class="toggle__input" name="" type="checkbox" id="myToggle" checked=true placeholder="xd" disabled>
               <div class="toggle__fill"></div>
             </label>
           </td>
 
           <td>
             <label class="toggle" for="myToggle2">
-              <input class="toggle__input2" name="" type="checkbox" id="myToggle2" placeholder="xd">
+              <input class="toggle__input2" name="" type="checkbox" [checked] = "rolResponsable" id="myToggle2" placeholder="xd" (change)="onChange($event, 'ROLE_RESPONSABLE')">
               <div class="toggle__fill"></div>
             </label>
           </td>
 
           <td>
             <label class="toggle" for="myToggle3">
-              <input class="toggle__input3" name="" type="checkbox" id="myToggle3" placeholder="xd">
+              <input class="toggle__input3" name="" type="checkbox" [checked] = "rolConstatante" id="myToggle3" placeholder="xd" (change)="onChange($event, 'ROLE_CONSTATANTE')">
               <div class="toggle__fill"></div>
             </label>
           </td>
-
-
         </tr>
       </tbody>
     </table>
   </div>
+  <button class="btn3" (click)="Confirmar()">Confirmar</button>
 </div>
