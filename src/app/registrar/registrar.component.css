@@ -1,15 +1,18 @@
 .fields{
     position: absolute;
-    margin-top: 20px;
-    margin-left: 300px;
-    margin-right: 150px;
-    width: 80ex;
-    height: 55ex;
+    margin-top: 2%;
+    margin-left: 23%;
+    margin-right: 150%;
+    width: 50%;
+    height: 63%;
     align-items: center;
+    box-shadow: 0 5px 7px rgb(39, 46, 86);
+    border-radius: 20px 20px 20px 20px;
 }
+
 .ajusts{
     position: absolute;
-    width: 17%;
+    width: 9%;
     height: 11%;
 }
 .background{
@@ -23,23 +26,33 @@
     display: table-row-group;
     justify-content: center;
     align-items: center;
-    width: 90vh;
+    width: 20%;
+    height: 12%;
+    
+}
+.container-text{
+    margin-left: 115px;
+    display: table;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    
 }
 .header {
     color: rgb(39, 46, 86);
     font-size: 25px;
-    padding: 10px;
+    padding: 2%;
 }
 
 .bigicon {
-    font-size: 35px;
+    font-size: 35%;
     color: rgb(39, 46, 86);
 }
 .img-perfil{
-    margin-bottom: 1ex;
+    margin-bottom: 4%;
     margin-left: 43%;
-    width: 90px;
-    height: 90px;
+    width: 17%;
+    height: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,41 +60,47 @@
 .text{
     background-color: #f8f8f8;
     color: lightslategray;
-    width: 40ex;
-    height: 3ex;
-    border-radius: 25px 25px 25px 25px;
+    width: 110%;
+    height: 20%;
+    border-radius: 20px 20px 20px 20px;
     border: 1px solid rgb(39, 46, 86);
     font-size:small;
-    margin-bottom: 0.5ex;
-    margin-left: 20ex;
+    margin-bottom: 1%;
+    margin-left: 70%;
 }
 .textlabel{
+    background-color: #f2f2f2;;
     color: rgb(174, 173, 173);
-    width: 59ex;
-    height: 3ex;
-    border-radius: 25px 25px 25px 25px;
-    font-size:x-small;
-    margin-bottom: 2ex;
-    margin-left: 33ex;
-    text-align: justify;
-    
-}
-.botton{
     width: 100%;
-  height: auto;
+    margin-bottom: 1%;
+    margin-left: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(39, 46, 86);
+    font-size: large;
+
+}
+  .input:required{
+    outline: 1px solid red;
+    }
+.botton{
+    width: 25%;
+    height: 40px;
     border: 1px solid rgb(39, 46, 86);
     border-left: 0;
-    border-radius: 25px 25px 25px 25px;
+    border-radius: 20px 20px 20px 20px;
     background-color: rgb(39, 46, 86);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    size: 20ex;
     color: white;
-    font-size: 90%;
+    font-size: 70%;
     margin-left: 38%;
     margin-bottom: 4%;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 3px 5px rgb(168, 177, 227);
 }
 .footer{
     position: absolute;

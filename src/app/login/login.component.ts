@@ -102,4 +102,7 @@ export class LoginComponent implements OnInit {
     reloadPage(): void {
         location.reload();
     }
+
+
+
 }
