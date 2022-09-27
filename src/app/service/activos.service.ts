@@ -94,4 +94,9 @@ public saveHistorialActivos(historialIngresosActivos:any): Observable<any>{
     );
   }
 
+    // Actualizar el estado del detalle
+    public updateDetalleEstadoDeIngreso(Detalle_ing:any): Observable<any>{
+      return this.httpClient.put(this.API_SERVER_DETALLE + "actualizarDetalle",Detalle_ing);
+    }
+
 }
