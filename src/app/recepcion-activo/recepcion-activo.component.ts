@@ -14,6 +14,10 @@ import { Activo } from 'src/app/models/activo';
 import { Edificio } from '../models/edificio';
 import { Departamento } from '../models/departamento';
 import { Procedencia } from '../models/procedencia';
+
+//Import del storage
+import { StorageService } from '../service/storage.service';
+import { concat } from 'rxjs';
 @Component({
   selector: 'app-recepcion-activo',
   templateUrl: './recepcion-activo.component.html',
@@ -39,7 +43,15 @@ export class RecepcionActivoComponent implements OnInit {
 
   activo:Activo[]=[];
 
+  //Variables de los datos del login.
+  isLoggedIn = false;
+  id_persona?: number;
+  nombres_usuario?: string;
+  apellidos_user?: string;
+  user_final:any;
+
   constructor(
+    private storageService: StorageService,
 
     public fb: FormBuilder,
     public regedificioservice: RegEdificioService,
@@ -50,8 +62,24 @@ export class RecepcionActivoComponent implements OnInit {
     private router:Router,
     private _CargaScripts: CargarScriptsService) {
     _CargaScripts.Carga(["js-constatacion-activos/activos"]);
+  
   }
   ngOnInit(): any {
+
+    //Carga de los nombres del usuario..
+    this.isLoggedIn = this.storageService.isLoggedIn();
+
+    if (this.isLoggedIn) {
+      console.log('Estamos logiados satisfacririamente')
+      const user = this.storageService.getUser();
+      this.id_persona = user.id;
+      this.nombres_usuario= user.nombres;
+      this.apellidos_user= user.apellidos;
+      this.user_final= this.nombres_usuario.concat(' '+this.apellidos_user)
+    
+
+      // alert('Estos son los datos que tenemos'+ this.id_persona +' '+this.nombres_usuario+ ' ' +this.apellidos_user)
+    }
 
     this.recepcionForm = this.fb.group({
       id_encabezado_ing: [''],

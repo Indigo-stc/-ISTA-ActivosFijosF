@@ -27,9 +27,12 @@
         <input type="text" class="inputbox" id="nombresss" placeholder="" required name="nombres" disabled> -->
         <p class="estado">
           Receptor:
-          <select  name="usuario" id="usuario" [(ngModel)]="recepcion.usuario" formControlName="usuario" class="combobox" required>
-            <option [ngValue]="usuario" *ngFor="let usuario of usuario"> {{ usuario.nombres }}  {{ usuario.apellidos }} </option>
+          <select  class="combobox" required >
+              <option>{{user_final}}</option>
           </select>
+          <!-- <select  name="usuario" id="usuario" [(ngModel)]="recepcion.usuario" formControlName="usuario" class="combobox" required>
+            <option [ngValue]="usuario" *ngFor="let usuario of usuario"> {{ usuario.nombres }}  {{ usuario.apellidos }} </option>
+          </select> -->
         </p>
         <p class="estado">
           Procedencia:
