@@ -1,4 +1,4 @@
-
+<!-- 
 <script src="http://googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <header>
     <div class="responsive, background">
@@ -50,7 +50,6 @@
                             <div class="col-md-8 text-center">
                                 <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
                                 <input type="password" placeholder="CONTRASEÑA" class="form-control, text" required [(ngModel)]="usuario.contrasenia" name="contrasenia">
-                                <!--input type="button" class="fa fa-eyes" onclick="mostrar()"-->
                                 <div class="textlabel">Tu contraseña debe tener entre 8 y 20 caracteres, contener letras y números, y no debe contener espacios, caracteres especiales ni emoji</div>
                             </div>
                         </div>
@@ -68,16 +67,93 @@
         </div>
     </div>
 </div>
-</div>
+</div>-->
 
 
-<script type="text/javascript">
-    function mostrar() {
-        var tipo = document.getElementById("password");
-        if(tipo.type =='password'){
-            tipo.type = 'text';
-        } else {
-            tipo.type = 'password';
-        }
-    }
-</script>
+<!-- fsdf -->
+
+
+
+<script src="http://googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<body class="body responsive">
+
+    <div class="bootstrap-wrapper">
+        <div class="container text-center">
+            <div class="row">
+                <div>
+                    <div>
+                        <form lass="form-horizontal" ngNativeValidate (ngSubmit)="create()">
+                            <fieldset class="fields">
+                                <legend class="header">REGISTRARSE</legend>
+                                <img class="img-perfil" src="../../assets/icon.png" />
+
+                                <div class="container-text">
+                                    <div class="form-group ">
+
+                                        <div class="col-md-8 ">
+                                            <!-- <input id="number" name="name" type="text" placeholder="CEDULA" class="form-control, text" > -->
+                                            <input type="text" maxlength="10" placeholder="CEDULA"
+                                                class="form-control, text" required [(ngModel)]="usuario.cedula"
+                                                name="cedula" (input)="escribirInput($event)">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-8 ">
+                                            <!-- <input id="fname" name="name" type="text" placeholder="NOMBRES" class="form-control, text"> -->
+                                            <input type="text" id="nombresss" placeholder="NOMBRES"
+                                                class="form-control, text" required [(ngModel)]="usuario.nombre"
+                                                name="nombres" disabled>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-8 ">
+                                            <!-- <input id="lname" name="name" type="text" placeholder="APELLIDOS" class="form-control, text"> -->
+                                            <input type="text" placeholder="APELLIDOS" class="form-control, text"
+                                                required [(ngModel)]="usuario.apellido" name="apellidos" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-8 ">
+                                            <!-- <input id="email" name="email" type="text" required placeholder="CORREO*" class="form-control, text" > -->
+                                            <input type="email" id="correoe" placeholder="CORREO"
+                                                class="form-control, text" required [(ngModel)]="usuario.correo"
+                                                name="correo" disabled (input)="autoEmail($event)">
+                                            <!--div id="emailHelp" class="textlabel">Nunca compartiremos su correo electrónico con nadie más.</div-->
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-8">
+                                            <!-- <input id="password" name="pssw" type="password" required placeholder="CONTRASEÑA*" class="form-control, text"> -->
+                                            <input type="password" placeholder="CONTRASEÑA" class="form-control, text"
+                                                required [(ngModel)]="usuario.contrasenia" name="contrasenia">
+                                            <!--input type="button" class="fa fa-eyes" onclick="mostrar()"-->
+                                            <!--div class="textlabel">Tu contraseña debe tener entre 8 y 20 caracteres, contener letras y números, y no debe contener espacios, caracteres especiales ni emoji</div-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="form-group">
+                                    <div class="col-md-12 text-center">
+
+                                        <button type="submit" class="btn btn-primary botton">REGISTRARSE</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
