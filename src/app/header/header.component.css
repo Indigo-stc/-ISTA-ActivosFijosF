@@ -12,6 +12,8 @@
 #btn-menu{
   display: none;
 }
+
+
 .container-menu{
   position: absolute;
   /* background: rgba(0,0,0,0.5); */
@@ -91,3 +93,11 @@ background: #c7c7c7;
     display: block;
   }
 }
+
+
+/* Sing Out */
+
+.sing_out{
+  width: 20px;
+}
+

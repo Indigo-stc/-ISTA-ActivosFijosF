@@ -17,21 +17,19 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
         <li class="nav-item">
           <div class="container">
             <div class="btn-menu" style="padding-top: 8px">
               <label for="btn-menu">☰</label>
             </div>
           </div>
-
-
-          <!-- *ngIf="showDepartamentoEdificio" -->
-
           <input type="checkbox" id="btn-menu" />
           <div class="container-menu">
             <div class="cont-menu">
               <nav>
-                <a routerLink="home" *ngIf="rolAdmin == true || rolSolicitante==true || rolConstatante==true || rolResponsable==true">INICIO</a>
+                <a routerLink="home" *ngIf="rolAdmin == true || rolSolicitante==true || rolConstatante==true || rolResponsable==true">
+                  INICIO</a>
                 <a *ngIf="rolAdmin == true || rolConstatante==true">Constatar</a>
                 <a [routerLink]="'roles'" *ngIf="rolAdmin == true || rolResponsable==true">Roles</a>
               </nav>
@@ -39,8 +37,10 @@
             </div>
           </div>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="home" style="margin-left:30px ;" *ngIf="rolAdmin == true || rolSolicitante==true || rolConstatante==true">Inicio
+          <a class="nav-link" aria-current="page" routerLink="home" style="margin-left:30px ;"
+            *ngIf="rolAdmin == true || rolSolicitante==true || rolConstatante==true">Inicio
 
             <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-house-door-fill" viewBox="0 0 16 16">
@@ -57,7 +57,8 @@
         </li>
 
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" routerLink="regedificio" style="margin-left:30px ;" *ngIf="rolAdmin == true">Departamentos y
+          <a class="nav-link" aria-current="page" routerLink="regedificio" style="margin-left:30px ;"
+            *ngIf="rolAdmin == true">Departamentos y
             Edificios</a>
         </li>
 
@@ -87,10 +88,12 @@
 
       <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
         <li class="nav-item">
-          <a class="nav-link" style="color: white;">{{ username }} - {{id_persona}}</a>
+          <a class="nav-link" style="color: white;">{{ user_final }} </a>
         </li>
         <li class="nav-item">
-          <a href class="nav-link" [routerLink]="'login'" (click)="logout()">LogOut</a>
+          <a href class="nav-link" [routerLink]="'login'" (click)="logout()">
+            <img src="../../assets/img/cerrar-sesion.png" class="sing_out" >
+            Cerrar sesión</a>
         </li>
       </ul>
     </div>

@@ -57,6 +57,10 @@ button {
 	transition: transform 80ms ease-in;
 }
 
+button:hover{
+    background-color: #333;
+}
+
 button:active {
 	transform: scale(0.95);
 }
@@ -68,6 +72,10 @@ button:focus {
 button.ghost {
 	background-color: transparent;
 	border-color: #5c2e81;
+}
+
+button.ghost:hover{
+	background-color: #3b2b49;
 }
 
 form {
