@@ -1,4 +1,10 @@
+<!-- New version -->
+
+
+
+
 <!-- botones de Navegacion-->
+
 <body class="bodyq">
   <div class="multi-button">
     <button class="btn1">Recepcion</button>
@@ -17,126 +23,105 @@
 
   <!-- Primer formulario -->
   <div class="step-forms step-forms-active">
-    <form action="" id="msform" [formGroup]="recepcionForm" (ngSubmit)="guardarEncabezado_ing()">
+    <form [formGroup]="form" action="" id="msform">
       <div class="group-inputs"></div>
       <fieldset>
         <h2 class="fs-title">Datos de la Recepcion</h2>
         <h3 class="fs-subtitle"></h3>
-        <input type="text" class="inputbox" id="recepcion-num_recep" [(ngModel)]="recepcion.num_recep" formControlName="num_recep" placeholder="N° Recepcion"required />    
-        <!-- <input type="text" class="inputbox"  [(ngModel)]="recepcion.usuario.id_usuario"  placeholder="Cedula" formControlName="" required (input)="escribirInput($event)">
-        <input type="text" class="inputbox" id="nombresss" placeholder="" required name="nombres" disabled> -->
+        <input type="text" class="inputbox" formControlName="num_recep" id="recepcion-num_recep"
+          placeholder="N° Recepcion" required (input)="nums_recep($event)" />
         <p class="estado">
-          Receptor:
-          <select  class="combobox" required >
-              <option>{{user_final}}</option>
-          </select>
-          <!-- <select  name="usuario" id="usuario" [(ngModel)]="recepcion.usuario" formControlName="usuario" class="combobox" required>
-            <option [ngValue]="usuario" *ngFor="let usuario of usuario"> {{ usuario.nombres }}  {{ usuario.apellidos }} </option>
-          </select> -->
+          Receptor:  {{user_final}}
         </p>
         <p class="estado">
           Procedencia:
-          <select name="procedencia" id="procedencia" [(ngModel)]="recepcion.procedencia" formControlName="procedencia" class="combobox" required>
+          <select name="procedencia" id="procedencia" class="combobox" required (change)="ids_procedencia($event)">
             <option [ngValue]="undefined"> Seleccione la Procedencia</option>
-            <option [ngValue]="procedencias" *ngFor="let procedencias of procedencia"> {{ procedencias.nombre_procedencia }}</option>
+            <option value={{procedencia.id_procedencia}} [ngValue]="procedencia"
+              *ngFor="let procedencia of procedencias"> {{ procedencia.nombre_procedencia }}</option>
           </select>
         </p>
         <p class="estado">
           Edificio:
-          <select  (change)="cargarDepartamentosSegunEdificio($event)" name="edificio" id="edificio" formControlName="" class="combobox" required>
+          <select (change)="cargarDepartamentosSegunEdificio($event)" name="edificio" id="edificio" class="combobox"
+            required>
             <option [ngValue]="undefined"> Seleccione un Edificio</option>
-            <option [value]="edificio.id_edificio" *ngFor="let edificio of edificios"> {{ edificio.nombre_edificio }}</option>
+            <option [value]="edificio.id_edificio" *ngFor="let edificio of edificios"> {{ edificio.nombre_edificio }}
+            </option>
           </select>
         </p>
         <p class="estado">
           Departamento:
-          <select name="departamento" id="departamento"  [(ngModel)]="recepcion.departamento" formControlName="departamento"  class="combobox" required>
+          <select name="departamento" id="departamento" class="combobox" required (change)="ids_Departamento($event)">
             <option [ngValue]="undefined"> Seleccione un Departamento </option>
-            <option [ngValue]="departamento" *ngFor="let departamento of departamentos"> {{departamento.nombre_departamento}}</option>
+            <option value={{departamento.id_departamento}} [ngValue]="departamento"
+              *ngFor="let departamento of departamentos"> {{departamento.nombre_departamento }} </option>
           </select>
         </p>
 
-        <input type="date" class="inputbox" name="fecha_ingreso" [(ngModel)]="recepcion.fecha_ingreso" formControlName="fecha_ingreso" placeholder="Ingrese la fecha - yyyy/mm/dd:"required />
-        <div class="btns-group1">
-          <input class="btn" type="button" value="Cancelar"> 
-          <input class="btn " type="submit" value="Registrar">
+        <input type="date" class="inputbox" name="fecha_ingreso" [(ngModel)]="dateSet" formControlName="fecha_ingreso" placeholder="Ingrese la fecha - yyyy/mm/dd:" required />
+         <div class="btns-group1">
+          <input class="btn" type="button" (click)="limpiar()" value="Cancelar">
+          <input class="btn" type="button" (click)="guardarEncabezadoRecepcion()" value="Registrar">
           <input class="btn btn-next" type="button" value="Siguiente">
-
         </div>
-          <!-- <input class="btn btn-next" type="submit" value="Siguiente" [disabled]="recepcionForm.invalid"> -->
-
       </fieldset>
     </form>
   </div>
 
   <!-- Segundo formulario -->
   <div class="step-forms">
-    <form action="" id="msform" [formGroup]="recepcionFormDetalle" (ngSubmit)="guardarDetalle_ing()" >
+    <form action="" id="msform" [formGroup]="recepcionFormDetalle">
       <fieldset>
         <h2 class="fs-title">Detalle de la Recepcion</h2>
         <p class="estado">
-        Recepciones:
-        <!-- <select (change)="onSelectDetalle($event)" [(ngModel)]="encabezado.id_encabezado_ing"  name="encabezado_id" id="encabezado_id" formControlName="encabezado_ing" class="combobox" required> -->
-        <select [(ngModel)]="encabezado.id_encabezado_ing"  name="encabezado_id" id="encabezado_id" formControlName="encabezado_ing" class="combobox" required>
-          <option [ngValue]="undefined"> Seleccione el Detalle </option>
-          <!-- <option value= {{item5.id_encabezado_ing}} *ngFor="let item5 of encabezado"> {{ item5.num_recep }}</option> -->
-          <option [ngValue]="item4" *ngFor="let item4 of encabezado"> {{ item4.num_recep }}</option>
-        </select>
-          <!-- <select name="departamento" id="departamento" formControlName="encabezado_ing"  class="combobox" required>
-            <option [ngValue]="item4" *ngFor="let item4 of encabezado"> {{ item4.num_recep }}</option>
-          </select> -->
-        </p> 
-        <input id="encabezado_idT" type="text" class="inputbox" formControlName="codigoA" placeholder="Codigo Activo:" required />
-        <input type="text" class="inputbox" formControlName="descripcion" placeholder="Nombre del Activo:" required />
+          Numero de Recepcion: {{ " " + num_recep }}
+        </p>
+        <input id="codigo_activo" type="text" class="inputbox" placeholder="Codigo Activo: "
+          (input)="codigos_activo($event)" required />
+        <input id="nombre-descripcion-activo" type="text" class="inputbox" placeholder="Nombre del Activo: "
+          (input)="nombres_activo($event)" required />
         <div class="" style="padding: 0.50rem; display: block;">
-          <!-- <a class="btn btn-add">Añadir</a> -->
-          <input class="btn" type="submit" value="Añadir">
+          <input class="btn" type="button" value="Añadir" (click)="guardarDetalle_ing()">
         </div>
         <div><br></div>
         <fieldset>
-            <div class="form-registrar-procedencia">
-                <div class="table-wraper">
-                    <table class="table" >
-                        <thead class="text-light" style="background-color:#272e56">
-                            <tr class="cabecera-tabla">
-                              <th class="th-lg"><a>Id Encab</a></th> 
-                              <th class="th-lg"><a>N° Recepcion</a></th>
-                                <!-- <th class="th-lg"><a>Nombre Receptor</a></th>
-                                <th class="th-lg"><a>Procedencia</a></th> -->
-                                <th class="th-lg"><a>Cod. Activo</a></th>
-                                <th class="th-lg"><a>Nom. Activo</a></th>
-                                <th class="th-lg"><a>...</a></th>
-
-                            </tr>
-                        </thead>
-                        <tbody  *ngFor="let itemB of detalleEnc">
-                            <tr>
-                              <th>{{ itemB.encabezado_ing.id_encabezado_ing}}</th>
-                              <th>{{ itemB.encabezado_ing.num_recep}}</th>
-                              <!-- <th>{{ itemB.id_encabezado_ing.usuario.nombre}}{{ itemB.id_encabezado_ing.usuario.apellido}}</th> -->
-                              <!-- <th>{{ itemB.encabezado_ing.procedencia.nombre_procedencia}}</th> -->
-                              <th>{{ itemB.codigoA}}</th>
-                              <th>{{ itemB.descripcion}}</th>
-                              <td>
-                                <!-- <input class="btn-añadir" type="button"(click)="eliminarDetalle(itemB.id_detalle_ing)"> -->
-                                <!-- <input class="btn-añadir" type="image" src="../../assets/img/trash.png" width="0.5px" height="50px"  (click)="eliminarDetalle(itemB.id_detalle_ing)"> -->
-                                <svg  style="align-items: center;" class="botons"  type="button" (click)="eliminarDetalle(itemB.id_detalle_ing)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-
-                              </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+          <div class="form-registrar-procedencia">
+            <div class="table-wraper">
+              <table class="table">
+                <thead class="text-light" style="background-color:#272e56">
+                  <tr class="cabecera-tabla">
+                    <th class="th-lg"><a>Id</a></th>
+                    <th class="th-lg"><a>N° Recepcion</a></th>
+                    <th class="th-lg"><a>Activo</a></th>
+                    <th class="th-lg"><a>Nombre</a></th>
+                    <th class="th-lg"><a>..</a></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let itemB of detalleAct">
+                  <tr>
+                    <th>{{ itemB.id_detalle_ing}}</th>
+                    <th>{{ itemB.encabezado_ing.num_recep}}</th>
+                    <th>{{ itemB.codigoA}}</th>
+                    <th>{{ itemB.descripcion}}</th>
+                    <td>
+                      <svg style="align-items: center;" class="botons" type="button" (click)="eliminarDetalle(itemB.id_detalle_ing)"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+                        <path
+                          d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                      </svg>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
         </fieldset>
         <div><br><br><br></div>
-    <div class="btns-group">
-      <input class="btn btn-prev" type="button" value="atras"> 
-      <input class="btn " type="button" (click)="Finaliza()" value="Finalizar"> 
-      <!-- <a class="btn btn-prev">Atrás</a>
-      <a class="btn">Finalizar</a> -->
-    </div>
+        <div class="btns-group">
+          <input class="btn btn-prev" type="button" value="atras">
+          <input class="btn " type="button" (click)="Finaliza()" value="Finalizar">
+        </div>
       </fieldset>
-</form>
+    </form>
   </div>

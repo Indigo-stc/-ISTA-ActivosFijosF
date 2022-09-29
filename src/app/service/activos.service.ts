@@ -11,12 +11,17 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ActivosService {
-
   private API_SERVER_ACTIVO = "http://localhost:8080/api/activos"
   private API_SERVER_DETALLE = "http://localhost:8080/api/detalleIngresos/";
   private API_SERVER_HISTORIAL_ACTIVO = "http://localhost:8080/api/historialIngresosActivos/";
+  private API_SERVER_ENCABEZADO = "http://localhost:8080/api/encabezadoIngresos";
+
 
   constructor(private httpClient: HttpClient) { }
+
+  public conteoDeDatosDelDetalle(id_encabezado_ing: number): Observable<any> {
+    return this.httpClient.get(this.API_SERVER_DETALLE + "ConteoDeDetalles/" + id_encabezado_ing);
+  }
 
   // Traer datos de detalle a la table
   public buscarRecepcionAct(id_encabezado_ing: number): Observable<any> {
@@ -46,14 +51,9 @@ export class ActivosService {
   }
 
   //GuardarHIstorialDetalle
-  public saveDetalle(historialIngresosActivos: any): Observable<any> {
+  public saveHistorialActivos(historialIngresosActivos: any): Observable<any> {
     return this.httpClient.post(this.API_SERVER_HISTORIAL_ACTIVO + "guardarHistorialIngresosActivos", historialIngresosActivos);
   }
-
-  //GuardarHIstorialDetalle
-public saveHistorialActivos(historialIngresosActivos:any): Observable<any>{
-  return this.httpClient.post(this.API_SERVER_HISTORIAL_ACTIVO + "guardarHistorialIngresosActivos",historialIngresosActivos);
-}
 
   //GuardarActivo
 
@@ -85,18 +85,14 @@ public saveHistorialActivos(historialIngresosActivos:any): Observable<any>{
       httpOptions
     );
   }
-
-  //Other método implementado.
-  public saveHistorialActivo(): Observable<any> {
-    return this.httpClient.post(this.API_SERVER_HISTORIAL_ACTIVO + "guardarHistorialIngresosActivos", {
-    },
-      httpOptions
-    );
+  // Actualizar el estado del detalle
+  public updateDetalleEstadoDeIngreso(Detalle_ing: any): Observable<any> {
+    return this.httpClient.put(this.API_SERVER_DETALLE + "actualizarDetalle", Detalle_ing);
   }
 
-    // Actualizar el estado del detalle
-    public updateDetalleEstadoDeIngreso(Detalle_ing:any): Observable<any>{
-      return this.httpClient.put(this.API_SERVER_DETALLE + "actualizarDetalle",Detalle_ing);
-    }
+  // Actualizar el encabezado del de
+  public updateEncabezadoEstadoDeIngreso(encabezado_ing: any): Observable<any> {
+    return this.httpClient.put(this.API_SERVER_ENCABEZADO + "/actualizarEstadoRecepcion", encabezado_ing);
+  }
 
 }

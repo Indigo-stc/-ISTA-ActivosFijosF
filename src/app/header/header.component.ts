@@ -10,6 +10,9 @@ import { CreateAccountService } from '../service/createaccount.service';
 import { EventBusService } from '../shared/event-bus.service';
 import Swal from "sweetalert2"; 
 
+
+
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -34,6 +37,11 @@ export class HeaderComponent {
   rolSolicitante=false;
   rolConstatante=false;
   rolResponsable=false;
+
+  //Variables de captura de los nombres el user Log
+  nombres_usuario?: string;
+  apellidos_user?: string;
+  user_final:any;
 
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
@@ -64,6 +72,9 @@ export class HeaderComponent {
       this.rolResponsable = this.roles.includes('ROLE_RESPONSABLE');
       
       this.username = user.correo;
+      this.nombres_usuario= user.nombres;
+      this.apellidos_user= user.apellidos;
+      this.user_final= this.nombres_usuario.concat(' '+this.apellidos_user)
       this.id_persona= user.id;
       console.log('La obtencio del email del storage--> ' + user.correo)
     }

@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RecepcionActivoService {
+
+  // New version
+
   private API_SERVER= "http://localhost:8080/api/encabezadoIngresos";
 
   private API_SERVER_2= "http://localhost:8080/api/user";
@@ -41,6 +44,11 @@ export class RecepcionActivoService {
     return this.httpClient.delete(this.API_SERVER + "/eliminarEncabezadoIngresos/"+id);
   }
 
+   //Buscar por numero de recepcion
+   public buscarNumRecepcion(num_recep: String): Observable<any> {
+    return this.httpClient.get(this.API_SERVER_DETALLE + "/buscarNumRecep/" + num_recep);
+  }
+
 
   // Añadir activos a recepcion
 
@@ -58,7 +66,10 @@ export class RecepcionActivoService {
 
   // Metodo para traer activos del encabezado a la tabla
   public getDatosEncabezado (id_encabezado_ing: number): Observable<any>{
-    return this.httpClient.get(this.API_SERVER_DETALLE +  "/filtrarDetalleIngresos/" +  id_encabezado_ing);
+    return this.httpClient.get(this.API_SERVER_DETALLE +  "/buscarDetalleIngresosPorId/" +  id_encabezado_ing);
   }
+
+
+
 
 }

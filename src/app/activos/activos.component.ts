@@ -22,6 +22,10 @@ declare var $: any;
   styleUrls: ['./activos.component.css'],
 })
 export class ActivosComponent implements OnInit {
+
+
+
+
   recepcionForm!: FormGroup;
   BuscarRecepForm!: FormGroup;
   listarActivoForm!: FormGroup;
@@ -35,9 +39,8 @@ export class ActivosComponent implements OnInit {
   //para buscar por nume recep
   recep: any;
   num_recep: string = '';
-
   id_buscador: any;
-  //***********//
+  //*****//
   edificios: any;
   departamentos: any;
 
@@ -67,7 +70,6 @@ export class ActivosComponent implements OnInit {
   isLoggedIn = false;
   id_persona?: number; // valor del usuario que este log
   ngOnInit(): any {
-
     this.isLoggedIn = this.storageService.isLoggedIn();
 
     if (this.isLoggedIn) {
@@ -75,26 +77,6 @@ export class ActivosComponent implements OnInit {
       const user = this.storageService.getUser();
       this.id_persona = user.id;
     }
-
-    // alert('Cogigo que llega: -> '+this.id_persona)
-
-    this.activoCompletForm = this.reg.group({
-      // id_detalle_ing:[''],
-      id_activo: [''],
-      codigo_activo: [''],
-      nombre: [''],
-      serie: [''],
-      marca: [''],
-      modelo: [''],
-      imagen: [''],
-      descripcion: [''],
-      costo: [''],
-      estado_fisico: [''],
-      disponibilidad: ['true'],
-    });
-    this.recepcionForm = this.fb.group({
-      encabezado_ing: [' ', Validators.required],
-    });
 
     this.buscarRecep.getAllDetalle_ing().subscribe(
       (detalleRecep) => {
@@ -113,33 +95,13 @@ export class ActivosComponent implements OnInit {
       (error) => console.log(error)
     );
 
-    // LLenar Departamentos
-    this.departamentoservice.getAllDepartamentos().subscribe(
-      (departamentos) => {
-        this.departamentos = departamentos;
-      },
-      (error) => console.log(error)
-    );
 
-    /////////////////////////////////////////
-    // this.activoServe.getAllEncabezado().subscribe(
-    //   (detalleAct) => {
-    //     this.detalleAct = detalleAct;
-    //     console.log(detalleAct);
-    //   },
-    //   (error) => console.log(error)
-    // );
-    /////llevar a tabla
-    // this.activo = new Activo();
-    // this.id = this.activateRoute.snapshot.params['id'];
-    // this.activoServe.getByidActivo(this.id).subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.activo = data;
-    //   },
-    //   (error) => console.log(error)
-    // );
   }
+
+
+
+  // NEW VERSION
+
 
   onSubmit() {
     this.activoServe.traerDatos(this.id, this.activo).subscribe(
@@ -155,19 +117,6 @@ export class ActivosComponent implements OnInit {
     this.route.navigate(['Gestion_activos', id]);
   }
 
-  ////////////////////
-  BuscarRecepcionDet(id_encabezado_ing: number) {
-    this.buscarRecep.buscarRecepcionAct(id_encabezado_ing).subscribe(
-      (resp) => {
-        if (resp === true) {
-          this.detalleRecep.pop(id_encabezado_ing);
-          this.detalleRecep.push(resp);
-        }
-      },
-      (error) => console.error(error)
-    );
-  }
-
   // Cargar Departamentes Anidado
   onSelect(event: any) {
     let id_edificio = event.target.value;
@@ -176,7 +125,6 @@ export class ActivosComponent implements OnInit {
       (resp) => {
         console.log(resp)
         this.departamentos = resp;
-        // alert('Valor resultado'+this.departamentos)
       },
       (error) => console.error(error)
     );
@@ -199,25 +147,22 @@ export class ActivosComponent implements OnInit {
 
 
   salida: string = "";
-
   id_detalle: number;
-
-  pasarCodigoActivo(cod_pro, id_detallea) {
+  //cap_id_encabezado: number;
+  pasarCodigoActivo(cod_pro, id_detallea, id_encabezadoa_ing) {
     this.salida = cod_pro;
     // alert(id_detallea)
     this.value = (document.getElementById("CodigoActivo") as HTMLInputElement).value;
     this.value = this.salida;
-
     this.id_detalle = id_detallea;
+    this.cap_id_encabezado = id_encabezadoa_ing;
     console.log(this.id_detalle)
-
+    console.log("este es el id del enca=> " + this.cap_id_encabezado)
   }
 
   @Input()
   value: string = "";
-
   estadoA: string = '';
-
   dispocicionAc: boolean;
 
 
@@ -266,7 +211,6 @@ export class ActivosComponent implements OnInit {
         console.log('Correcto el ingreso del activo')
         this.guardarHistorialActivo();
         this.actualizarDetalleEstado();
-       
       },
       error: err => {
         console.log('Error no se pudo guardar el activo')
@@ -283,13 +227,12 @@ export class ActivosComponent implements OnInit {
 
   guardarHistorialActivo(): void {
 
-    let historial_ing = { 
-      "estado_fisico":this.estadoA,
-      "fecha_ingreso": null,
-      "id_activo":{
-        "id_activo":this.id_activo1
+    let historial_ing = {
+      "estado_fisico": this.estadoA,
+      "id_activo": {
+        "id_activo": this.id_activo1
       },
-      "id_departamento":{
+      "id_departamento": {
         "id_departamento": this.id_departamento
       },
       "id_detalle_ing": {
@@ -300,7 +243,7 @@ export class ActivosComponent implements OnInit {
       }
 
     };
-    
+
     this.activoServe.saveHistorialActivos(historial_ing).subscribe({
       next: data => {
         console.log(data);
@@ -314,18 +257,64 @@ export class ActivosComponent implements OnInit {
 
   actualizarDetalleEstado(): void {
 
-    let detalle_ing = { 
-      "id_detalle_ing":this.id_detalle,
+    let detalle_ing = {
+      "id_detalle_ing": this.id_detalle,
       "estado_detalle": true,
+      "encabezado_ing": {
+        "id_encabezado_ing": 0
+      }
     };
-    
+
     this.activoServe.updateDetalleEstadoDeIngreso(detalle_ing).subscribe({
       next: data => {
         console.log(data);
         console.log('Se actualizo el detalle')
+        this.verificarElConteoDeDatos();
       },
       error: err => {
         console.log('Error al actualizar el detalle')
+        this.verificarElConteoDeDatos();
+      }
+    });
+  }
+
+  cap_id_encabezado: number;
+  conteo: number;
+  verificarElConteoDeDatos(): void {
+    this.activoServe.conteoDeDatosDelDetalle(this.cap_id_encabezado).subscribe({
+      next: data => {
+        console.log('Este es el id del enca a enviar' + this.cap_id_encabezado)
+        console.log(data);
+        this.conteo = data;
+        console.log('Este es los ingresados ' + this.conteo)
+        console.log('Esto se va a comparar ' + this.conteo)
+        if (this.conteo == 0) {
+          this.actualizarEncabezadoEstado();
+        } else {
+          console.log('Falta de ingresar ' + this.conteo)
+        }
+      },
+      error: err => {
+        console.log('Error al acapturar el conteo')
+      }
+    });
+  }
+
+
+  actualizarEncabezadoEstado(): void {
+
+    let detalle_ing = {
+      "id_encabezado_ing": this.cap_id_encabezado,
+      "estado": true,
+    };
+
+    this.activoServe.updateEncabezadoEstadoDeIngreso(detalle_ing).subscribe({
+      next: data => {
+        console.log(data);
+        console.log('Se actualizo el encabezado')
+      },
+      error: err => {
+        console.log('Error al actualizar el encabezado')
       }
     });
   }

@@ -17,54 +17,65 @@ import { Procedencia } from '../models/procedencia';
 
 //Import del storage
 import { StorageService } from '../service/storage.service';
-import { concat } from 'rxjs';
+
+//Import de DATE
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-recepcion-activo',
   templateUrl: './recepcion-activo.component.html',
-  styleUrls: ['./recepcion-activo.component.css']
+  styleUrls: ['./recepcion-activo.component.css'],
+  providers: [DatePipe]
 })
 export class RecepcionActivoComponent implements OnInit {
 
-
-  recepcionForm!: FormGroup;
+  form?: FormGroup;
   recepcionFormDetalle!: FormGroup;
-
   recepcion: Encabezado_ing = new Encabezado_ing();
   recepciones: any;
-
   edificios: Edificio[] = [];
-  departamentos: any //esto esetaba como array
-  procedencia: Procedencia[] = [];
+  departamentos: any;
+  procedencias: Procedencia[] = [];
+  activo: Activo[] = [];
+  username: any;
 
+  recepcionForm!: FormGroup;
+
+  procedencia: Procedencia[] = [];
   usuario: any;
   detalle: any;
   encabezado: any;
   detalleEnc: any;
-
-  activo:Activo[]=[];
 
   //Variables de los datos del login.
   isLoggedIn = false;
   id_persona?: number;
   nombres_usuario?: string;
   apellidos_user?: string;
-  user_final:any;
+  user_final: any;
+
+  //Date Variables
+  date: Date;
+  dateSet: string;
 
   constructor(
     private storageService: StorageService,
 
-    public fb: FormBuilder,
+    public fomrmularioInicial: FormBuilder,
     public regedificioservice: RegEdificioService,
     public procedenciaservice: ProcedenciaService,
     public departamentoservice: DepartamentosService,
     public recepcionservice: RecepcionActivoService,
-    private activoTabla:ActivosService,
-    private router:Router,
-    private _CargaScripts: CargarScriptsService) {
+    private miDatePipe: DatePipe,
+    private _CargaScripts: CargarScriptsService
+  ) {
     _CargaScripts.Carga(["js-constatacion-activos/activos"]);
-  
+
   }
+
   ngOnInit(): any {
+    //Formato a fechas actuales.. SET
+    this.date = new Date();
+    this.dateSet = this.miDatePipe.transform(this.date, 'yyyy-MM-dd');
 
     //Carga de los nombres del usuario..
     this.isLoggedIn = this.storageService.isLoggedIn();
@@ -73,16 +84,16 @@ export class RecepcionActivoComponent implements OnInit {
       console.log('Estamos logiados satisfacririamente')
       const user = this.storageService.getUser();
       this.id_persona = user.id;
-      this.nombres_usuario= user.nombres;
-      this.apellidos_user= user.apellidos;
-      this.user_final= this.nombres_usuario.concat(' '+this.apellidos_user)
-    
+      this.nombres_usuario = user.nombres;
+      this.apellidos_user = user.apellidos;
+      this.user_final = this.nombres_usuario.concat(' ' + this.apellidos_user)
+
 
       // alert('Estos son los datos que tenemos'+ this.id_persona +' '+this.nombres_usuario+ ' ' +this.apellidos_user)
     }
+    this.findUserByNumRecep();
 
-    this.recepcionForm = this.fb.group({
-      id_encabezado_ing: [''],
+    this.form = this.fomrmularioInicial.group({
       num_recep: ['', Validators.required],
       fecha_ingreso: ['', Validators.required],
       Documento: ['vacio', Validators.required],
@@ -93,15 +104,14 @@ export class RecepcionActivoComponent implements OnInit {
     });
 
 
-
-    // SEGUDO DETALLE
-    this.recepcionFormDetalle = this.fb.group({
-      id_detalle_ing: [' '],
-      codigoA: [' ', Validators.required],
-      descripcion: [' ', Validators.required],
-      encabezado_ing: [' ', Validators.required],
-      estado_detalle: ['false', Validators.required],
-    });
+    // // SEGUDO DETALLE
+    // this.recepcionFormDetalle = this.fb.group({
+    //   id_detalle_ing: [' '],
+    //   codigoA: [' ', Validators.required],
+    //   descripcion: [' ', Validators.required],
+    //   encabezado_ing: [' ', Validators.required],
+    //   estado_detalle: ['false', Validators.required],
+    // });
 
     // LLenar Edificios
     this.regedificioservice.getAllEdificios().subscribe(
@@ -111,145 +121,176 @@ export class RecepcionActivoComponent implements OnInit {
       error => (console.log(error))
     )
 
-
-    // LLenar Encabezados
-    this.recepcionservice.getAllEncabezado_ing().subscribe(
-      encabezado => {
-        this.encabezado = encabezado
-      },
-      error => (console.log(error))
-    )
-
-    // Usuario Temporal
-    this.recepcionservice.getAllUsuarios().subscribe(
-      usuarios => {
-        this.usuario = usuarios
-      },
-      error => (console.log(error))
-    )
-
-
     // LLenar Procedencia
     this.procedenciaservice.getAllProcedencia().subscribe(
-      procedencia => {
-        this.procedencia = procedencia
-      },
-      error => (console.log(error))
-    )
-
-    this.recepcionservice.getAllDetalle_ing().subscribe(
-      detalle => {
-        this.detalle = detalle
+      procedencias => {
+        this.procedencias = procedencias
       },
       error => (console.log(error))
     )
 
   }
 
-  // Obtenner el Dato del input ***********************************************************************************
 
-  escribirInput(event: any) {
-    let cedulaCap = event.target.value;
-    this.recepcionservice.getDatosUsuario(cedulaCap).subscribe(resp => {
-      console.log(resp)
-      this.recepcion.usuario = resp.nombre + ' hola';
-    },
-      error => (console.error(error))
-    )
+  // new version
+
+  num_recep: string;
+  nums_recep(e) {
+    this.num_recep = e.target.value;
+    console.log('nombre recpcion-> ' + this.num_recep)
   }
 
-  //  ***************************************************************************************************************
+  // fecha_ingreso: Date;
+  // fechas_ingrso(e) {
+  //   this.fecha_ingreso = e.target.value;
+  //   console.log('fecha de ingreso: -> ' + this.fecha_ingreso)
+  // }
+
+  id_departamento: number;
+  ids_Departamento(e) {
+    this.id_departamento = e.target.value;
+    console.log('Id del departameno-> ' + this.id_departamento)
+  }
+
+  id_procedencia: number;
+  ids_procedencia(e) {
+    this.id_procedencia = e.target.value;
+    console.log('Id del procedncia-> ' + this.id_procedencia)
+  }
+
+  // ID del encabezado
+  cap_id_encabezado_ing: number;
+
+  guardarEncabezadoRecepcion(): void {
+
+    let encabezados_ing = {
+      "num_recep": this.num_recep,
+      "documento": "N/A",
+      "estado_detalle": false,
+      "procedencia": {
+        "id_procedencia": this.id_procedencia,
+      },
+      "departamento": {
+        "id_departamento": this.id_departamento,
+      },
+      "usuario": {
+        "id_usuario": this.id_persona,
+      }
+
+    };
+
+    this.recepcionservice.saveEncabezado_ing(encabezados_ing).subscribe({
+      next: data => {
+        this.cap_id_encabezado_ing = data.id_encabezado_ing;
+        console.log('Codigo de encabezado-> ' + this.cap_id_encabezado_ing);
+        this.form.reset();
+        console.log(data);
+        console.log('Correcto el guardador del detalle')
+      },
+      error: err => {
+        console.log('Error no se pudo guardar del encabezado')
+      }
+    });
+  }
+
+  limpiar(): void {
+    console.log("limpiar")
+    this.form.reset();
+  }
+
+  // Guardar el Detalle del Encabezado
+
+  codigo_activo: string;
+  codigos_activo(e) {
+    this.codigo_activo = e.target.value;
+    console.log('nombre recpcion-> ' + this.codigo_activo)
+  }
+
+  nombre_activo: string;
+  nombres_activo(e) {
+    this.nombre_activo = e.target.value;
+    console.log('nombre recpcion-> ' + this.nombre_activo)
+  }
+
+  // ID del encabezado
+  cap_id_detalle: number;
 
   guardarDetalle_ing(): void {
-    this.recepcionservice.saveDetalle(this.recepcionFormDetalle.value).subscribe(resp => {
-      this.recepcionFormDetalle.reset();
-      this.detalle.push(resp);
-    },
-      error => (console.error(error))
-    )
-  }
 
-  guardarEncabezado_ing(): void {
-    this.recepcionservice.saveEncabezado_ing(this.recepcionForm.value).subscribe(resp => {
-      this.recepcionForm.reset();
-      // Obtener los Encabezados
-      this.recepcionservice.getAllEncabezado_ing().subscribe(
-        encabezado => {
-          this.encabezado = encabezado
-        },
-        error => (console.log(error))
-      )
-    },
+    let detalle_encabezado = {
+      "codigoA": this.codigo_activo,
+      "descripcion": this.nombre_activo,
+      "estado_detalle": false,
+      "encabezado_ing": {
+        "id_encabezado_ing": this.cap_id_encabezado_ing,
+      }
 
-      error => (console.error(error))
+    };
+
+    this.recepcionservice.saveDetalle(detalle_encabezado).subscribe(
+      data => {
+        this.cap_id_detalle = data.id_detalle_ing;
+        console.log('Codigo de detalle-> ' + this.cap_id_detalle);
+        console.log(data);
+        console.log('Correcto el guardador detalle del encaebado')
+        console.log('uno' + this.cap_id_encabezado_ing)
+        this.findUserByNumRecep();
+      },
+      error => {
+        console.log('Erro el guardador detalle del encaebado')
+      }
     )
   }
 
 
   Finaliza(): void {
     this.recepcionFormDetalle.reset();
-    this.recepcionForm.reset();
+    this.form.reset();
 
-    // Cargar tabla vacia
-    let id_encabezado_ing_vacia = 0;
-    this.recepcionservice.getDatosEncabezado(id_encabezado_ing_vacia).subscribe(
-      resp => {
-        this.detalleEnc = resp;
-      },
-      error => (console.error(error))
-    )
+    // // Cargar tabla vacia
+    // let id_encabezado_ing_vacia = 0;
+    // this.recepcionservice.getDatosEncabezado(id_encabezado_ing_vacia).subscribe(
+    //   resp => {
+    //     this.detalleEnc = resp;
+    //   },
+    //   error => (console.error(error))
+    // )
     Swal.fire('Recepcion Registrada Correctamente', 'Continue', 'success')
-  }
-
-  // Cargar Departamentes Anidado
-  onSelect(event: any) {
-    let id_edificio = event.target.value;
-    this.departamentoservice.getByidDepartamentos(id_edificio).subscribe(
-      resp => {
-        this.departamentos = this.departamentos;
-      },
-      error => (console.error(error))
-    )
   }
 
 
   // Eliminar
-  eliminarDetalle(id_detalle_ing: number) {
-    this.recepcionservice.eliminarDetalle_ing(id_detalle_ing).subscribe(resp => {
-      if (resp === true) {
-        this.procedencia.pop()
-        this.procedencia.push(resp);
-      }
-
+  eliminarDetalle(id:number) {
+    this.recepcionservice.eliminarDetalle_ing(id).subscribe(resp => {
+      console.log("Detalle eliminado")
+      this.findUserByNumRecep();
     },
       error => (console.error(error))
     )
   }
 
   // Cargar tabla
-  onSelectDetalle(event: any) {
-    let id_encabezado_ing = event.target.value;
-    this.recepcionservice.getDatosEncabezado(id_encabezado_ing).subscribe(
-      resp => {
-        this.detalleEnc = resp;
-      },
-      error => (console.error(error))
-    )
+  public detalleAct: any;
+  public findUserByNumRecep() {
+    let resp = this.recepcionservice.buscarNumRecepcion(this.num_recep);
+    resp.subscribe((data) => (this.detalleAct = data));
   }
 
-  //*************//
-   // Cargar Departamentes Anidado
-   cargarDepartamentosSegunEdificio(event) {
+  //*****//
+  // Cargar Departamentes Anidado
+  cargarDepartamentosSegunEdificio(event) {
     let id_edificio = event.target.value;
-    alert("Id edificio " + id_edificio)
     this.departamentoservice.getByidDepartamentos(id_edificio).subscribe(
-      resp  => {
+      resp => {
         console.log(resp)
         this.departamentos = resp;
       },
       error => (console.error(error))
     )
   }
+
+  // fin
+
 
 
 }
