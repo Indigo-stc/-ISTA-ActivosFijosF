@@ -82,7 +82,7 @@
           <input [(ngModel)]="form.modelo" type="text" class="inputbox" name="Modleo" placeholder="Modelo:"
             required />
           <input [(ngModel)]="form.serie" type="text" class="inputbox" name="Serie" placeholder="Serie:" required />
-          <input [(ngModel)]="form.costo" type="text" class="inputbox" name="Coste" placeholder="Coste:" required />
+          <input onkeypress="return event.charCode>=48 && event.charCode<=57" [(ngModel)]="form.costo" type="text" class="inputbox" name="Coste" placeholder="Coste:" required />
           <p class="estado">
             Estado:
             <select [(ngModel)]="form.estado_Fisico" class="combobox" required (change)="estadoActivo($event)">
@@ -157,8 +157,10 @@
     </form>
   </div>
 
-<!-- </form> -->
-<!-- formulario  de Recepciones-->
+
+
+
+<!-- ///////////////////////////////////Inicio de formulario de detalle de recepciones ///////////////////////////// -->
 <input type="checkbox" id="ham-menu" [routerLink]="['/Gestion_activos']">
 <label for="ham-menu">
   <div class="hide-des">
@@ -166,6 +168,7 @@
       height="50px">
   </div>
 </label>
+<!-- ///////////////////////////////////Buscar Recepcion///////////////////////////// -->
 <div class="ham-menu">
   <form action="" id="msform">
     <fieldset>
@@ -174,36 +177,45 @@
         <div class="searchBox">
           <input type="text" class="input-search" name="num_recep" id="num_recep"
             placeholder="Ingrese el N° de Recepcion" [(ngModel)]="num_recep">
-          <button type="button" class="searchButton" (click)="findUserByNumRecep()">
+          <button type="button" class="searchButton"  (click)="findUserByNumRecep()">
             <i class="material-icons"> search</i>
           </button>
         </div>
       </form>
-      <!-- ///para subir el acta -->
-      <form action="" class="msform2">
-        <fieldset>
+<!-- ///////////////////////////////////Subir Acta///////////////////////////// -->
+      <form action="" class="">
+        <div class="field2">
           <h2 class="fs-title">Subir Acta de la Recepcion</h2>
-          <!-- <div class="container-input"> -->
-          <input type="file" name="file-8" id="file-8" class="inputfile inputfile-7"
-            data-multiple-caption="{count} archivos seleccionados" multiple placeholder="Ingrese el acta" />
-          <label for="file-8">
-            <span class="iborrainputfile2"></span>
-            <strong>
-              <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17"
-                viewBox="0 0 20 17">
-                <path
-                  d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
-                </path>
-              </svg>
-              Seleccionar archivo
-            </strong>
-          </label>
-          <!-- </div> -->
-          <button class="btnActa">Subir Acta</button>
-        </fieldset>
-
+          <div class="container-input">
+            <input type="file" name="file-8" id="file-8" class="inputfile inputfile-7" placeholder="Ingrese el acta"
+              (change)="selectFile($event)" (input)="caps_nombre_documento($event)"/>
+            <label for="file-8">
+              <span class="iborrainputfile2"></span>
+              <strong>
+                <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17"
+                  viewBox="0 0 20 17">
+                  <path
+                    d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z">
+                  </path>
+                </svg>
+                Seleccionar el acta
+              </strong>
+            </label>
+          </div>
+          <button class="btnActa" [disabled]="!selectedFiles" (click)="upload()">Subir Acta</button>
+          <button class="btnActa" (click)="buscarElNameDoc()">Subir Acta</button>
+          <button class="btnActa" (click)="actualizarEncabezadoEstado()">act</button>
+        </div>
+        <div *ngIf="currentFile" class="progress my-3">
+          <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+            attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"
+            [ngStyle]="{ width: progress + '%' }">
+            {{ progress }}%
+          </div>
+        </div>
+        <div *ngIf="message" class="inputbox" role="alert">{{ message }}</div>
       </form>
-
+<!-- ////////////////////////Tabla de activos en recepcion///////////////////////////// -->
       <div class="table-wraper">
         <table class="table">
           <thead class="text-light" style="background-color:#272e56">
@@ -225,7 +237,9 @@
               <th>{{ itemB.codigoA}}</th>
               <th>{{ itemB.descripcion}}</th>
               <th>{{ itemB.encabezado_ing.procedencia.nombre_procedencia}}</th>
-              <td><button class="btnM" (click)="pasarCodigoActivo(itemB.codigoA, itemB.id_detalle_ing, itemB.encabezado_ing.id_encabezado_ing)" [routerLink]="['/Gestion_activos']">Registrar</button></td>
+              <td><button class="btnM"
+                  (click)="pasarCodigoActivo(itemB.codigoA, itemB.id_detalle_ing, itemB.encabezado_ing.id_encabezado_ing)"
+                  [routerLink]="['/Gestion_activos']">Registrar</button></td>
             </tr>
           </tbody>
         </table>

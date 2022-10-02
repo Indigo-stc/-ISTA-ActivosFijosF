@@ -1,4 +1,4 @@
-
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
 body {
     height: 10vh;
     margin: 0;
@@ -24,7 +24,7 @@ body {
     height: 35px;
     padding: 1px 20px;
     border: 2px solid #ced4da;
-    font-family: "Lato", sans-serif;
+    font-family: montserrat, arial, verdana;
     font-weight: 100;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -39,7 +39,7 @@ body {
     height: 35px;
     padding: 1px 20px;
     border: 2px solid #ced4da;
-    font-family: "Lato", sans-serif;
+    font-family: montserrat, arial, verdana;
     font-weight: 100;
     font-weight: bold;
     cursor: pointer;
@@ -50,4 +50,18 @@ body {
     background-color:#dcdcdc;
     color:#272e56;
   }
+  .fs-title {
+    font-size: 22px;
+    text-transform: uppercase;
+    color: #2c3e50;
+    margin-bottom: 10px;
+   margin-left: 390px;
+   font-family: montserrat, arial, verdana;
+
+  }
   
+  .table-wraper{
+    font-size: 12px;
+      height: 300px;
+      overflow-y: scroll ;
+  }
