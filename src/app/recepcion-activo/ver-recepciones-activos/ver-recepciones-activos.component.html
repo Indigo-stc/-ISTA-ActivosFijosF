@@ -33,7 +33,11 @@
                                 <td>{{ itemA.procedencia.nombre_procedencia}}</td>
                                 <td>{{ itemA.usuario.nombres}} {{ itemA.usuario.apellidos}}</td>
                                 <td>{{ itemA.fecha_ingreso  | date: 'dd-MM-yyyy' }}</td>
-                                <td>{{ itemA.estado }}</td>
+                                <!-- <td>{{ itemA.estado}}</td> -->
+                                <td style="color: green;" *ngIf="itemA.estado == true; else elseStatement">Registrado</td>
+                                <ng-template #elseStatement>
+                                    <td style="color: red;">Pendiente</td>
+                                </ng-template>
                             </tr>
                         </tbody>
                     </table>

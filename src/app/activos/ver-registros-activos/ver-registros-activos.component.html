@@ -36,19 +36,23 @@
                           </tr>
                       </thead>
                       <tbody *ngFor="let itemX of listarActivos ">
-                          <tr>
-                            <th> {{itemX.id_activo}}</th>
-                              <th>{{ itemX.codigo_activo}}</th>
-                              <th>{{ itemX.nombre}}</th>
-                              <th>{{ itemX.marca}}</th>
-                              <th>{{ itemX.modelo}}</th>
-                              <th>{{ itemX.costo}}</th>
-                              <th>{{ itemX.estado_fisico}}</th>
-                              <th>{{ itemX.disponibilidad}}</th>
-                            <th>{{ itemX.descripcion}}</th>
-                          </tr>
+                        <tr>
+                          <th> {{itemX.id_activo}}</th>
+                            <td>{{ itemX.codigo_activo}}</td>
+                            <td>{{ itemX.nombre}}</td>
+                            <td>{{ itemX.marca}}</td>
+                            <td>{{ itemX.modelo}}</td>
+                            <td>{{ itemX.costo}}</td>
+                            <td>{{ itemX.estado_fisico}}</td>
+                            <!-- <th>{{ itemX.disponibilidad}}</th> -->
+                            <td style="color: green;" *ngIf="itemX.disponibilidad == true; else elseStatement" >Disponible</td>
+                            <ng-template #elseStatement>
+                              <td style="color: red;">Ocupado</td>
+                            </ng-template>
+                          <td>{{ itemX.descripcion}}</td>
+                        </tr>
 
-                      </tbody>
+                    </tbody>
                   </table>
               </div>
           </div>

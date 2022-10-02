@@ -215,6 +215,8 @@ export class RecepcionActivoComponent implements OnInit {
   // ID del encabezado
   cap_id_detalle: number;
 
+  cap_codigos_activos: string;
+
   guardarDetalle_ing(): void {
 
     let detalle_encabezado = {
@@ -227,20 +229,38 @@ export class RecepcionActivoComponent implements OnInit {
 
     };
 
-    this.recepcionservice.saveDetalle(detalle_encabezado).subscribe(
-      data => {
-        this.cap_id_detalle = data.id_detalle_ing;
-        console.log('Codigo de detalle-> ' + this.cap_id_detalle);
-        console.log(data);
-        console.log('Correcto el guardador detalle del encaebado')
-        console.log('uno' + this.cap_id_encabezado_ing)
-        this.findUserByNumRecep();
+    this.recepcionservice.validarCodigoActivo(this.codigo_activo).subscribe( 
+      resp => {
+        console.log(resp)
+        this.cap_codigos_activos = resp;
+        if (this.codigo_activo == this.cap_codigos_activos) {
+          console.log('CODIGO REPETIDO')
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Codigo de Activo Existente!',
+          })
+        } else {
+          console.log('CODIGO NO REPETIDO')
+          this.recepcionservice.saveDetalle(detalle_encabezado).subscribe(
+            data => {
+              this.cap_id_detalle = data.id_detalle_ing;
+              console.log('Codigo de detalle-> ' + this.cap_id_detalle);
+              console.log(data);
+              console.log('Correcto el guardador detalle del encaebado')
+              console.log('uno' + this.cap_id_encabezado_ing)
+              this.findUserByNumRecep();
+            },
+            error => {
+              console.log('Erro el guardador detalle del encaebado')
+            }
+          )
+        }
       },
-      error => {
-        console.log('Erro el guardador detalle del encaebado')
-      }
+      error => (console.error(error))
     )
   }
+
 
 
   Finaliza(): void {
@@ -260,7 +280,7 @@ export class RecepcionActivoComponent implements OnInit {
 
 
   // Eliminar
-  eliminarDetalle(id:number) {
+  eliminarDetalle(id: number) {
     this.recepcionservice.eliminarDetalle_ing(id).subscribe(resp => {
       console.log("Detalle eliminado")
       this.findUserByNumRecep();

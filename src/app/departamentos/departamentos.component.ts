@@ -61,7 +61,7 @@ export class DepartamentosComponent implements OnInit {
   }
 
   cargarDatosEdit() {
-    this.departamentoservice.getByidDepartamentos(this.id_departamentoD).subscribe((data: any)=> {
+    this.departamentoservice.getByidDepartamento(this.id_departamentoD).subscribe((data: any)=> {
       this.departamentoForm.setValue(data);
       console.log(data);
     });

@@ -26,7 +26,26 @@ export class DepartamentosService {
     return this.httpClient.put(this.API_SERVER + "/actualizarDepartamento/", departamentos, {responseType: "text" })
   }
 
+  public getByidDepartamento(id: number):Observable<Departamento>{
+    return this.httpClient.get<Departamento>(this.API_SERVER + "/buscarDepartamento/"+id);
+  }
+
   public getByidDepartamentos(id: number):Observable<Departamento>{
     return this.httpClient.get<Departamento>(this.API_SERVER + "/buscarDepartamentoPorEdifcio/"+id);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -226,11 +226,11 @@ export class ActivosService {
   }
 
   // Actualizar el encabezado del de
-  public updateEncabezadoEstadoDeIngreso(encabezado_ing: any): Observable<any> {
+  public updateEncabezadoEstado(encabezado_ing: any): Observable<any> {
     return this.httpClient.put(this.API_SERVER_ENCABEZADO + "/actualizarEstadoRecepcion", encabezado_ing);
   }
-  public updateEncabezadoDocumento(encabezado_ing: any): Observable<any> {
-    return this.httpClient.put(this.API_SERVER_ENCABEZADO + "/actualizarEstadoRecepcion", encabezado_ing);
+  public updateEncabezadoEstadoDocumento(encabezado_ing: any): Observable<any> {
+    return this.httpClient.put(this.API_SERVER_ENCABEZADO + "/actualizarDocumentoRecepcion/", encabezado_ing);
   }
 
   // nuevos servicios
