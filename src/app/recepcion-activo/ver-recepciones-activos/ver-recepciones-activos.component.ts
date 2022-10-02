@@ -19,6 +19,8 @@ export class VerRecepcionesActivosComponent implements OnInit {
     // Obtener los Encabezados o Recepciones
   this.recepcionservice.getAllEncabezado_ing().subscribe(
     encabezado => {
+
+
       this.encabezado = encabezado
       console.log(encabezado);
     },

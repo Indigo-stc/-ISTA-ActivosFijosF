@@ -149,7 +149,6 @@
           <div id="contenedorQR" class="contenedorQR"></div>
         </div>
         <div class="btns-group">
-          <a class="btn" [routerLink]="['/Gestion_activos']">Cancelar</a>
           <a class="btn" type="submit" [routerLink]="['/Gestion_activos']" (click)="registroAc()">Guardar</a>
           <a class="btn" type="button" [routerLink]="['/Gestion_activos']" (click)="Finaliza()">Finalizar</a>
         </div>
@@ -202,9 +201,12 @@
               </strong>
             </label>
           </div>
-          <button class="btnActa" [disabled]="!selectedFiles" (click)="upload()">Subir Acta</button>
-          <button class="btnActa" (click)="buscarElNameDoc()">Subir Acta</button>
-          <button class="btnActa" (click)="actualizarEncabezadoEstado()">act</button>
+      
+            <button class="btnActa" [disabled]="!selectedFiles" (click)="upload()">Subir Acta</button>
+          <!-- <button class="btnActa" (click)="buscarElNameDoc()">Actualizar Documento</button> -->
+      
+          
+          <!--<button class="btnActa" (click)="actualizarEncabezadoEstado2()">act</button> -->
         </div>
         <div *ngIf="currentFile" class="progress my-3">
           <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"

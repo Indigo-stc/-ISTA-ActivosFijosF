@@ -14,6 +14,8 @@ export class RecepcionActivoService {
   private API_SERVER_2= "http://localhost:8080/api/user";
 
   private API_SERVER_DETALLE= "http://localhost:8080/api/detalleIngresos";
+
+  private API_SERVER_ACTIVO = "http://localhost:8080/api/activos/"
   
   private httpHeaders = new HttpHeaders({'Content-Type':'application/json'})
 
@@ -69,6 +71,13 @@ export class RecepcionActivoService {
     return this.httpClient.get(this.API_SERVER_DETALLE +  "/buscarDetalleIngresosPorId/" +  id_encabezado_ing);
   }
 
+
+  
+
+
+  public validarCodigoActivo(codigo_activo: string): Observable<any> {
+    return this.httpClient.get(this.API_SERVER_ACTIVO + "validarExistenciaDeCodigoActivo/" + codigo_activo);
+  }
 
 
 

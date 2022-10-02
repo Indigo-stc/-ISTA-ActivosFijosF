@@ -1,4 +1,4 @@
-/************************ diseño para botones de navegacion ***********************/
+/******** diseño para botones de navegacion *********/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 .bodyq {
   min-height: 10vh;
@@ -111,7 +111,7 @@
 }
 
 
-/************************ diseño para  Botones del form ***********************/
+/******** diseño para  Botones del form *********/
 .btns-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -134,7 +134,7 @@
     box-shadow: 0 0 0 2px #fff, 0 0 0 3px #272e56;
   }
   
-  /************************ diseño para  inputs del form ***********************/
+  /******** diseño para  inputs del form *********/
   
   p {
     display: block;
@@ -184,7 +184,7 @@
     float: right;
   }
  
-  /************************ diseño para los forms and fieldshet ***********************/
+  /******** diseño para los forms and fieldshet *********/
  
  .form {
     /* width: clamp(320px, 100%, 55%); */
@@ -224,7 +224,7 @@
     text-align: center;
     position: relative;
   }
-  /************************************ color de fondo de los forms **************************************/
+  /************ color de fondo de los forms **************/
   #msform fieldset {
     background: white;
     border: 0 none;
