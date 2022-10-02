@@ -62,8 +62,7 @@
         <input type="date" class="inputbox" name="fecha_ingreso" [(ngModel)]="dateSet" formControlName="fecha_ingreso" placeholder="Ingrese la fecha - yyyy/mm/dd:" required />
          <div class="btns-group1">
           <input class="btn" type="button" (click)="limpiar()" value="Cancelar">
-          <input class="btn" type="button" (click)="guardarEncabezadoRecepcion()" value="Registrar">
-          <input class="btn btn-next" type="button" value="Siguiente">
+          <input class="btn btn-next"  type="button" (click)="guardarEncabezadoRecepcion()" value="Registrar">
         </div>
       </fieldset>
     </form>
@@ -119,7 +118,6 @@
         </fieldset>
         <div><br><br><br></div>
         <div class="btns-group">
-          <input class="btn btn-prev" type="button" value="atras">
           <input class="btn " type="button" (click)="Finaliza()" value="Finalizar">
         </div>
       </fieldset>

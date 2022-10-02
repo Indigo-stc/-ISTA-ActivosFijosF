@@ -38,4 +38,9 @@ export class ProcedenciaService {
     return this.httpClient.get(this.url_ponit + "/buscarProcedenciaPorId/"+id)
   }
 
+
+  public getByNombreProcedencia(nombre_procedencia: string):Observable<any>{
+    return this.httpClient.get(this.url_ponit + "/validarExistenciaNombreProcedencia/" + nombre_procedencia)
+  }
+
 }

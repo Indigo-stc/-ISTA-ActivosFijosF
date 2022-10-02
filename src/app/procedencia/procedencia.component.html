@@ -1,4 +1,4 @@
-<body class="bodyq">
+<!-- <body class="bodyq">
   <div class="multi-button">
     <button class="btn1">Registros</button>
     <button class="btn2" [routerLink]="['/procedencia/VerTodos']">Ver todos</button>
@@ -19,6 +19,35 @@
         <input class="btn" type="button" value="Actualizar" [disabled]="procedenciaForm.invalid" (click)="actualizarProcedencia()">
       </div>
       
+    </fieldset>
+
+  </form>
+</div> -->
+
+
+
+<body class="bodyq">
+  <div class="multi-button">
+    <button class="btn1">Registros</button>
+    <button class="btn2" [routerLink]="['/procedencia/VerTodos']">Ver todos</button>
+  </div>
+</body>
+<div class="step-forms step-forms-procedencia">
+  <form action="" id="msform" [formGroup]="procedenciaForm" (ngSubmit)="guardarProcedencia()">
+    <fieldset>
+      <h2 class="fs-title">Registro de Procedencia</h2>
+      <h3 class="fs-subtitle"></h3>
+
+      <input type='text' formControlName="nombre_procedencia" [(ngModel)]="procedencia.nombre_procedencia" class='inputbox' placeholder="Nombre" (input)="nombres_procedencia($event)"/>
+      <input type='text' formControlName="descripcion" [(ngModel)]="procedencia.descripcion" class='inputbox' placeholder="Descripción" />
+
+      <div class="btns-group">
+        <input class="btn" type="button" (click)="limpiar()" value="Cancelar">
+        <input class="btn" type="submit"  value="Registrar" [disabled]="procedenciaForm.invalid">
+      </div>
+      <div id="boton">
+        <input class="btn" type="button" value="Actualizar" [disabled]="procedenciaForm.invalid" (click)="actualizarProcedencia()">
+      </div>
     </fieldset>
 
   </form>

@@ -79,6 +79,7 @@ export class ActivosComponent implements OnInit {
   isLoggedIn = false;
   id_persona?: number; // valor del usuario que este log
   ngOnInit(): any {
+    
     this.isLoggedIn = this.storageService.isLoggedIn();
 
     if (this.isLoggedIn) {
@@ -142,20 +143,10 @@ export class ActivosComponent implements OnInit {
   }
 
   Finaliza(): void {
-    // this.recepcionFormDetalle.reset();
-    // this.recepcionForm.reset();
-
-    // // Cargar tabla vacia
-    // let id_encabezado_ing_vacia = 0;
-    // this.recepcionservice.getDatosEncabezado(id_encabezado_ing_vacia).subscribe(
-    //   resp => {
-    //     this.detalleEnc = resp;
-    //   },
-    //   error => (console.error(error))
-    // )
-    Swal.fire('Activo Registrado Correctamente', 'Continue', 'success');
+    console.log('looo')
+    Swal.fire('Activo registrado correctamente', 'Continue', 'success')
+    location.reload();
   }
-
 
   salida: string = "";
   id_detalle: number;
@@ -354,13 +345,15 @@ export class ActivosComponent implements OnInit {
   new_cap_nombre_documento3: any;
 
   caps_nombre_documento(e) {
+    console.log('Lllegada.........-----------------> '+e.target.value);
+
     this.caps_nombre_documento = e.target.value;
     console.log('Nombre del archivo-> ' + this.caps_nombre_documento)
     console.log('nuemor de datos del archivo-> ' +this.caps_nombre_documento.length)
     this.cap_nombre_documento2 = this.caps_nombre_documento;
     console.log('el nuev quitado-> ' + this.cap_nombre_documento2.slice(12))
     this.cap_nombre_documento3 = this.cap_nombre_documento2.slice(12);
-    
+    console.log('salida.........-----------------> '+this.cap_nombre_documento3 );
   }
 
   upload(): void {
@@ -382,25 +375,25 @@ export class ActivosComponent implements OnInit {
               console.log('Acta sucesful')
               this.progress = Math.round(100 * event.loaded / event.total);
               this.message = 'Se ha subido el acta, exitosamente';
-              
-              // Swal.fire({
-              //   position: 'top',
-              //   icon: 'success',
-              //   title: 'Recepción de la acta subida satisfactoriamente.',
-              //   showConfirmButton: false,
-              //   timer: 2000,
-              // });
+              Swal.fire('Acta guardada', 'Continue', 'success')
             } else if (event instanceof HttpResponse) {
               this.message = event.body.message;
               this.message = 'No se ha podido subir el acta';
             }
           });
-          // this.buscarElNameDoc();
-          //     this.actualizarEncabezadoEstado2();
+          
       }
       this.selectedFiles = undefined;
     }
    
+  }
+
+
+  metodoFinalSave(){
+    this.upload();
+    this.buscarElNameDoc();
+    this.actualizarEncabezadoEstado2();
+
   }
 
   cap_id_del_documento: number;
@@ -423,13 +416,18 @@ export class ActivosComponent implements OnInit {
           console.log(f)
           this.cap_id_del_documento = f;
         })
+
+
+        
         //this.new_cap_id_del_documento = this.cap_id_del_documento.slice(1, -1)
         console.log('Esta es la id del doc 2 sp =>' + this.cap_id_del_documento)
+        //this.actualizarEncabezadoEstado2();
       },
       error: err => {
         console.log('no hay id'+err)
       }
     });
+    
   }
   //****************** */
 // --------------------------------------------------------------------------
@@ -457,12 +455,6 @@ export class ActivosComponent implements OnInit {
       }
     );
   }
-
-
-
-
-
-
 
 
   // Nuevo guardados por defecto

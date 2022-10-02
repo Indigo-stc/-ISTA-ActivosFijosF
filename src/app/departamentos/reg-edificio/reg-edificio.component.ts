@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegEdificioService } from 'src/app/service/reg-edificio.service';
 import { ActivatedRoute } from '@angular/router';
 import { Edificio } from 'src/app/models/edificio';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reg-edificio',
@@ -38,11 +39,37 @@ export class RegEdificioComponent implements OnInit {
     }
   }
 
+  nombre_edificio: string;
+  nombres_edificio(e) {
+    this.nombre_edificio = e.target.value;
+    console.log('Nombre edificio-> ' + this.nombre_edificio)
+  }
+
+  cap_nombre_edificio: string;
+
   guardarEdificio(): void {
-    this.regedificioservice.saveEdificios(this.edificioForm.value).subscribe(resp=>{
-      this.edificioForm.reset();
-    },
-      error=>(console.error(error))
+    this.regedificioservice.getByNombreEdificio(this.nombre_edificio).subscribe(
+      resp =>{
+        console.log(resp)
+        this.cap_nombre_edificio = resp;
+        if(this.nombre_edificio == this.cap_nombre_edificio){
+          console.log('Edificio Repetido')
+          Swal.fire({
+            icon: 'error',title: 'Lo lamento....',text: 'Edificio Ya Existente',
+          })
+        }else{
+          this.regedificioservice.saveEdificios(this.edificioForm.value).subscribe(resp=>{
+            if (resp = true) {
+              this.edificioForm.reset();    
+              Swal.fire('Edificio Registrado Correctamente', 'Continue', 'success')
+            } else {
+              Swal.fire('Error', 'Erro de registro', 'warning')
+            }
+          },
+            error => (console.error(error))
+          )
+        }
+      }
     )
   }
 
@@ -55,11 +82,20 @@ export class RegEdificioComponent implements OnInit {
 
   actualizarEdificio(): void {
     this.regedificioservice.updateEdificios(this.edificioForm.value).subscribe(resp => {
-      console.log(resp)
-      this.edificioForm.reset();
+      if (resp = true) {
+        this.edificioForm.reset();    
+        Swal.fire('Edificio Actualizado Correctamente', 'Continue', 'success')
+      } else {
+        Swal.fire('Error', 'Error de actualizar', 'warning')
+      }
     },
       error => (console.error(error))
     )
     
+  }
+
+  limpiar(): void {
+    console.log("limpiar")
+    this.edificioForm.reset();
   }
 }

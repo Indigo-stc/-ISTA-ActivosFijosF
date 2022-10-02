@@ -264,18 +264,9 @@ export class RecepcionActivoComponent implements OnInit {
 
 
   Finaliza(): void {
-    this.recepcionFormDetalle.reset();
-    this.form.reset();
-
-    // // Cargar tabla vacia
-    // let id_encabezado_ing_vacia = 0;
-    // this.recepcionservice.getDatosEncabezado(id_encabezado_ing_vacia).subscribe(
-    //   resp => {
-    //     this.detalleEnc = resp;
-    //   },
-    //   error => (console.error(error))
-    // )
+    console.log('looo')
     Swal.fire('Recepcion Registrada Correctamente', 'Continue', 'success')
+    location.reload();
   }
 
 

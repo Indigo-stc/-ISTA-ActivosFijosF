@@ -4,6 +4,7 @@ import { RegEdificioService } from '../service/reg-edificio.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Departamento } from '../models/departamento';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -52,16 +53,68 @@ export class DepartamentosComponent implements OnInit {
     }
   }
 
+  // guardarDepartamentos(): void {
+  //   this.departamentoservice.saveDepartamentos(this.departamentoForm.value).subscribe(resp=>{
+  //     this.departamentoForm.reset();
+  //   },
+  //     error=>(console.error(error))
+  //   )
+  // }
+
+  // cargarDatosEdit() {
+  //   this.departamentoservice.getByidDepartamento(this.id_departamentoD).subscribe((data: any)=> {
+  //     this.departamentoForm.setValue(data);
+  //     console.log(data);
+  //   });
+  // }
+
+  // actualizarDepartamento(): void {
+  //   this.departamentoservice.updateDepartamentos(this.departamentoForm.value).subscribe(resp => {
+  //     console.log(resp)
+  //     this.departamentoForm.reset();
+  //   },
+  //     error => (console.error(error))
+  //   )
+    
+  // }
+
+
+  nombre_departamento: string;
+  nombres_departamento(e) {
+    this.nombre_departamento = e.target.value;
+    console.log('Nombre departamento-> ' + this.nombre_departamento)
+  }
+
+  cap_nombre_departamento: string;
+
   guardarDepartamentos(): void {
-    this.departamentoservice.saveDepartamentos(this.departamentoForm.value).subscribe(resp=>{
-      this.departamentoForm.reset();
-    },
-      error=>(console.error(error))
+    this.departamentoservice.getByNombreDepartamento(this.nombre_departamento).subscribe(
+      resp =>{
+        console.log(resp)
+        this.cap_nombre_departamento = resp;
+        if(this.nombre_departamento == this.cap_nombre_departamento){
+          console.log('Departamento Repetido')
+          Swal.fire({
+            icon: 'error',title: 'Lo lamento....',text: 'Departamento Ya Existente',
+          })
+        }else{
+          this.departamentoservice.saveDepartamentos(this.departamentoForm.value).subscribe(resp=>{
+            if (resp = true) {
+              this.departamentoForm.reset();    
+              Swal.fire('Departamento Registrado Correctamente', 'Continue', 'success')
+            } else {
+              Swal.fire('Error', 'Erro de registro', 'warning')
+            }
+          },
+            error => (console.error(error))
+          )
+        }
+      }
     )
   }
 
   cargarDatosEdit() {
-    this.departamentoservice.getByidDepartamento(this.id_departamentoD).subscribe((data: any)=> {
+    this.departamentoservice.getByidDepartamentos(this.id_departamentoD).subscribe((data: any)=> {
       this.departamentoForm.setValue(data);
       console.log(data);
     });
@@ -69,11 +122,21 @@ export class DepartamentosComponent implements OnInit {
 
   actualizarDepartamento(): void {
     this.departamentoservice.updateDepartamentos(this.departamentoForm.value).subscribe(resp => {
-      console.log(resp)
-      this.departamentoForm.reset();
+      if (resp = true) {
+        this.departamentoForm.reset();    
+        Swal.fire('Departamento Actualizado Correctamente', 'Continue', 'success')
+      } else {
+        Swal.fire('Error', 'Error de actualizar', 'warning')
+      }
     },
       error => (console.error(error))
-    )
-    
+    )  
   }
+
+  limpiar(): void {
+    console.log("limpiar")
+    this.departamentoForm.reset();
+  }
+
+  
 }

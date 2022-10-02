@@ -30,4 +30,9 @@ export class RegEdificioService {
   public getByidEdificio(id: number):Observable<Edificio>{
     return this.httpClient.get<Edificio>(this.API_SERVER + "/buscarEdificiosPorId/"+id)
   }
+
+
+  public getByNombreEdificio(nombre_edificio: string):Observable<any>{
+    return this.httpClient.get(this.API_SERVER + "/validarExistenciaNombreEdificio/" + nombre_edificio)
+  }
 }
