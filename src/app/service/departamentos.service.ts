@@ -37,6 +37,7 @@ export class DepartamentosService {
   public getByNombreDepartamento(nombre_departamento: string):Observable<any>{
     return this.httpClient.get(this.API_SERVER + "/validarExistenciaNombreDepartamento/" + nombre_departamento)
   }
+
 }
 
 
