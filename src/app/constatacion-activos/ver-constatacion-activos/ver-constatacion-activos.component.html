@@ -1,0 +1,45 @@
+<!-- botones de Navegacion-->
+
+<body class="bodyq">
+    <div class="multi-button">
+        <button class="btn2" [routerLink]="['/regconstatacion']">Recepcion</button>
+        <button class="btn1">Ver Todos</button>
+    </div>
+</body>
+
+<!-- Tabla -->
+<div class="step-forms step-forms-active">
+    <form action="" id="msform">
+        <fieldset>
+            <div class="form-registrar-procedencia">
+                <h4>Lista de Constataciones</h4>
+
+                <div class="table-wraper">
+                    <table class="table">
+                        <thead class="text-light" style="background-color:#272e56">
+                            <tr class="cabecera-tabla">
+                                <th class="th-lg"><a>#</a></th>
+                                <th class="th-lg"><a>Nombre responsable</a></th>
+                                <th class="th-lg"><a>Fecha Constatacion</a></th>
+                                <th class="th-lg"><a>Observaciones</a></th>
+                                <th class="th-lg"><a>Estado</a></th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let itemA of encabezado">
+                            <tr>
+                                <th>{{ itemA.id_encabezado_Constatacion }}</th>
+                                <td>{{ itemA.nombres_Responsable}}</td>
+                                <td>{{ itemA.fecha_Constatacion | date: 'dd-MM-yyyy' }}</td>
+                                <td>{{ itemA.observaciones}}</td>
+                                <td style="color: green;" *ngIf="itemA.estado == true; else elseStatement" >Terminado</td>
+                                <ng-template #elseStatement>
+                                  <td style="color: red;">En proceso</td>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

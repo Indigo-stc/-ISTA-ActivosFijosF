@@ -42,7 +42,7 @@
 
         <li class="nav-item">
           <a class="nav-link" aria-current="page" routerLink="home" style="margin-left:30px ;"
-            *ngIf="rolAdmin == true || rolSolicitante==true || rolConstatante==true">Inicio
+            *ngIf="rolAdmin == true || rolSolicitante==true">Inicio
 
             <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-house-door-fill" viewBox="0 0 16 16">
@@ -79,6 +79,12 @@
             </li> -->
           </ul>
         </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" aria-current="page" routerLink="regconstatacion" style="margin-left:30px ;"
+            *ngIf="rolAdmin == true || rolResponsable==true || rolConstatante==true">Constataciones</a>
+        </li>
+
 
       </ul>
 
