@@ -1,0 +1,34 @@
+<!-- botones de Navegacion-->
+
+<body class="bodyq">
+  <div class="multi-button">
+    <button class="btn1">Constatcion</button>
+    <button class="btn2" [routerLink]="['/Constatacion_Activos/verTodos']">Ver Todos</button>
+  </div>
+</body>
+
+  <!-- Primer formulario -->
+  <div class="step-forms step-forms-active">
+    <form [formGroup]="form" action="" id="msform">
+      <div class="group-inputs"></div>
+      <fieldset>
+        <h2 class="fs-title">Datos de la Constatacion</h2>
+        <h3 class="fs-subtitle"></h3>
+       
+        <p class="estado">
+          Responsable:  {{user_final}}
+        </p>
+
+        <input type="text" class="inputbox" formControlName="Observacion" id="recepcion-num_recep"
+        placeholder="Observaciones" required (input)="Observaciones($event)" />
+
+        <input type="date" class="inputbox" name="fecha_ingreso" value="{{this.dateSet}}" placeholder="Ingrese la fecha - yyyy/mm/dd:" required />
+         <div class="btns-group1">
+          <input class="btn" type="button" (click)="limpiar()" value="Cancelar">
+           <input class="btn" type="button" (click)="guardarEncabezadoConstatacion()" value="Registrar">
+          <input class="btn btn-next" type="button" value="Siguiente">
+        </div>
+      </fieldset>
+    </form>
+  </div>
+

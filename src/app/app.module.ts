@@ -43,6 +43,8 @@ import { VerEdificiosComponent } from './departamentos/ver-edificios/ver-edifici
 
 //Impot del interceptor
 import { httpInterceptorProviders } from './helpers/http.interceptor';
+import { ConstatacionActivosComponent } from './constatacion-activos/constatacion-activos.component';
+import { VerConstatacionActivosComponent } from './constatacion-activos/ver-constatacion-activos/ver-constatacion-activos.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { httpInterceptorProviders } from './helpers/http.interceptor';
     RolesComponent,
     PermisosComponent,
     HistorialComponent,
-    VerEdificiosComponent
+    VerEdificiosComponent,
+    ConstatacionActivosComponent,
+    VerConstatacionActivosComponent
   ],
 
 
