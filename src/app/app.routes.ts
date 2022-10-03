@@ -22,8 +22,11 @@ import { PermisosComponent } from './roles/permisos/permisos.component';
 import { HistorialComponent } from './roles/Historial/historial.component';
 import { VerEdificiosComponent } from './departamentos/ver-edificios/ver-edificios.component';
 import { VigilanteGuard } from './vigilante.guard';
+import { ConstatacionActivosComponent } from './constatacion-activos/constatacion-activos.component';
+import { VerConstatacionActivosComponent } from './constatacion-activos/ver-constatacion-activos/ver-constatacion-activos.component';
 
 const app_routes: Routes = [
+  {path: 'regconstatacion', component: ConstatacionActivosComponent},
   { path: 'Gestion_activos', component: ActivosComponent },
   { path: 'Recepcion_Activos', component: RecepcionActivoComponent },
   { path: 'Consultas_Activos', component: ConsultasActivosComponent },
@@ -35,6 +38,10 @@ const app_routes: Routes = [
   {
     path: 'Recepcion_Activos/verTodos',
     component: VerRecepcionesActivosComponent,
+  },
+  {
+    path: 'Constatacion_Activos/verTodos',
+    component: VerConstatacionActivosComponent,
   },
   {
     path: 'Registro_Activos/verTodos',
